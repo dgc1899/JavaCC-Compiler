@@ -34,6 +34,11 @@ TOKEN:{
 		|<FLOATTYPE:("float "|"double "|"decimal ")>{System.out.println("FLOATTYPE-> "+image+"\r\n");}
 		|<BOOLTYPE:"true "|"false ">{System.out.println("BOOLTYPE-> "+image+"\r\n");}
 	}
+//Tokens de tipo de datos alfanumericos
+TOKEN:{
+	<STRINGTYPE:("string ")>{System.out.println("STRINGTYPE-> "+image+"\r\n");}
+	<CHARTYPE:("char ")>{System.out.println("CHARTYPE-> "+image+"\r\n");}
+}
 	
 TOKEN:
 {
@@ -80,7 +85,27 @@ TOKEN:{
 	|<DIFFERENT:"<> " >{System.out.println("DIFFERENT-> "+image+"\r\n");}
 }
 
+//Tokens para declarar metodos y clases
+TOKEN:{
+	<CLASSTYPE:"abstract |static | const | implements | clascy">{System.out.println("CLASSTYPE-> "+image+"\r\n");}
+}
 
+//Token de bloque try catch
+TOKEN:{
+	<TRYBLOCK:"try ">{System.out.println("TRYBLOCK-> "+image+"\r\n");}
+	<CATCHBLOCK:"catch ">{System.out.println("CATCHBLOCK-> "+image+"\r\n");}
+}
+
+//Token de imprimir a consola
+TOKEN:{
+	<PRINTOUT:"print | println | writeline"> {System.out.println("PRINTOUT-> "+image+"\r\n");}
+}
+
+//Token para delclaraciones de seleccion
+TOKEN:{
+	<IFSTRUCT: "if | else "> {System.out.println("IFSTRUCT-> "+image+"\r\n");}
+	<SWITCHSTRUCT:"switch | stoom "> {System.out.println("SWITCHSTRUCT-> "+image+"\r\n");}
+}
 
 //Fin de estados léxicos
 
