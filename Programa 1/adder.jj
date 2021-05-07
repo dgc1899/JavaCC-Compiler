@@ -88,7 +88,7 @@ TOKEN:{
 void Start():
 {}
 {
-	Block()|NumberTypes()|Symbols()|Loops()|AritmOp()|RelatOp()
+	Block()|NumberTypes()|Symbols()|Loops()|AritmOp()|RelatOp()|ValType()|DeclarClass()|EquiCase()|EstrucRep()|Clause()
 	
 }
 
@@ -142,6 +142,28 @@ void RelatOp():
 	<AND>|<OR>|<SAMEAS>|<GREATER>|<LESSER>|<GREATSAME>|<LESSAME>|<DIFFERENT>
 }
 
-
-
-
+void ValType():
+{}
+{
+	<STRUCTTYPE>|<VOIDTYPE>|<YOOLTYPE>
+}
+void DeclarClass():
+{}
+{ 
+   <LONG>|<BOOL>|<CHAR>|<CLASS>
+}
+void EquiCase():
+{}
+{
+   <CASE>|<ING>
+}
+void EstrucRep():
+{}
+{
+   <FOREACH>|<INGFER>
+}
+void Clause():
+{}
+{
+   <CATCH>|<EXCEPT>|<RAISE>
+}
