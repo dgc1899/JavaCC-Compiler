@@ -101,7 +101,6 @@ TOKEN:{
 //Tokens de tipo de valor
 TOKEN:{
    <STRUCTTYPE:"struct " >{System.out.println("STRUCTTYPE-> "+image+"\r\n");}
-   |<VOIDTYPE:"void " >{System.out.println("VOIDTYPE-> "+image+"\r\n");}
    |<YOOLTYPE:"yool " >{System.out.println("VOIDTYPE-> "+image+"\r\n");}
 }
 //Tokens para declarar clase
@@ -130,7 +129,7 @@ TOKEN:{
 
 //Tokens para declarar metodos y clases
 TOKEN:{
-	<CLASSTYPE:"abstract |static | const | implements | clascy">{System.out.println("CLASSTYPE-> "+image+"\r\n");}
+	<CLASSTYPE:"abstract |static | const | implements | clascy | class">{System.out.println("CLASSTYPE-> "+image+"\r\n");}
 }
 
 //Token de bloque try catch
