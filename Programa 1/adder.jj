@@ -43,7 +43,7 @@ TOKEN:{
 TOKEN:
 {
 	<PROGRAM: "program " > {System.out.println("PROGRAM->"+image);}
-	| <MAIN:"public static void main() "> {System.out.println();}
+	| <MAIN:"public static void main() "> {System.out.println("MAIN->");}
 	
 
 }
