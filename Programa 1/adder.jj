@@ -45,13 +45,13 @@ TOKEN:{
 	
 //Token para tipo de dato booleano
 TOKEN:{  
-   <BOOL:"bool " >{System.out.println("BOOL-> "+image+"\r\n");}
+   <BOOL:"bool " >{System.out.println("BOOL->\r\n");}
 }
 	
 TOKEN:
 {
 	<PROGRAM: "program " > {System.out.println("PROGRAM->"+image);}
-	| <MAIN:"public static void main() "> {System.out.println("MAIN->"+image);}	
+	 |<MAIN:"public static void main() "> {System.out.println("MAIN->");}	
 }
 
 //Tokens de símbolos
@@ -105,7 +105,8 @@ TOKEN:{
 }
 //Tokens para declarar clase
 TOKEN:{
-	<CLASS:"class " >{System.out.println("CLASS-> "+image+"\r\n");}
+	<CLASS:"class " >{System.out.println("CLASS->\r\n");}
+
 }
 //tokens  de etiquetas 
 TOKEN:{
@@ -134,7 +135,7 @@ TOKEN:{
 
 //Token de bloque try catch
 TOKEN:{
-	<TRYBLOCK:"try ">{System.out.println("TRYBLOCK-> "+image+"\r\n");}
+	<TRYBLOCK:"try ">{System.out.println("TRYBLOCK->\r\n");}
 }
 
 //Token de imprimir a consola
@@ -150,6 +151,7 @@ TOKEN:{
 //Fin de estados léxicos
 
 //Inicio de procedimientos para definir patrones
+
 
 void Start():
 {}
