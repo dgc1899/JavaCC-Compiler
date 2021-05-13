@@ -45,7 +45,7 @@ TOKEN:{
 	
 //Token para tipo de dato booleano
 TOKEN:{  
-   <BOOL:"bool " >{System.out.println("BOOL-> "+image+"\r\n");}
+   <BOOL:"bool " >{System.out.println("BOOL->\r\n");}
 }
 	
 TOKEN:
