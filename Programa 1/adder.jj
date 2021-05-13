@@ -21,32 +21,39 @@ SKIP:{" " | "\n" | "\r" | "\r\n" | "\t"}
 
 //Token para identificadores de usuario
 TOKEN:{
-	//<IDREACH:"public "|"private "|"protected " > {System.out.println("IDREACH->"+image+"\r\n");}
 	<IDENTIFIER:["a"-"z","A"-"Z"] (["a"-"z","A"-"Z","0"-"9","_"])*>{System.out.println("IDENTIFIER ->"+image+"\r\n");}
 	|<STRING : ["a"-"z","A"-"Z","0"-"9"](["a"-"z","A"-"Z","0"-"9"])*>{System.out.print("STRING -> "+image+"\r\n");}
 	| <NUMBER : (["0"-"9"])+ > {System.out.print("NUM-> "+image+"\r\n");}
 	}
+//Token para Alcance de Identificador
+TOKEN:{
+<IDREACH:"public "|"private "|"protected " > {System.out.println("IDREACH->"+image+"\r\n");}	
+}
 
-	
-	//Tokens de tipos de numeros
+//Tokens de tipos de numeros
 TOKEN:{
 		<NUMTYPES:("int "|"byte "|"short "|"long "|"sbyte "|"ushort "|"ulong ")>{System.out.println("NUMTYPES-> "+image+"\r\n");}
 		|<FLOATTYPE:("float "|"double "|"decimal ")>{System.out.println("FLOATTYPE-> "+image+"\r\n");}
-		|<BOOLTYPE:"true "|"false ">{System.out.println("BOOLTYPE-> "+image+"\r\n");}
+		|<BOOLTYPE:"bool ">{System.out.println("BOOLTYPE-> "+image+"\r\n");}
 	}
+
 //Tokens de tipo de datos alfanumericos
 TOKEN:{
 	<STRINGTYPE:("string ")>{System.out.println("STRINGTYPE-> "+image+"\r\n");}
-	<CHARTYPE:("char ")>{System.out.println("CHARTYPE-> "+image+"\r\n");}
+	|<CHARTYPE:("char ")>{System.out.println("CHARTYPE-> "+image+"\r\n");}
+}
+	
+//Token para tipo de dato booleano
+TOKEN:{  
+   <BOOL:"bool " >{System.out.println("BOOL-> "+image+"\r\n");}
 }
 	
 TOKEN:
 {
 	<PROGRAM: "program " > {System.out.println("PROGRAM->"+image);}
-	| <MAIN:"public static void main() "> {System.out.println("MAIN->");}
-	
-
+	| <MAIN:"public static void main() "> {System.out.println("MAIN->");}	
 }
+
 //Tokens de símbolos
 TOKEN:
 {
@@ -73,6 +80,11 @@ TOKEN:{
 	|<DIVIDE:"/ ">{System.out.println("DIVIDE-> "+image+"\r\n");}
 }
 
+//Token para valores de condición
+TOKEN:{
+	<CONDITION:"true |false "> {System.out.println("CONDITION-> "+image+"\r\n");}
+}
+
 //Tokens de operadores relacionales
 TOKEN:{
 	<AND:"&& "|"bitand " >{System.out.println("AND-> "+image+"\r\n");}
@@ -85,15 +97,44 @@ TOKEN:{
 	|<DIFFERENT:"<> " >{System.out.println("DIFFERENT-> "+image+"\r\n");}
 }
 
+//10 nuevos componentes lexicos Marco
+//Tokens de tipo de valor
+TOKEN:{
+   <STRUCTTYPE:"struct " >{System.out.println("STRUCTTYPE-> "+image+"\r\n");}
+   |<YOOLTYPE:"yool " >{System.out.println("VOIDTYPE-> "+image+"\r\n");}
+}
+//Tokens para declarar clase
+TOKEN:{
+	<CLASS:"class " >{System.out.println("CLASS->\r\n");}
+}
+//tokens  de etiquetas 
+TOKEN:{
+	<CASE:"case " >{System.out.println("CASE-> "+image+"\r\n");}
+	|<ING:"ing " >{System.out.println("ING-> "+image+"\r\n");}
+	|<ELSE:"else "> {System.out.println("ELSE-> "+image+"\r\n");}
+	|<FINALLY:"finally "> {System.out.println("FINALLY-> "+image+"\r\n");}
+}
+//tokens estructura repetitivas
+TOKEN:{
+    <FOREACH:"foreach " >{System.out.println("FOREACH-> "+image+"\r\n");}
+    |<INGFER:"ingfer " >{System.out.println("INGFER-> "+image+"\r\n");}
+}
+//tokens de clausula
+TOKEN:{
+    <CATCH:"catch " >{System.out.println("CATCH-> "+image+"\r\n");}
+    |<EXCEPT:"except " >{System.out.println("EXCEPT-> "+image+"\r\n");}
+	|<RAISE:"raise " >{System.out.println("RAISE-> "+image+"\r\n");}
+}
+
+
 //Tokens para declarar metodos y clases
 TOKEN:{
-	<CLASSTYPE:"abstract |static | const | implements | clascy">{System.out.println("CLASSTYPE-> "+image+"\r\n");}
+	<CLASSTYPE:"abstract |static | const | implements | clascy | class">{System.out.println("CLASSTYPE-> "+image+"\r\n");}
 }
 
 //Token de bloque try catch
 TOKEN:{
-	<TRYBLOCK:"try ">{System.out.println("TRYBLOCK-> "+image+"\r\n");}
-	<CATCHBLOCK:"catch ">{System.out.println("CATCHBLOCK-> "+image+"\r\n");}
+	<TRYBLOCK:"try ">{System.out.println("TRYBLOCK->\r\n");}
 }
 
 //Token de imprimir a consola
@@ -103,69 +144,65 @@ TOKEN:{
 
 //Token para delclaraciones de seleccion
 TOKEN:{
-	<IFSTRUCT: "if | else "> {System.out.println("IFSTRUCT-> "+image+"\r\n");}
-	<SWITCHSTRUCT:"switch | stoom "> {System.out.println("SWITCHSTRUCT-> "+image+"\r\n");}
+	<IFSTRUCT: "if "> {System.out.println("IFSTRUCT-> "+image+"\r\n");}
+	|<SWITCHSTRUCT:"switch | stoom "> {System.out.println("SWITCHSTRUCT-> "+image+"\r\n");}
 }
-
 //Fin de estados léxicos
 
 //Inicio de procedimientos para definir patrones
+
 void Start():
 {}
 {
-	Block()|NumberTypes()|Symbols()|Loops()|AritmOp()|RelatOp()
+	<MAIN>
+	|<LBRACE>
+	|<RBRACE>
+	|<NUMTYPES>
+	|<IDENTIFIER>
+	|<SEMICOLON>
+	|<FLOATTYPE>
+	|<IDENTIFIER>
+	|<SEMICOLON>
+	| <BOOLTYPE>	
+	|<LPAR>
+	|<RPAR>
+	|<FOR> 
+	| <DO> 
+	| <WHILE>
+	|<EQUALS>
+	|<SUM>
+	|<MINUS>
+	|<MULT>
+	|<DIVIDE>
+	|<AND>
+	|<OR>
+	|<SAMEAS>
+	|<GREATER>
+	|<LESSER>
+	|<GREATSAME>
+	|<LESSAME>
+	|<DIFFERENT>
+	<STRUCTTYPE>
+	|<VOIDTYPE>
+	|<YOOLTYPE>
+	| <LONG>
+	|<BOOL>
+	|<CHAR>
+	|<CLASS>
+	|<CASE>
+	|<ING>
+	| <FOREACH>
+	|<INGFER>
+	| <CATCH>
+	|<EXCEPT>
+	|<RAISE>
+	|<IFSTRUCT>
+	|<SWITCHSTRUCT>
+	|<PRINTOUT>
+	|<TRYBLOCK>
+	|<CLASSTYPE>
+	|<STRINGTYPE>
+	|<CHARTYPE>
+	|<ELSE>
 	
 }
-
-void Block():
-{}
-{
-	Main()
-}
-
-void Main():
-{}
-{
-	<MAIN>
-	<LBRACE>Sentence()<RBRACE>
-}
-
-void Sentence():
-{}
-{
-	<NUMTYPES><IDENTIFIER><SEMICOLON>
-	|<FLOATTYPE><IDENTIFIER><SEMICOLON>
-}
-
-void NumberTypes():
-{}
-{
-	<NUMTYPES> | <FLOATTYPE> | <BOOLTYPE>	
-}
-
-void Symbols():
-{}
-{
-	<LPAR>|<RPAR>|<LBRACE>|<RBRACE>|<SEMICOLON>
-}
-
-void Loops():
-{}
-{
-	<FOR> | <DO> | <WHILE>
-}
-
-void AritmOp():
-{}
-{
-	<EQUALS>|<SUM>|<MINUS>|<MULT>|<DIVIDE>
-}
-
-void RelatOp():
-{}
-{
-	<AND>|<OR>|<SAMEAS>|<GREATER>|<LESSER>|<GREATSAME>|<LESSAME>|<DIFFERENT>
-}
-
-
-
