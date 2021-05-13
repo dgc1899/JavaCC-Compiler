@@ -51,7 +51,7 @@ TOKEN:{
 TOKEN:
 {
 	<PROGRAM: "program " > {System.out.println("PROGRAM->"+image);}
-	| <MAIN:"public static void main() "> {System.out.println("MAIN->");}	
+	 |<MAIN:"public static void main() "> {System.out.println("MAIN->");}	
 }
 
 //Tokens de símbolos
@@ -106,6 +106,7 @@ TOKEN:{
 //Tokens para declarar clase
 TOKEN:{
 	<CLASS:"class " >{System.out.println("CLASS->\r\n");}
+
 }
 //tokens  de etiquetas 
 TOKEN:{
@@ -150,6 +151,7 @@ TOKEN:{
 //Fin de estados léxicos
 
 //Inicio de procedimientos para definir patrones
+
 
 void Start():
 {}
@@ -206,3 +208,4 @@ void Start():
 	|<ELSE>
 	
 }
+
