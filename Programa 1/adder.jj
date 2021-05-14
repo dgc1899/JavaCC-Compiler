@@ -47,13 +47,6 @@ TOKEN:{
    <BOOL:"bool " >{System.out.println("BOOL->"+"\r\n");}
 }
 
-/*	
-TOKEN:
-{
-	<PROGRAM: "program " > {System.out.println("PROGRAM->"+image);}
-	 |<MAIN:"public static void main() "> {System.out.println("MAIN->");}	
-}
-*/
 
 //Tokens de símbolos
 TOKEN:
@@ -138,56 +131,35 @@ TOKEN:{
 void Start():
 {}
 {
-	<MAIN>
-	|<LBRACE>
-	|<RBRACE>
+	<IDENTIFIER>
+	|<STRING>
+	|<NUMBER>
+	|<IDREACH>
 	|<NUMTYPES>
-	|<IDENTIFIER>
-	|<SEMICOLON>
 	|<FLOATTYPE>
-	|<IDENTIFIER>
-	|<SEMICOLON>
-	| <BOOLTYPE>	
-	|<LPAR>
-	|<RPAR>
-	|<FOR> 
-	| <DO> 
-	| <WHILE>
-	|<EQUALS>
-	|<SUM>
-	|<MINUS>
-	|<MULT>
-	|<DIVIDE>
-	|<AND>
-	|<OR>
-	|<SAMEAS>
-	|<GREATER>
-	|<LESSER>
-	|<GREATSAME>
-	|<LESSAME>
-	|<DIFFERENT>
-	<STRUCTTYPE>
-	|<VOIDTYPE>
-	|<YOOLTYPE>
-	| <LONG>
-	|<BOOL>
-	|<CHAR>
-	|<CLASS>
-	|<CASE>
-	|<ING>
-	| <FOREACH>
-	|<INGFER>
-	| <CATCH>
-	|<EXCEPT>
-	|<RAISE>
-	|<IFSTRUCT>
-	|<SWITCHSTRUCT>
-	|<PRINTOUT>
-	|<TRYBLOCK>
-	|<CLASSTYPE>
 	|<STRINGTYPE>
 	|<CHARTYPE>
-	|<ELSE>
+	|<BOOL>
+	|<LPAR>
+	|<RPAR>
+	|<LBRACE>
+	|<RBRACE>
+	|<SEMICOLON>
+	|<LOOP>
+	|<ARITM>
+	|<CONDITION>
+	|<RELAT>
+	|<STRUCTTYPE>
+	|<CLASS>
+	|<ALT>
+	|<FOREACH>
+	|<CATCH>
+	|<CLASSTYPE>
+	|<TRYBLOCK>
+	|<PRINTOUT>
+	|<IFSTRUCT>
+	|<SWITCHSTRUCT>
+	
 	
 }
 
