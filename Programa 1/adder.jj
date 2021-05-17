@@ -5,6 +5,8 @@ options{
 		}
 // Bloque de instrucciones para definir el Parser		
 PARSER_BEGIN(adder)
+import java.util.HashMap;
+
 class adder{
 			public static void main(String[]args)
 			throws ParseException, TokenMgrError{
@@ -128,12 +130,28 @@ TOKEN:{
 //Inicio de procedimientos para definir patrones
 
 
-void Start():
-{}
+void Start() throws ParseException:
 {
-	<IDENTIFIER>
+	int contador = 0;
+	Token t;
+	HashMap<String, Integer> Lista = new HashMap<String, Integer>();
+}
+
+{
+	(
+	 <NUMBER>
+	| t = <IDENTIFIER>
+		{String varible = t.image;}
+			{
+				if(Lista.get(varible) == null)
+				{
+					Lista.put(varible, contador);
+					contador++;
+				}
+			}
+		{System.out.println("Identificador: " + varible + " " + Integer.toString(Lista.get(varible)));}
+	 <IDENTIFIER>
 	|<STRING>
-	|<NUMBER>
 	|<IDREACH>
 	|<NUMTYPES>
 	|<FLOATTYPE>
@@ -159,7 +177,5 @@ void Start():
 	|<PRINTOUT>
 	|<IFSTRUCT>
 	|<SWITCHSTRUCT>
-	
-	
+	)*	
 }
-
