@@ -1,3 +1,5 @@
-public static void main() {
-	int test;
-}
+public 
+static 
+void 
+int
+test

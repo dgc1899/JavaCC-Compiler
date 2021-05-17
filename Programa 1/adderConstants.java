@@ -15,57 +15,55 @@ public interface adderConstants {
   /** RegularExpression Id. */
   int NUMBER = 8;
   /** RegularExpression Id. */
-  int NUMTYPES = 9;
+  int IDREACH = 9;
   /** RegularExpression Id. */
-  int FLOATTYPE = 10;
+  int NUMTYPES = 10;
   /** RegularExpression Id. */
-  int BOOLTYPE = 11;
+  int FLOATTYPE = 11;
   /** RegularExpression Id. */
-  int PROGRAM = 12;
+  int STRINGTYPE = 12;
   /** RegularExpression Id. */
-  int MAIN = 13;
+  int CHARTYPE = 13;
   /** RegularExpression Id. */
-  int LPAR = 14;
+  int BOOL = 14;
   /** RegularExpression Id. */
-  int RPAR = 15;
+  int LPAR = 15;
   /** RegularExpression Id. */
-  int LBRACE = 16;
+  int RPAR = 16;
   /** RegularExpression Id. */
-  int RBRACE = 17;
+  int LBRACE = 17;
   /** RegularExpression Id. */
-  int SEMICOLON = 18;
+  int RBRACE = 18;
   /** RegularExpression Id. */
-  int FOR = 19;
+  int SEMICOLON = 19;
   /** RegularExpression Id. */
-  int DO = 20;
+  int LOOP = 20;
   /** RegularExpression Id. */
-  int WHILE = 21;
+  int ARITM = 21;
   /** RegularExpression Id. */
-  int EQUALS = 22;
+  int CONDITION = 22;
   /** RegularExpression Id. */
-  int SUM = 23;
+  int RELAT = 23;
   /** RegularExpression Id. */
-  int MINUS = 24;
+  int STRUCTTYPE = 24;
   /** RegularExpression Id. */
-  int MULT = 25;
+  int CLASS = 25;
   /** RegularExpression Id. */
-  int DIVIDE = 26;
+  int ALT = 26;
   /** RegularExpression Id. */
-  int AND = 27;
+  int FOREACH = 27;
   /** RegularExpression Id. */
-  int OR = 28;
+  int CATCH = 28;
   /** RegularExpression Id. */
-  int SAMEAS = 29;
+  int CLASSTYPE = 29;
   /** RegularExpression Id. */
-  int GREATER = 30;
+  int TRYBLOCK = 30;
   /** RegularExpression Id. */
-  int LESSER = 31;
+  int PRINTOUT = 31;
   /** RegularExpression Id. */
-  int GREATSAME = 32;
+  int IFSTRUCT = 32;
   /** RegularExpression Id. */
-  int LESSAME = 33;
-  /** RegularExpression Id. */
-  int DIFFERENT = 34;
+  int SWITCHSTRUCT = 33;
 
   /** Lexical state. */
   int DEFAULT = 0;
@@ -81,32 +79,31 @@ public interface adderConstants {
     "<IDENTIFIER>",
     "<STRING>",
     "<NUMBER>",
+    "<IDREACH>",
     "<NUMTYPES>",
     "<FLOATTYPE>",
-    "<BOOLTYPE>",
-    "\"program \"",
-    "\"public static void main() \"",
+    "\"string \"",
+    "\"char \"",
+    "\"bool \"",
     "\"(\"",
     "\")\"",
     "\"{\"",
     "\"}\"",
     "\";\"",
-    "\"for \"",
-    "\"do \"",
-    "\"while \"",
-    "\"= \"",
-    "\"+ \"",
-    "\"- \"",
-    "\"* \"",
-    "\"/ \"",
-    "<AND>",
-    "<OR>",
-    "\"== \"",
-    "\"> \"",
-    "\"< \"",
-    "\">= \"",
-    "\"<= \"",
-    "\"<> \"",
+    "\"for| do| while \"",
+    "\"= | + | - | * | / \"",
+    "\"true |false \"",
+    "<RELAT>",
+    "<STRUCTTYPE>",
+    "\"class \"",
+    "<ALT>",
+    "<FOREACH>",
+    "<CATCH>",
+    "\"abstract |static | const | implements | clascy\"",
+    "\"try \"",
+    "\"print | println | writeline\"",
+    "\"if \"",
+    "\"switch | stoom \"",
   };
 
 }
