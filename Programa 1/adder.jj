@@ -150,8 +150,7 @@ void Start() throws ParseException:
 				}
 			}
 		{System.out.println("Identificador: " + varible + " " + Integer.toString(Lista.get(varible)));}
-	 <IDENTIFIER>
-	|<STRING>
+	 <STRING>
 	|<IDREACH>
 	|<NUMTYPES>
 	|<FLOATTYPE>
@@ -177,5 +176,6 @@ void Start() throws ParseException:
 	|<PRINTOUT>
 	|<IFSTRUCT>
 	|<SWITCHSTRUCT>
+	|<IDENTIFIER>
 	)*	
 }
