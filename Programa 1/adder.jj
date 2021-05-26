@@ -5,7 +5,7 @@ options{
 		}
 // Bloque de instrucciones para definir el Parser		
 PARSER_BEGIN(adder)
-import java.util.HashMap;
+import java.util.ArrayList;
 
 class adder{
 			public static void main(String[]args)
@@ -20,16 +20,18 @@ PARSER_END(adder)
 
 SKIP:{" " | "\n" | "\r" | "\r\n" | "\t"}
 
-
-//Token para identificadores de usuario
-TOKEN:{
-	<IDENTIFIER:["a"-"z","A"-"Z"] (["a"-"z","A"-"Z","0"-"9","_"])*>{System.out.println("IDENTIFIER ->"+image+"\r\n");}
-	|<STRING : ["a"-"z","A"-"Z","0"-"9"](["a"-"z","A"-"Z","0"-"9"])*>{System.out.print("STRING -> "+image+"\r\n");}
-	| <NUMBER : (["0"-"9"])+ > {System.out.print("NUM-> "+image+"\r\n");}
-	}
 //Token para Alcance de Identificador
 TOKEN:{
 <IDREACH:"public "|"private "|"protected " > {System.out.println("IDREACH->"+image+"\r\n");}	
+}
+//Tokens para declarar metodos y clases
+TOKEN:{
+	<CLASSTYPE:"abstract | static | const | implements | clascy ">{System.out.println("CLASSTYPE-> "+image+"\r\n");}
+}
+
+//Token para tipo de retorno
+TOKEN:{
+	<VOID:"void ">{System.out.println("VOID-> "+"\r\n");}
 }
 
 //Tokens de tipos de numeros
@@ -53,16 +55,16 @@ TOKEN:{
 //Tokens de símbolos
 TOKEN:
 {
-	<LPAR:"(">{System.out.println("LPAR->"+"\r\n");}
-	| <RPAR:")">{System.out.println("RPAR->"+"\r\n");}
-	| <LBRACE:"{">{System.out.println("LBRACE->"+"\r\n");}
-	| <RBRACE:"}">{System.out.println("RBRACE->"+"\r\n");}
-	| <SEMICOLON:";">{System.out.println("SEMICOL->"+"\r\n");}
+	<LPAR:"( ">{System.out.println("LPAR->"+"\r\n");}
+	| <RPAR:") ">{System.out.println("RPAR->"+"\r\n");}
+	| <LBRACE:"{ ">{System.out.println("LBRACE->"+"\r\n");}
+	| <RBRACE:"} ">{System.out.println("RBRACE->"+"\r\n");}
+	| <SEMICOLON:"; ">{System.out.println("SEMICOL->"+"\r\n");}
 }
 
 //Tokens para bloques repetitivos, control de flujo
 TOKEN:{
-	<LOOP:"for| do| while ">{System.out.println("LOOP-> "+image+"\r\n");}
+	<LOOP:"for | do | while ">{System.out.println("LOOP-> "+image+"\r\n");}
 }
 
 //Tokens para operadores aritmeticos
@@ -72,7 +74,7 @@ TOKEN:{
 
 //Token para valores de condición
 TOKEN:{
-	<CONDITION:"true |false "> {System.out.println("CONDITION-> "+image+"\r\n");}
+	<CONDITION:"true | false "> {System.out.println("CONDITION-> "+image+"\r\n");}
 }
 
 //Tokens de operadores relacionales
@@ -105,11 +107,6 @@ TOKEN:{
 }
 
 
-//Tokens para declarar metodos y clases
-TOKEN:{
-	<CLASSTYPE:"abstract |static | const | implements | clascy">{System.out.println("CLASSTYPE-> "+image+"\r\n");}
-}
-
 //Token de bloque try catch
 TOKEN:{
 	<TRYBLOCK:"try ">{System.out.println("TRYBLOCK->\r\n");}
@@ -125,34 +122,34 @@ TOKEN:{
 	<IFSTRUCT: "if "> {System.out.println("IFSTRUCT-> "+"\r\n");}
 	|<SWITCHSTRUCT:"switch | stoom "> {System.out.println("SWITCHSTRUCT-> "+image+"\r\n");}
 }
+
+//Token para identificadores de usuario
+TOKEN:{
+	 <NUMBER : (["0"-"9"])+ > {System.out.print("NUM-> "+image+"\r\n");}
+	|<IDENTIFIER:(["a"-"z","A"-"Z"]) (["a"-"z","A"-"Z","0"-"9","_"])*>{System.out.println("IDENTIFIER ->"+image+"\r\n");}
+	|<STRING : ["a"-"z","A"-"Z","0"-"9"](["a"-"z","A"-"Z","0"-"9"])*>{System.out.print("STRING -> "+image+"\r\n");}
+	}
 //Fin de estados léxicos
 
 //Inicio de procedimientos para definir patrones
 
 
-void Start() throws ParseException:
+void Start():
 {
 	int contador = 0;
 	Token t;
-	HashMap<String, Integer> Lista = new HashMap<String, Integer>();
+	ArrayList<String> Lista = new ArrayList<String>();
 }
-
 {
+
 	(
-	 <NUMBER>
-	| t = <IDENTIFIER>
-		{String varible = t.image;}
-			{
-				if(Lista.get(varible) == null)
-				{
-					Lista.put(varible, contador);
-					contador++;
-				}
-			}
-		{System.out.println("Identificador: " + varible + " " + Integer.toString(Lista.get(varible)));}
-	 <IDENTIFIER>
+
+		
+	<NUMBER>
 	|<STRING>
 	|<IDREACH>
+	|<CLASSTYPE>
+	|<VOID>
 	|<NUMTYPES>
 	|<FLOATTYPE>
 	|<STRINGTYPE>
@@ -172,10 +169,26 @@ void Start() throws ParseException:
 	|<ALT>
 	|<FOREACH>
 	|<CATCH>
-	|<CLASSTYPE>
 	|<TRYBLOCK>
 	|<PRINTOUT>
 	|<IFSTRUCT>
 	|<SWITCHSTRUCT>
+	|
+		 t = <IDENTIFIER>
+		{String variable = t.image;}
+			{
+				if(Lista.contains(variable))
+				{
+					
+				}
+				else
+				{
+					Lista.add(variable);
+				}
+				contador++;
+			}
+
+		{System.out.println("Identificador: " + variable + " " + Lista.indexOf(variable) );} 
 	)*	
 }
+

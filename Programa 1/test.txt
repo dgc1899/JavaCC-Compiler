@@ -1,5 +1,4 @@
-public 
-static 
-void 
-int
 test
+hola
+daniel
+hola

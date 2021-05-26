@@ -9,61 +9,63 @@ public interface adderConstants {
   /** End of File. */
   int EOF = 0;
   /** RegularExpression Id. */
-  int IDENTIFIER = 6;
+  int IDREACH = 6;
   /** RegularExpression Id. */
-  int STRING = 7;
+  int CLASSTYPE = 7;
   /** RegularExpression Id. */
-  int NUMBER = 8;
+  int VOID = 8;
   /** RegularExpression Id. */
-  int IDREACH = 9;
+  int NUMTYPES = 9;
   /** RegularExpression Id. */
-  int NUMTYPES = 10;
+  int FLOATTYPE = 10;
   /** RegularExpression Id. */
-  int FLOATTYPE = 11;
+  int STRINGTYPE = 11;
   /** RegularExpression Id. */
-  int STRINGTYPE = 12;
+  int CHARTYPE = 12;
   /** RegularExpression Id. */
-  int CHARTYPE = 13;
+  int BOOL = 13;
   /** RegularExpression Id. */
-  int BOOL = 14;
+  int LPAR = 14;
   /** RegularExpression Id. */
-  int LPAR = 15;
+  int RPAR = 15;
   /** RegularExpression Id. */
-  int RPAR = 16;
+  int LBRACE = 16;
   /** RegularExpression Id. */
-  int LBRACE = 17;
+  int RBRACE = 17;
   /** RegularExpression Id. */
-  int RBRACE = 18;
+  int SEMICOLON = 18;
   /** RegularExpression Id. */
-  int SEMICOLON = 19;
+  int LOOP = 19;
   /** RegularExpression Id. */
-  int LOOP = 20;
+  int ARITM = 20;
   /** RegularExpression Id. */
-  int ARITM = 21;
+  int CONDITION = 21;
   /** RegularExpression Id. */
-  int CONDITION = 22;
+  int RELAT = 22;
   /** RegularExpression Id. */
-  int RELAT = 23;
+  int STRUCTTYPE = 23;
   /** RegularExpression Id. */
-  int STRUCTTYPE = 24;
+  int CLASS = 24;
   /** RegularExpression Id. */
-  int CLASS = 25;
+  int ALT = 25;
   /** RegularExpression Id. */
-  int ALT = 26;
+  int FOREACH = 26;
   /** RegularExpression Id. */
-  int FOREACH = 27;
+  int CATCH = 27;
   /** RegularExpression Id. */
-  int CATCH = 28;
+  int TRYBLOCK = 28;
   /** RegularExpression Id. */
-  int CLASSTYPE = 29;
+  int PRINTOUT = 29;
   /** RegularExpression Id. */
-  int TRYBLOCK = 30;
+  int IFSTRUCT = 30;
   /** RegularExpression Id. */
-  int PRINTOUT = 31;
+  int SWITCHSTRUCT = 31;
   /** RegularExpression Id. */
-  int IFSTRUCT = 32;
+  int NUMBER = 32;
   /** RegularExpression Id. */
-  int SWITCHSTRUCT = 33;
+  int IDENTIFIER = 33;
+  /** RegularExpression Id. */
+  int STRING = 34;
 
   /** Lexical state. */
   int DEFAULT = 0;
@@ -76,34 +78,35 @@ public interface adderConstants {
     "\"\\r\"",
     "\"\\r\\n\"",
     "\"\\t\"",
-    "<IDENTIFIER>",
-    "<STRING>",
-    "<NUMBER>",
     "<IDREACH>",
+    "\"abstract | static | const | implements | clascy \"",
+    "\"void \"",
     "<NUMTYPES>",
     "<FLOATTYPE>",
     "\"string \"",
     "\"char \"",
     "\"bool \"",
-    "\"(\"",
-    "\")\"",
-    "\"{\"",
-    "\"}\"",
-    "\";\"",
-    "\"for| do| while \"",
+    "\"( \"",
+    "\") \"",
+    "\"{ \"",
+    "\"} \"",
+    "\"; \"",
+    "\"for | do | while \"",
     "\"= | + | - | * | / \"",
-    "\"true |false \"",
+    "\"true | false \"",
     "<RELAT>",
     "<STRUCTTYPE>",
     "\"class \"",
     "<ALT>",
     "<FOREACH>",
     "<CATCH>",
-    "\"abstract |static | const | implements | clascy\"",
     "\"try \"",
     "\"print | println | writeline\"",
     "\"if \"",
     "\"switch | stoom \"",
+    "<NUMBER>",
+    "<IDENTIFIER>",
+    "<STRING>",
   };
 
 }
