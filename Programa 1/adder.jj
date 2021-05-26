@@ -192,3 +192,16 @@ void Start():
 	)*	
 }
 
+void Classes():
+{
+	<IDREACH> <CLASSTYPE> <CLASS> <IDENTIFIER>
+	<LBRACE>
+	(Declaration() | Method())*
+	<RBRACE>
+	
+}
+
+void Declaration():
+{
+	<IDREACH> (<STRINGTYPE>|<CHARTYPE>|<BOOL>|<NUMTYPES>|<FLOATTYPE>) <IDENTIFIER> <SEMICOLON>
+}
