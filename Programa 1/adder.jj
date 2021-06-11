@@ -60,16 +60,31 @@ TOKEN:
 	| <LBRACE:"{ ">{System.out.println("LBRACE->"+"\r\n");}
 	| <RBRACE:"} ">{System.out.println("RBRACE->"+"\r\n");}
 	| <SEMICOLON:"; ">{System.out.println("SEMICOL->"+"\r\n");}
+	| <COLON:": ">{System.out.println("COL->"+"\r\n");}
+	| <COMA:", "> {System.out.println("COMA->"+"\r\n");}
 }
 
 //Tokens para bloques repetitivos, control de flujo
 TOKEN:{
-	<LOOP:"for | do | while ">{System.out.println("LOOP-> "+image+"\r\n");}
+	<LOOPFOR:"for ">{System.out.println("LOOPFOR-> "+"\r\n");}
+}
+
+TOKEN:{
+	<LOOPDO:"do "> {System.out.println("LOOPDO-> "+"\r\n");}
+}
+
+TOKEN:{
+	<LOOPWHILE:"while "> {System.out.println("LOOPWHILE-> "+"\r\n");}
 }
 
 //Tokens para operadores aritmeticos
 TOKEN:{
-	<ARITM:"= | + | - | * | / ">{System.out.println("ARITM-> "+image+"\r\n");}
+	<ARITM:"+ | - | * | / ">{System.out.println("ARITM-> "+image+"\r\n");}
+}
+
+//Token para asignar
+TOKEN:{
+	<ASIGN:"= "> {System.out.println("ASIGN-> "+"\r\n");}
 }
 
 //Token para valores de condición
@@ -129,6 +144,32 @@ TOKEN:{
 	|<IDENTIFIER:(["a"-"z","A"-"Z"]) (["a"-"z","A"-"Z","0"-"9","_"])*>{System.out.println("IDENTIFIER ->"+image+"\r\n");}
 	|<STRING : ["a"-"z","A"-"Z","0"-"9"](["a"-"z","A"-"Z","0"-"9"])*>{System.out.print("STRING -> "+image+"\r\n");}
 	}
+	
+//Token para importar paquetes
+TOKEN:{
+	  <PACKEXP: "packexp"> {System.out.println("PACKEXP-> "+"\r\n");}
+	| <IMPORT: "import"> {System.out.println("IMPORT-> "+"\r\n");}
+	}
+	
+//Token para heredar clases
+TOKEN:{
+	<HCLASS:">> "> {System.out.println("HCLASS-> "+"\r\n");}
+}
+
+//Token para palabra reservada def
+TOKEN:{
+	<DEF: "def "> {System.out.println("DEF-> "+"\r\n");}
+}
+
+//Token para palabra clave de metodos
+TOKEN:{
+	<CONST:"const "> {System.out.println("CONST-> "+"\r\n");}
+}
+
+//Token para Return
+TOKEN:{
+	<RETURN:"return "> {System.out.println("RETURN-> "+"\r\n");}
+}
 //Fin de estados léxicos
 
 //Inicio de procedimientos para definir patrones
@@ -192,16 +233,78 @@ void Start():
 	)*	
 }
 
-void Classes():
+void Programa():
 {
-	<IDREACH> <CLASSTYPE> <CLASS> <IDENTIFIER>
-	<LBRACE>
-	(Declaration() | Method())*
-	<RBRACE>
-	
+	<IDENTIFIER> (Librerias())? (Clase())* <COLON>
 }
 
-void Declaration():
+void Librerias():
 {
-	<IDREACH> (<STRINGTYPE>|<CHARTYPE>|<BOOL>|<NUMTYPES>|<FLOATTYPE>) <IDENTIFIER> <SEMICOLON>
+	(<PACKEXP> <IDENTIFIER>)*
+}
+
+void Clase():
+{
+	(Heredar())? <CLASS> <IDENTIFIER> (DeclarVarGlob() | Metodo())* <COLON>
+}
+
+
+void Heredar():
+{
+	<IDENTIFIER> <HCLASS>
+}
+
+void DeclarVarGlob():
+{
+	<DEF> DefinirVariables() <COLON>
+}
+
+void DefinirVariables():
+{
+	(<IDENTIFIER> <ASIGN> (<NUMTYPES>|<FLOATTYPE>|<BOOL>|<STRINGTYPE>|<CHARTYPE>) )+
+}
+
+void Metodo():
+{
+	<CONST><VOID><IDENTIFIER> Bloque() Return() <COLON>
+}
+
+void Bloque():
+{
+	Instrucciones()
+}
+
+void Return():
+{
+	<RETURN> <IDENTIFIER>
+}
+
+void Instrucciones():
+{
+	( Ciclos()| Pregunta()| ImpCons()| declarVarLocal()| opAritmetica()| Asignar() )*
+}
+
+void Ciclos():
+{
+	CicloFor() | CicloWhile() | CicloDo()
+}
+
+void CicloFor():
+{
+	<LOOPFOR> EstructuraFor() Bloque()
+}
+
+void EstructuraFor():
+{
+	Condicion() <COMA> <IDENTIFIER> <ASIGN> Valor() <COMA> Incremento()
+}
+
+void Incremento():
+{
+	<IDENTIFIER> <ARITM> Valor()
+}
+
+void CicloWhile():
+{
+	<LOOPWHILE> Condicion() Bloque()
 }
