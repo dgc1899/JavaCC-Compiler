@@ -308,3 +308,23 @@ void CicloWhile():
 {
 	<LOOPWHILE> Condicion() Bloque()
 }
+
+void CicloDo():
+{
+       <LOPPDO> Bloque() <LOOPWHILE> Condicion()
+}
+
+void Pregunta():
+{
+      <LOOPIF> Condicion() Then() Bloque() (Else())?
+}
+
+void Impcons():
+{
+      <Imprimir> (Valor() |id())
+ }
+ 
+ void Imprimir():
+ {
+      <Print> | Println() | Writeline()
+ }
