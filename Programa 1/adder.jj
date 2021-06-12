@@ -316,7 +316,7 @@ void CicloDo():
 
 void Pregunta():
 {
-      <LOOPIF> Condicion() Then() Bloque() (Else())?
+      <LOOPIF> Condicion() Then() Bloque() (Sino())?
 }
 
 void Impcons():
@@ -328,3 +328,64 @@ void Impcons():
  {
       <Print> | Println() | Writeline()
  }
+
+void Sino():
+{
+     <Else> Bloque()
+}
+
+void Condicion():
+{
+     <Oprelacional> (Oplogico() Oprelacional())*
+}
+
+void Oparitmetica():
+{
+     <Id Asignar()>? (Id | Valor()) (Operadoraritm (id | valor()))*
+}
+
+void Oprelacional():
+{
+     <id | Oparitmetica() | Valor() | Operadorrel> (id | Oparitmetica() | Valor())
+}
+
+void OperadorRel():
+{
+    <= >= ==
+}
+
+void Oplogicol():
+{
+    && | || 
+}
+
+void Valor():
+{
+     <Numerico> <Alfanumerico> <Booleano>
+}
+
+void Enumerable():
+{
+     <const> <Enum> bloque() <Enum> <DPunto>
+}
+
+void BloqueEnum():
+{
+     (Valor())+
+}
+
+void Estructura():
+{
+    Tipodato() (EstructuraDatos() | EstructuraEstatica()) id 
+}
+
+void EstructuraDatos():
+{
+    <list> | <stack> | <queue>
+}
+
+void EstructuraEstatica():
+{
+   <array> | <struct>
+}
+
