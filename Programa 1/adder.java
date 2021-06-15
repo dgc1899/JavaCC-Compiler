@@ -6,10 +6,7 @@ class adder implements adderConstants {
                         public static void main(String[]args)
                         throws ParseException, TokenMgrError{
                         adder parser=new adder(System.in);
-                        parser.Programa();
-                                }
-
-//Fin de estados léxicos
+                        parser.Programa();}
 
 //Inicio de procedimientos para definir patrones
   final public 
@@ -45,8 +42,8 @@ void Start() throws ParseException {int contador = 0;
       case PRINTOUT:
       case IFSTRUCT:
       case SWITCHSTRUCT:
-      case NUMBER:
       case IDENTIFIER:
+      case NUMBER:
       case STRING:{
         ;
         break;
@@ -348,13 +345,10 @@ System.out.println("Identificador: " + variable + " " + Lista.indexOf(variable) 
       case LOOPFOR:
       case LOOPDO:
       case LOOPWHILE:
-      case CONDITION:
       case PRINTOUT:
       case IFSTRUCT:
-      case NUMBER:
-      case IDENTIFIER:
-      case STRING:
-      case DEF:{
+      case DEF:
+      case IDENTIFIER:{
         ;
         break;
         }
@@ -381,10 +375,7 @@ System.out.println("Identificador: " + variable + " " + Lista.indexOf(variable) 
         declarVarLocal();
         break;
         }
-      case CONDITION:
-      case NUMBER:
-      case IDENTIFIER:
-      case STRING:{
+      case IDENTIFIER:{
         OpAritmetica();
         break;
         }
@@ -523,16 +514,8 @@ System.out.println("Identificador: " + variable + " " + Lista.indexOf(variable) 
 }
 
   final public void OpAritmetica() throws ParseException {
-    switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
-    case IDENTIFIER:{
-      jj_consume_token(IDENTIFIER);
-      jj_consume_token(ASIGN);
-      break;
-      }
-    default:
-      jj_la1[16] = jj_gen;
-      ;
-    }
+    jj_consume_token(IDENTIFIER);
+    jj_consume_token(ASIGN);
     switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
     case IDENTIFIER:{
       jj_consume_token(IDENTIFIER);
@@ -545,7 +528,7 @@ System.out.println("Identificador: " + variable + " " + Lista.indexOf(variable) 
       break;
       }
     default:
-      jj_la1[17] = jj_gen;
+      jj_la1[16] = jj_gen;
       jj_consume_token(-1);
       throw new ParseException();
     }
@@ -557,7 +540,7 @@ System.out.println("Identificador: " + variable + " " + Lista.indexOf(variable) 
         break;
         }
       default:
-        jj_la1[18] = jj_gen;
+        jj_la1[17] = jj_gen;
         break label_8;
       }
       jj_consume_token(ARITM);
@@ -573,7 +556,7 @@ System.out.println("Identificador: " + variable + " " + Lista.indexOf(variable) 
         break;
         }
       default:
-        jj_la1[19] = jj_gen;
+        jj_la1[18] = jj_gen;
         jj_consume_token(-1);
         throw new ParseException();
       }
@@ -583,40 +566,34 @@ System.out.println("Identificador: " + variable + " " + Lista.indexOf(variable) 
   final public void Oprelacional() throws ParseException {
     switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
     case IDENTIFIER:{
-      jj_consume_token(IDENTIFIER);
+      OpAritmetica();
       break;
       }
     case CONDITION:
     case NUMBER:
     case STRING:{
-      OpAritmetica();
-      break;
-      }{
       Valor();
       break;
       }
     default:
-      jj_la1[20] = jj_gen;
+      jj_la1[19] = jj_gen;
       jj_consume_token(-1);
       throw new ParseException();
     }
     jj_consume_token(RELAT);
     switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
     case IDENTIFIER:{
-      jj_consume_token(IDENTIFIER);
+      OpAritmetica();
       break;
       }
     case CONDITION:
     case NUMBER:
     case STRING:{
-      OpAritmetica();
-      break;
-      }{
       Valor();
       break;
       }
     default:
-      jj_la1[21] = jj_gen;
+      jj_la1[20] = jj_gen;
       jj_consume_token(-1);
       throw new ParseException();
     }
@@ -637,7 +614,7 @@ System.out.println("Identificador: " + variable + " " + Lista.indexOf(variable) 
       break;
       }
     default:
-      jj_la1[22] = jj_gen;
+      jj_la1[21] = jj_gen;
       jj_consume_token(-1);
       throw new ParseException();
     }
@@ -662,7 +639,7 @@ System.out.println("Identificador: " + variable + " " + Lista.indexOf(variable) 
         break;
         }
       default:
-        jj_la1[23] = jj_gen;
+        jj_la1[22] = jj_gen;
         break label_9;
       }
     }
@@ -679,7 +656,7 @@ System.out.println("Identificador: " + variable + " " + Lista.indexOf(variable) 
       break;
       }
     default:
-      jj_la1[24] = jj_gen;
+      jj_la1[23] = jj_gen;
       jj_consume_token(-1);
       throw new ParseException();
     }
@@ -696,7 +673,7 @@ System.out.println("Identificador: " + variable + " " + Lista.indexOf(variable) 
       break;
       }
     default:
-      jj_la1[25] = jj_gen;
+      jj_la1[24] = jj_gen;
       jj_consume_token(-1);
       throw new ParseException();
     }
@@ -718,7 +695,7 @@ System.out.println("Identificador: " + variable + " " + Lista.indexOf(variable) 
       break;
       }
     default:
-      jj_la1[26] = jj_gen;
+      jj_la1[25] = jj_gen;
       jj_consume_token(-1);
       throw new ParseException();
     }
@@ -735,7 +712,7 @@ System.out.println("Identificador: " + variable + " " + Lista.indexOf(variable) 
       break;
       }
     default:
-      jj_la1[27] = jj_gen;
+      jj_la1[26] = jj_gen;
       jj_consume_token(-1);
       throw new ParseException();
     }
@@ -750,7 +727,7 @@ System.out.println("Identificador: " + variable + " " + Lista.indexOf(variable) 
   public Token jj_nt;
   private int jj_ntk;
   private int jj_gen;
-  final private int[] jj_la1 = new int[28];
+  final private int[] jj_la1 = new int[27];
   static private int[] jj_la1_0;
   static private int[] jj_la1_1;
   static {
@@ -758,10 +735,10 @@ System.out.println("Identificador: " + variable + " " + Lista.indexOf(variable) 
 	   jj_la1_init_1();
 	}
 	private static void jj_la1_init_0() {
-	   jj_la1_0 = new int[] {0xed07ffc0,0xed07ffc0,0x0,0x40000000,0x0,0x0,0x0,0x0,0x3e00,0x0,0x4e00000,0x4e00000,0x4000000,0xe00000,0x80000000,0x10000000,0x0,0x4000000,0x1000000,0x4000000,0x4000000,0x4000000,0x4000000,0x4000000,0x0,0x0,0x0,0x0,};
+	   jj_la1_0 = new int[] {0xff683ffe,0xff683ffe,0x0,0x2000000,0x0,0x0,0x0,0x0,0x1f0,0x0,0xc0070000,0xc0070000,0x200000,0x70000,0x4000000,0x800000,0x200000,0x80000,0x200000,0x200000,0x200000,0x200000,0x200000,0x0,0x0,0x0,0x0,};
 	}
 	private static void jj_la1_init_1() {
-	   jj_la1_1 = new int[] {0x18bf,0x18bf,0x2000,0x800,0x2000,0x800,0x30000,0x30000,0x0,0x800,0x11898,0x11898,0x1880,0x0,0x0,0x0,0x800,0x1880,0x0,0x1880,0x1880,0x1880,0x1080,0x1080,0x1080,0x1f00000,0x700000,0x1800000,};
+	   jj_la1_1 = new int[] {0x8c001,0x8c001,0x4,0x4000,0x4,0x4000,0x60,0x60,0x0,0x4000,0x4020,0x4020,0x8c000,0x0,0x0,0x0,0x8c000,0x0,0x8c000,0x8c000,0x8c000,0x88000,0x88000,0x88000,0x3e00,0xe00,0x3000,};
 	}
 
   /** Constructor with InputStream. */
@@ -775,7 +752,7 @@ System.out.println("Identificador: " + variable + " " + Lista.indexOf(variable) 
 	 token = new Token();
 	 jj_ntk = -1;
 	 jj_gen = 0;
-	 for (int i = 0; i < 28; i++) jj_la1[i] = -1;
+	 for (int i = 0; i < 27; i++) jj_la1[i] = -1;
   }
 
   /** Reinitialise. */
@@ -789,7 +766,7 @@ System.out.println("Identificador: " + variable + " " + Lista.indexOf(variable) 
 	 token = new Token();
 	 jj_ntk = -1;
 	 jj_gen = 0;
-	 for (int i = 0; i < 28; i++) jj_la1[i] = -1;
+	 for (int i = 0; i < 27; i++) jj_la1[i] = -1;
   }
 
   /** Constructor. */
@@ -799,7 +776,7 @@ System.out.println("Identificador: " + variable + " " + Lista.indexOf(variable) 
 	 token = new Token();
 	 jj_ntk = -1;
 	 jj_gen = 0;
-	 for (int i = 0; i < 28; i++) jj_la1[i] = -1;
+	 for (int i = 0; i < 27; i++) jj_la1[i] = -1;
   }
 
   /** Reinitialise. */
@@ -817,7 +794,7 @@ System.out.println("Identificador: " + variable + " " + Lista.indexOf(variable) 
 	 token = new Token();
 	 jj_ntk = -1;
 	 jj_gen = 0;
-	 for (int i = 0; i < 28; i++) jj_la1[i] = -1;
+	 for (int i = 0; i < 27; i++) jj_la1[i] = -1;
   }
 
   /** Constructor with generated Token Manager. */
@@ -826,7 +803,7 @@ System.out.println("Identificador: " + variable + " " + Lista.indexOf(variable) 
 	 token = new Token();
 	 jj_ntk = -1;
 	 jj_gen = 0;
-	 for (int i = 0; i < 28; i++) jj_la1[i] = -1;
+	 for (int i = 0; i < 27; i++) jj_la1[i] = -1;
   }
 
   /** Reinitialise. */
@@ -835,7 +812,7 @@ System.out.println("Identificador: " + variable + " " + Lista.indexOf(variable) 
 	 token = new Token();
 	 jj_ntk = -1;
 	 jj_gen = 0;
-	 for (int i = 0; i < 28; i++) jj_la1[i] = -1;
+	 for (int i = 0; i < 27; i++) jj_la1[i] = -1;
   }
 
   private Token jj_consume_token(int kind) throws ParseException {
@@ -891,7 +868,7 @@ System.out.println("Identificador: " + variable + " " + Lista.indexOf(variable) 
 	   la1tokens[jj_kind] = true;
 	   jj_kind = -1;
 	 }
-	 for (int i = 0; i < 28; i++) {
+	 for (int i = 0; i < 27; i++) {
 	   if (jj_la1[i] == jj_gen) {
 		 for (int j = 0; j < 32; j++) {
 		   if ((jj_la1_0[i] & (1<<j)) != 0) {

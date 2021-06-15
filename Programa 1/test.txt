@@ -1,11 +1,11 @@
-Programa
+Programa_1
 
 packexp libreria1
 
 
 class Ejemplo
 
-	def 
+	def
 		numero1 = int
 		cadena1 = string
 	:

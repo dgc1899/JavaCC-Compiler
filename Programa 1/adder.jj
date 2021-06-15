@@ -17,8 +17,6 @@ PARSER_END(adder)
 
 //Inicio de estados léxicos
 
-SKIP:{" " | "\n" | "\r" | "\r\n" | "\t"}
-
 //Token para Alcance de Identificador
 TOKEN:{
 <IDREACH:"public "|"private "|"protected " > {System.out.println("IDREACH->"+image+"\r\n");}	
@@ -35,19 +33,19 @@ TOKEN:{
 
 //Tokens de tipos de numeros
 TOKEN:{
-		<NUMTYPES:("int "|"byte "|"short "|"long "|"sbyte "|"ushort "|"ulong ")>{System.out.println("NUMTYPES-> "+image+"\r\n");}
-		|<FLOATTYPE:("float "|"double "|"decimal ")>{System.out.println("FLOATTYPE-> "+image+"\r\n");}
+		<NUMTYPES:("int"|"byte"|"short"|"long"|"sbyte"|"ushort"|"ulong")>{System.out.println("NUMTYPES-> "+image+"\r\n");}
+		|<FLOATTYPE:("float"|"double"|"decimal")>{System.out.println("FLOATTYPE-> "+image+"\r\n");}
 	}
 
 //Tokens de tipo de datos alfanumericos
 TOKEN:{
-	<STRINGTYPE:("string ")>{System.out.println("STRINGTYPE-> "+"\r\n");}
-	|<CHARTYPE:("char ")>{System.out.println("CHARTYPE-> "+"\r\n");}
+	<STRINGTYPE:("string")>{System.out.println("STRINGTYPE-> "+"\r\n");}
+	|<CHARTYPE:("char")>{System.out.println("CHARTYPE-> "+"\r\n");}
 }
 	
 //Token para tipo de dato booleano
 TOKEN:{  
-   <BOOL:"bool " >{System.out.println("BOOL->"+"\r\n");}
+   <BOOL:"bool" >{System.out.println("BOOL->"+"\r\n");}
 }
 
 
@@ -59,7 +57,7 @@ TOKEN:
 	| <LBRACE:"{ ">{System.out.println("LBRACE->"+"\r\n");}
 	| <RBRACE:"} ">{System.out.println("RBRACE->"+"\r\n");}
 	| <SEMICOLON:"; ">{System.out.println("SEMICOL->"+"\r\n");}
-	| <COLON:": ">{System.out.println("COL->"+"\r\n");}
+	| <COLON:":">{System.out.println("COL->"+"\r\n");}
 	| <COMA:", "> {System.out.println("COMA->"+"\r\n");}
 }
 
@@ -78,7 +76,7 @@ TOKEN:{
 
 //Tokens para operadores aritmeticos
 TOKEN:{
-	<ARITM:"+ | - | * | / ">{System.out.println("ARITM-> "+image+"\r\n");}
+	<ARITM:"+| -| *| /">{System.out.println("ARITM-> "+image+"\r\n");}
 }
 
 //Token para asignar
@@ -93,8 +91,8 @@ TOKEN:{
 
 //Tokens de operadores relacionales
 TOKEN:{
-	<RELAT:"== "|"> "|"< "|">= "|"<= "|"<> " >{System.out.println("RELAT-> "+image+"\r\n");}
-	|<LOGIC: "&& "|"bitand " |"|| " |"bitor "> {System.out.println("LOGIC-> "+image+"\r\n");}
+	<RELAT:"== "|">"|"<"|">="|"<="|"<>" >{System.out.println("RELAT-> "+image+"\r\n");}
+	|<LOGIC: " && "|" bitand " |" || " |" bitor "> {System.out.println("LOGIC-> "+image+"\r\n");}
 }
 
 //10 nuevos componentes lexicos Marco
@@ -138,23 +136,11 @@ TOKEN:{
 	|<SWITCHSTRUCT:"switch | stoom "> {System.out.println("SWITCHSTRUCT-> "+image+"\r\n");}
 	|<THEN:"then "> {System.out.println("THEN-> "+"\r\n");}
 }
-
-//Token para identificadores de usuario
-TOKEN:{
-	 <NUMBER : (["0"-"9"])+ > {System.out.print("NUM-> "+image+"\r\n");}
-	|<LETTER:["A"-"Z","a"-"z"]> {System.out.print("LETTER-> "+image+"\r\n");}
-	|<UNDERSC:"_"> {System.out.print("UNDERSC-> "+image+"\r\n");}
-	|<WORD:(<LETTER>)+> {System.out.print("WORD-> "+image+"\r\n");}
-	|<IDENTIFIER: <LETTER> (<WORD> <NUMBER> <UNDERSC>)*>{System.out.println("IDENTIFIER ->"+image+"\r\n");}
-	|<STRING : <LETTER> <NUMBER> (<WORD> <NUMBER>)*>{System.out.print("STRING -> "+image+"\r\n");}
-	//|<IDENTIFIER:(["a"-"z","A"-"Z"]) (["a"-"z","A"-"Z","0"-"9","_"])*>{System.out.println("IDENTIFIER ->"+image+"\r\n");}
-	//|<STRING : ["a"-"z","A"-"Z","0"-"9"](["a"-"z","A"-"Z","0"-"9"])*>{System.out.print("STRING -> "+image+"\r\n");}
-	}
 	
 //Token para importar paquetes
 TOKEN:{
-	  <PACKEXP: "packexp"> {System.out.println("PACKEXP-> "+"\r\n");}
-	| <IMPORT: "import"> {System.out.println("IMPORT-> "+"\r\n");}
+	  <PACKEXP: "packexp "> {System.out.println("PACKEXP-> "+"\r\n");}
+	| <IMPORT: "import "> {System.out.println("IMPORT-> "+"\r\n");}
 	}
 	
 //Token para heredar clases
@@ -164,7 +150,7 @@ TOKEN:{
 
 //Token para palabra reservada def
 TOKEN:{
-	<DEF: "def "> {System.out.println("DEF-> "+"\r\n");}
+	<DEF: "def"> {System.out.println("DEF-> "+"\r\n");}
 }
 
 //Token para palabra clave de metodos
@@ -194,7 +180,24 @@ TOKEN:{
 	<ARRAY:"array "> {System.out.println("ARRAY-> "+"\r\n");}
 	|<STRUCT:"struct "> {System.out.println("STRUCT-> "+"\r\n");}
 }
+
+TOKEN:{
+	<IDENTIFIER:(["a"-"z","A"-"Z"]) (["a"-"z","A"-"Z","0"-"9","_"])*>{System.out.println("IDENTIFIER ->"+image+"\r\n");}
+}
+//Token para identificadores de usuario
+TOKEN:{
+	 <NUMBER : (["0"-"9"])+ > {System.out.print("NUM-> "+image+"\r\n");}
+	|<LETTER:["A"-"Z","a"-"z"]> {System.out.print("LETTER-> "+image+"\r\n");}
+	|<UNDERSC:"_"> {System.out.print("UNDERSC-> "+image+"\r\n");}
+	|<WORD:(<LETTER>)+> {System.out.print("WORD-> "+image+"\r\n");}
+	//|<IDENTIFIER: <LETTER> (<WORD> <NUMBER> <UNDERSC>)*>{System.out.println("IDENTIFIER ->"+image+"\r\n");}
+	|<STRING : <LETTER> <NUMBER> (<WORD> <NUMBER>)*>{System.out.print("STRING -> "+image+"\r\n");}
+	//|<STRING : ["a"-"z","A"-"Z","0"-"9"](["a"-"z","A"-"Z","0"-"9"])*>{System.out.print("STRING -> "+image+"\r\n");}
+	}
 //Fin de estados léxicos
+
+
+SKIP:{" " | "\n" | "\r" | "\r\n" | "\t"}
 
 //Inicio de procedimientos para definir patrones
 
@@ -308,7 +311,7 @@ void Bloque():
 void Instrucciones():
 {}
 {
-	(Ciclos() Pregunta() ImpCons() declarVarLocal() OpAritmetica())*
+	(Ciclos() | Pregunta() | ImpCons() | declarVarLocal() | OpAritmetica())*
 }
 
 void ImpCons():
@@ -334,7 +337,7 @@ void declarVarLocal():
 void Ciclos():
 {}
 {
-	CicloFor()  CicloWhile()  CicloDo()
+	(CicloFor() | CicloWhile() | CicloDo())
 }
 
 void CicloFor():

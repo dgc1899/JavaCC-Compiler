@@ -9,107 +9,107 @@ public interface adderConstants {
   /** End of File. */
   int EOF = 0;
   /** RegularExpression Id. */
-  int IDREACH = 6;
+  int IDREACH = 1;
   /** RegularExpression Id. */
-  int CLASSTYPE = 7;
+  int CLASSTYPE = 2;
   /** RegularExpression Id. */
-  int VOID = 8;
+  int VOID = 3;
   /** RegularExpression Id. */
-  int NUMTYPES = 9;
+  int NUMTYPES = 4;
   /** RegularExpression Id. */
-  int FLOATTYPE = 10;
+  int FLOATTYPE = 5;
   /** RegularExpression Id. */
-  int STRINGTYPE = 11;
+  int STRINGTYPE = 6;
   /** RegularExpression Id. */
-  int CHARTYPE = 12;
+  int CHARTYPE = 7;
   /** RegularExpression Id. */
-  int BOOL = 13;
+  int BOOL = 8;
   /** RegularExpression Id. */
-  int LPAR = 14;
+  int LPAR = 9;
   /** RegularExpression Id. */
-  int RPAR = 15;
+  int RPAR = 10;
   /** RegularExpression Id. */
-  int LBRACE = 16;
+  int LBRACE = 11;
   /** RegularExpression Id. */
-  int RBRACE = 17;
+  int RBRACE = 12;
   /** RegularExpression Id. */
-  int SEMICOLON = 18;
+  int SEMICOLON = 13;
   /** RegularExpression Id. */
-  int COLON = 19;
+  int COLON = 14;
   /** RegularExpression Id. */
-  int COMA = 20;
+  int COMA = 15;
   /** RegularExpression Id. */
-  int LOOPFOR = 21;
+  int LOOPFOR = 16;
   /** RegularExpression Id. */
-  int LOOPDO = 22;
+  int LOOPDO = 17;
   /** RegularExpression Id. */
-  int LOOPWHILE = 23;
+  int LOOPWHILE = 18;
   /** RegularExpression Id. */
-  int ARITM = 24;
+  int ARITM = 19;
   /** RegularExpression Id. */
-  int ASIGN = 25;
+  int ASIGN = 20;
   /** RegularExpression Id. */
-  int CONDITION = 26;
+  int CONDITION = 21;
   /** RegularExpression Id. */
-  int RELAT = 27;
+  int RELAT = 22;
   /** RegularExpression Id. */
-  int LOGIC = 28;
+  int LOGIC = 23;
   /** RegularExpression Id. */
-  int STRUCTTYPE = 29;
+  int STRUCTTYPE = 24;
   /** RegularExpression Id. */
-  int CLASS = 30;
+  int CLASS = 25;
   /** RegularExpression Id. */
-  int ALT = 31;
+  int ALT = 26;
   /** RegularExpression Id. */
-  int FOREACH = 32;
+  int FOREACH = 27;
   /** RegularExpression Id. */
-  int CATCH = 33;
+  int CATCH = 28;
   /** RegularExpression Id. */
-  int TRYBLOCK = 34;
+  int TRYBLOCK = 29;
   /** RegularExpression Id. */
-  int PRINTOUT = 35;
+  int PRINTOUT = 30;
   /** RegularExpression Id. */
-  int IFSTRUCT = 36;
+  int IFSTRUCT = 31;
   /** RegularExpression Id. */
-  int SWITCHSTRUCT = 37;
+  int SWITCHSTRUCT = 32;
   /** RegularExpression Id. */
-  int THEN = 38;
+  int THEN = 33;
   /** RegularExpression Id. */
-  int NUMBER = 39;
+  int PACKEXP = 34;
   /** RegularExpression Id. */
-  int LETTER = 40;
+  int IMPORT = 35;
   /** RegularExpression Id. */
-  int UNDERSC = 41;
+  int HCLASS = 36;
   /** RegularExpression Id. */
-  int WORD = 42;
+  int DEF = 37;
   /** RegularExpression Id. */
-  int IDENTIFIER = 43;
+  int CONST = 38;
   /** RegularExpression Id. */
-  int STRING = 44;
+  int RETURN = 39;
   /** RegularExpression Id. */
-  int PACKEXP = 45;
+  int ENUM = 40;
   /** RegularExpression Id. */
-  int IMPORT = 46;
+  int LIST = 41;
   /** RegularExpression Id. */
-  int HCLASS = 47;
+  int STACK = 42;
   /** RegularExpression Id. */
-  int DEF = 48;
+  int QUEUE = 43;
   /** RegularExpression Id. */
-  int CONST = 49;
+  int ARRAY = 44;
   /** RegularExpression Id. */
-  int RETURN = 50;
+  int STRUCT = 45;
   /** RegularExpression Id. */
-  int ENUM = 51;
+  int IDENTIFIER = 46;
   /** RegularExpression Id. */
-  int LIST = 52;
+  int NUMBER = 47;
   /** RegularExpression Id. */
-  int STACK = 53;
+  int LETTER = 48;
   /** RegularExpression Id. */
-  int QUEUE = 54;
+  int UNDERSC = 49;
   /** RegularExpression Id. */
-  int ARRAY = 55;
+  int WORD = 50;
   /** RegularExpression Id. */
-  int STRUCT = 56;
+  int STRING = 51;
 
   /** Lexical state. */
   int DEFAULT = 0;
@@ -117,32 +117,27 @@ public interface adderConstants {
   /** Literal token values. */
   String[] tokenImage = {
     "<EOF>",
-    "\" \"",
-    "\"\\n\"",
-    "\"\\r\"",
-    "\"\\r\\n\"",
-    "\"\\t\"",
     "<IDREACH>",
     "\"abstract | static | const | implements | clascy \"",
     "\"void \"",
     "<NUMTYPES>",
     "<FLOATTYPE>",
-    "\"string \"",
-    "\"char \"",
-    "\"bool \"",
+    "\"string\"",
+    "\"char\"",
+    "\"bool\"",
     "\"( \"",
     "\") \"",
     "\"{ \"",
     "\"} \"",
     "\"; \"",
-    "\": \"",
+    "\":\"",
     "\", \"",
     "\"for \"",
     "\"do \"",
     "\"while \"",
-    "\"+ | - | * | / \"",
+    "\"+| -| *| /\"",
     "\"= \"",
-    "\"true | false \"",
+    "\"true | false\"",
     "<RELAT>",
     "<LOGIC>",
     "<STRUCTTYPE>",
@@ -155,16 +150,10 @@ public interface adderConstants {
     "\"if \"",
     "\"switch | stoom \"",
     "\"then \"",
-    "<NUMBER>",
-    "<LETTER>",
-    "\"_\"",
-    "<WORD>",
-    "<IDENTIFIER>",
-    "<STRING>",
-    "\"packexp\"",
-    "\"import\"",
+    "\"packexp \"",
+    "\"import \"",
     "\">> \"",
-    "\"def \"",
+    "\"def\"",
     "\"const \"",
     "\"return \"",
     "\"enum \"",
@@ -173,6 +162,17 @@ public interface adderConstants {
     "\"queue \"",
     "\"array \"",
     "\"struct \"",
+    "<IDENTIFIER>",
+    "<NUMBER>",
+    "<LETTER>",
+    "\"_\"",
+    "<WORD>",
+    "<STRING>",
+    "\" \"",
+    "\"\\n\"",
+    "\"\\r\"",
+    "\"\\r\\n\"",
+    "\"\\t\"",
   };
 
 }
