@@ -81,7 +81,7 @@ TOKEN:{
 
 //Token para asignar
 TOKEN:{
-	<ASIGN:"= "> {System.out.println("ASIGN-> "+"\r\n");}
+	<ASIGN:"="> {System.out.println("ASIGN-> "+"\r\n");}
 }
 
 //Token para valores de condición
@@ -91,7 +91,7 @@ TOKEN:{
 
 //Tokens de operadores relacionales
 TOKEN:{
-	<RELAT:"== "|">"|"<"|">="|"<="|"<>" >{System.out.println("RELAT-> "+image+"\r\n");}
+	<RELAT:"=="|">"|"<"|">="|"<="|"<>" >{System.out.println("RELAT-> "+image+"\r\n");}
 	|<LOGIC: " && "|" bitand " |" || " |" bitor "> {System.out.println("LOGIC-> "+image+"\r\n");}
 }
 
@@ -389,18 +389,23 @@ void Condicion():
      Oprelacional() (<LOGIC> Oprelacional())*
 }
 
+void Oprelacional():
+{}
+{
+    (OpAritmetica() | Valor()) A'()
+}
+
+void A'():
+{}
+{
+   <RELAT> | ϵ
+}
+
 void OpAritmetica():
 {}
 {
     <IDENTIFIER> <ASIGN> (<IDENTIFIER> | Valor()) (<ARITM> (<IDENTIFIER> | Valor()))*  
 }
-
-void Oprelacional():
-{}
-{
-    (OpAritmetica() | Valor()) <RELAT> (OpAritmetica() | Valor())
-}
-
 
 void Valor():
 {}
