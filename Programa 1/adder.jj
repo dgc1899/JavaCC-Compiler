@@ -11,8 +11,7 @@ class adder{
 			public static void main(String[]args)
 			throws ParseException, TokenMgrError{
 			adder parser=new adder(System.in);
-			parser.Programa();										
-				}
+			parser.Programa();}
 		}			
 PARSER_END(adder)
 
@@ -309,7 +308,7 @@ void Bloque():
 void Instrucciones():
 {}
 {
-	( Ciclos()| Pregunta()| ImpCons()| declarVarLocal()| OpAritmetica())*
+	(Ciclos() Pregunta() ImpCons() declarVarLocal() OpAritmetica())*
 }
 
 void ImpCons():
@@ -335,7 +334,7 @@ void declarVarLocal():
 void Ciclos():
 {}
 {
-	CicloFor() | CicloWhile() | CicloDo()
+	CicloFor()  CicloWhile()  CicloDo()
 }
 
 void CicloFor():
@@ -390,13 +389,13 @@ void Condicion():
 void OpAritmetica():
 {}
 {
-     (<IDENTIFIER> <ASIGN>)? (<IDENTIFIER> | Valor()) (<ARITM> (<IDENTIFIER> | Valor()))*
+     <IDENTIFIER>  (<ASIGN>)? Valor() (<ARITM> (Valor()))*
 }
 
 void Oprelacional():
 {}
 {
-     (<IDENTIFIER> | OpAritmetica() | Valor()) <RELAT> (<IDENTIFIER> | OpAritmetica() | Valor())
+    (OpAritmetica() Valor()) <RELAT> (OpAritmetica()  Valor())
 }
 
 
@@ -436,5 +435,3 @@ void EstructuraEstatica():
 {
    <ARRAY> | <STRUCT>
 }
-
-
