@@ -88,7 +88,7 @@ TOKEN:{
 
 //Token para valores de condición
 TOKEN:{
-	<CONDITION:"true | false "> {System.out.println("CONDITION-> "+image+"\r\n");}
+	<CONDITION:"true | false"> {System.out.println("CONDITION-> "+image+"\r\n");}
 }
 
 //Tokens de operadores relacionales
@@ -389,13 +389,13 @@ void Condicion():
 void OpAritmetica():
 {}
 {
-     <IDENTIFIER>  (<ASIGN>)? Valor() (<ARITM> (Valor()))*
+    <IDENTIFIER> <ASIGN> (<IDENTIFIER> | Valor()) (<ARITM> (<IDENTIFIER> | Valor()))*  
 }
 
 void Oprelacional():
 {}
 {
-    (OpAritmetica() Valor()) <RELAT> (OpAritmetica()  Valor())
+    (OpAritmetica() | Valor()) <RELAT> (OpAritmetica() | Valor())
 }
 
 
