@@ -11,7 +11,7 @@ class adder{
 			public static void main(String[]args)
 			throws ParseException, TokenMgrError{
 			adder parser=new adder(System.in);
-			parser.Start();										
+			parser.Programa();										
 				}
 		}			
 PARSER_END(adder)
@@ -94,7 +94,8 @@ TOKEN:{
 
 //Tokens de operadores relacionales
 TOKEN:{
-	<RELAT:"&& "|"bitand " |"|| " |"bitor "|"== "|"> "|"< "|">= "|"<= "|"<> " >{System.out.println("RELAT-> "+image+"\r\n");}
+	<RELAT:"== "|"> "|"< "|">= "|"<= "|"<> " >{System.out.println("RELAT-> "+image+"\r\n");}
+	|<LOGIC: "&& "|"bitand " |"|| " |"bitor "> {System.out.println("LOGIC-> "+image+"\r\n");}
 }
 
 //10 nuevos componentes lexicos Marco
@@ -136,13 +137,19 @@ TOKEN:{
 TOKEN:{
 	<IFSTRUCT: "if "> {System.out.println("IFSTRUCT-> "+"\r\n");}
 	|<SWITCHSTRUCT:"switch | stoom "> {System.out.println("SWITCHSTRUCT-> "+image+"\r\n");}
+	|<THEN:"then "> {System.out.println("THEN-> "+"\r\n");}
 }
 
 //Token para identificadores de usuario
 TOKEN:{
 	 <NUMBER : (["0"-"9"])+ > {System.out.print("NUM-> "+image+"\r\n");}
-	|<IDENTIFIER:(["a"-"z","A"-"Z"]) (["a"-"z","A"-"Z","0"-"9","_"])*>{System.out.println("IDENTIFIER ->"+image+"\r\n");}
-	|<STRING : ["a"-"z","A"-"Z","0"-"9"](["a"-"z","A"-"Z","0"-"9"])*>{System.out.print("STRING -> "+image+"\r\n");}
+	|<LETTER:["A"-"Z","a"-"z"]> {System.out.print("LETTER-> "+image+"\r\n");}
+	|<UNDERSC:"_"> {System.out.print("UNDERSC-> "+image+"\r\n");}
+	|<WORD:(<LETTER>)+> {System.out.print("WORD-> "+image+"\r\n");}
+	|<IDENTIFIER: <LETTER> (<WORD> <NUMBER> <UNDERSC>)*>{System.out.println("IDENTIFIER ->"+image+"\r\n");}
+	|<STRING : <LETTER> <NUMBER> (<WORD> <NUMBER>)*>{System.out.print("STRING -> "+image+"\r\n");}
+	//|<IDENTIFIER:(["a"-"z","A"-"Z"]) (["a"-"z","A"-"Z","0"-"9","_"])*>{System.out.println("IDENTIFIER ->"+image+"\r\n");}
+	//|<STRING : ["a"-"z","A"-"Z","0"-"9"](["a"-"z","A"-"Z","0"-"9"])*>{System.out.print("STRING -> "+image+"\r\n");}
 	}
 	
 //Token para importar paquetes
@@ -169,6 +176,24 @@ TOKEN:{
 //Token para Return
 TOKEN:{
 	<RETURN:"return "> {System.out.println("RETURN-> "+"\r\n");}
+}
+
+//Token para bloque enum
+TOKEN:{
+	<ENUM:"enum "> {System.out.println("ENUM-> "+"\r\n");}
+}
+
+//Token para estructuras de datos
+TOKEN:{
+	<LIST:"list "> {System.out.println("list-> "+"\r\n");}
+	|<STACK:"stack "> {System.out.println("stack-> "+"\r\n");}
+	|<QUEUE:"queue "> {System.out.println("queue-> "+"\r\n");}
+}
+
+//Tokens para arreglos
+TOKEN:{
+	<ARRAY:"array "> {System.out.println("ARRAY-> "+"\r\n");}
+	|<STRUCT:"struct "> {System.out.println("STRUCT-> "+"\r\n");}
 }
 //Fin de estados léxicos
 
@@ -201,7 +226,6 @@ void Start():
 	|<LBRACE>
 	|<RBRACE>
 	|<SEMICOLON>
-	|<LOOP>
 	|<ARITM>
 	|<CONDITION>
 	|<RELAT>
@@ -234,158 +258,183 @@ void Start():
 }
 
 void Programa():
+{}
 {
 	<IDENTIFIER> (Librerias())? (Clase())* <COLON>
 }
 
 void Librerias():
+{}
 {
-	(<PACKEXP> <IDENTIFIER>)*
+	(<PACKEXP> <IDENTIFIER>)+
 }
 
 void Clase():
+{}
 {
 	(Heredar())? <CLASS> <IDENTIFIER> (DeclarVarGlob() | Metodo())* <COLON>
 }
 
 
 void Heredar():
+{}
 {
 	<IDENTIFIER> <HCLASS>
 }
 
 void DeclarVarGlob():
+{}
 {
 	<DEF> DefinirVariables() <COLON>
 }
 
 void DefinirVariables():
+{}
 {
 	(<IDENTIFIER> <ASIGN> (<NUMTYPES>|<FLOATTYPE>|<BOOL>|<STRINGTYPE>|<CHARTYPE>) )+
 }
 
 void Metodo():
+{}
 {
 	<CONST><VOID><IDENTIFIER> Bloque() Return() <COLON>
 }
 
 void Bloque():
+{}
 {
 	Instrucciones()
 }
 
+void Instrucciones():
+{}
+{
+	( Ciclos()| Pregunta()| ImpCons()| declarVarLocal()| OpAritmetica())*
+}
+
+void ImpCons():
+{}
+{
+      <PRINTOUT> (Valor() | <IDENTIFIER>)
+ }
+ 
+
+
 void Return():
+{}
 {
 	<RETURN> <IDENTIFIER>
 }
 
-void Instrucciones():
+void declarVarLocal():
+{}
 {
-	( Ciclos()| Pregunta()| ImpCons()| declarVarLocal()| opAritmetica()| Asignar() )*
+	<DEF> DefinirVariables() <COLON>
 }
 
 void Ciclos():
+{}
 {
 	CicloFor() | CicloWhile() | CicloDo()
 }
 
 void CicloFor():
+{}
 {
 	<LOOPFOR> EstructuraFor() Bloque()
 }
 
 void EstructuraFor():
+{}
 {
 	Condicion() <COMA> <IDENTIFIER> <ASIGN> Valor() <COMA> Incremento()
 }
 
 void Incremento():
+{}
 {
 	<IDENTIFIER> <ARITM> Valor()
 }
 
 void CicloWhile():
+{}
 {
 	<LOOPWHILE> Condicion() Bloque()
 }
 
 void CicloDo():
+{}
 {
-       <LOPPDO> Bloque() <LOOPWHILE> Condicion()
+       <LOOPDO> Bloque() <LOOPWHILE> Condicion()
 }
 
 void Pregunta():
+{}
 {
-      <LOOPIF> Condicion() Then() Bloque() (Sino())?
+      <IFSTRUCT> Condicion() <THEN> Bloque() (Sino())?
 }
 
-void Impcons():
-{
-      <Imprimir> (Valor() |id())
- }
- 
- void Imprimir():
- {
-      <Print> | Println() | Writeline()
- }
 
 void Sino():
+{}
 {
-     <Else> Bloque()
+     <ALT> Bloque()
 }
 
 void Condicion():
+{}
 {
-     <Oprelacional> (Oplogico() Oprelacional())*
+     Oprelacional() (<LOGIC> Oprelacional())*
 }
 
-void Oparitmetica():
+void OpAritmetica():
+{}
 {
-     <Id Asignar()>? (Id | Valor()) (Operadoraritm (id | valor()))*
+     (<IDENTIFIER> <ASIGN>)? (<IDENTIFIER> | Valor()) (<ARITM> (<IDENTIFIER> | Valor()))*
 }
 
 void Oprelacional():
+{}
 {
-     <id | Oparitmetica() | Valor() | Operadorrel> (id | Oparitmetica() | Valor())
+     (<IDENTIFIER> | OpAritmetica() | Valor()) <RELAT> (<IDENTIFIER> | OpAritmetica() | Valor())
 }
 
-void OperadorRel():
-{
-    <= >= ==
-}
-
-void Oplogicol():
-{
-    && | || 
-}
 
 void Valor():
+{}
 {
-     <Numerico> <Alfanumerico> <Booleano>
+    (<CONDITION> | <NUMBER> | <STRING>)
 }
 
 void Enumerable():
+{}
 {
-     <const> <Enum> bloque() <Enum> <DPunto>
+     <CONST> <ENUM> BloqueEnum() <COLON>
 }
 
 void BloqueEnum():
+{}
 {
      (Valor())+
 }
 
+
 void Estructura():
+{}
 {
-    Tipodato() (EstructuraDatos() | EstructuraEstatica()) id 
+    (<STRING>|<NUMBER>) (EstructuraDatos() | EstructuraEstatica()) <IDENTIFIER>
 }
 
 void EstructuraDatos():
+{}
 {
-    <list> | <stack> | <queue>
+    <LIST> | <STACK> | <QUEUE>
 }
 
 void EstructuraEstatica():
+{}
 {
-   <array> | <struct>
+   <ARRAY> | <STRUCT>
 }
+
 

@@ -6,7 +6,7 @@ class adder implements adderConstants {
                         public static void main(String[]args)
                         throws ParseException, TokenMgrError{
                         adder parser=new adder(System.in);
-                        parser.Start();
+                        parser.Programa();
                                 }
 
 //Fin de estados léxicos
@@ -33,7 +33,6 @@ void Start() throws ParseException {int contador = 0;
       case LBRACE:
       case RBRACE:
       case SEMICOLON:
-      case LOOP:
       case ARITM:
       case CONDITION:
       case RELAT:
@@ -117,10 +116,6 @@ void Start() throws ParseException {int contador = 0;
         jj_consume_token(SEMICOLON);
         break;
         }
-      case LOOP:{
-        jj_consume_token(LOOP);
-        break;
-        }
       case ARITM:{
         jj_consume_token(ARITM);
         break;
@@ -192,6 +187,560 @@ System.out.println("Identificador: " + variable + " " + Lista.indexOf(variable) 
     }
 }
 
+  final public void Programa() throws ParseException {
+    jj_consume_token(IDENTIFIER);
+    switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
+    case PACKEXP:{
+      Librerias();
+      break;
+      }
+    default:
+      jj_la1[2] = jj_gen;
+      ;
+    }
+    label_2:
+    while (true) {
+      switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
+      case CLASS:
+      case IDENTIFIER:{
+        ;
+        break;
+        }
+      default:
+        jj_la1[3] = jj_gen;
+        break label_2;
+      }
+      Clase();
+    }
+    jj_consume_token(COLON);
+}
+
+  final public void Librerias() throws ParseException {
+    label_3:
+    while (true) {
+      jj_consume_token(PACKEXP);
+      jj_consume_token(IDENTIFIER);
+      switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
+      case PACKEXP:{
+        ;
+        break;
+        }
+      default:
+        jj_la1[4] = jj_gen;
+        break label_3;
+      }
+    }
+}
+
+  final public void Clase() throws ParseException {
+    switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
+    case IDENTIFIER:{
+      Heredar();
+      break;
+      }
+    default:
+      jj_la1[5] = jj_gen;
+      ;
+    }
+    jj_consume_token(CLASS);
+    jj_consume_token(IDENTIFIER);
+    label_4:
+    while (true) {
+      switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
+      case DEF:
+      case CONST:{
+        ;
+        break;
+        }
+      default:
+        jj_la1[6] = jj_gen;
+        break label_4;
+      }
+      switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
+      case DEF:{
+        DeclarVarGlob();
+        break;
+        }
+      case CONST:{
+        Metodo();
+        break;
+        }
+      default:
+        jj_la1[7] = jj_gen;
+        jj_consume_token(-1);
+        throw new ParseException();
+      }
+    }
+    jj_consume_token(COLON);
+}
+
+  final public void Heredar() throws ParseException {
+    jj_consume_token(IDENTIFIER);
+    jj_consume_token(HCLASS);
+}
+
+  final public void DeclarVarGlob() throws ParseException {
+    jj_consume_token(DEF);
+    DefinirVariables();
+    jj_consume_token(COLON);
+}
+
+  final public void DefinirVariables() throws ParseException {
+    label_5:
+    while (true) {
+      jj_consume_token(IDENTIFIER);
+      jj_consume_token(ASIGN);
+      switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
+      case NUMTYPES:{
+        jj_consume_token(NUMTYPES);
+        break;
+        }
+      case FLOATTYPE:{
+        jj_consume_token(FLOATTYPE);
+        break;
+        }
+      case BOOL:{
+        jj_consume_token(BOOL);
+        break;
+        }
+      case STRINGTYPE:{
+        jj_consume_token(STRINGTYPE);
+        break;
+        }
+      case CHARTYPE:{
+        jj_consume_token(CHARTYPE);
+        break;
+        }
+      default:
+        jj_la1[8] = jj_gen;
+        jj_consume_token(-1);
+        throw new ParseException();
+      }
+      switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
+      case IDENTIFIER:{
+        ;
+        break;
+        }
+      default:
+        jj_la1[9] = jj_gen;
+        break label_5;
+      }
+    }
+}
+
+  final public void Metodo() throws ParseException {
+    jj_consume_token(CONST);
+    jj_consume_token(VOID);
+    jj_consume_token(IDENTIFIER);
+    Bloque();
+    Return();
+    jj_consume_token(COLON);
+}
+
+  final public void Bloque() throws ParseException {
+    Instrucciones();
+}
+
+  final public void Instrucciones() throws ParseException {
+    label_6:
+    while (true) {
+      switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
+      case LOOPFOR:
+      case LOOPDO:
+      case LOOPWHILE:
+      case CONDITION:
+      case PRINTOUT:
+      case IFSTRUCT:
+      case NUMBER:
+      case IDENTIFIER:
+      case STRING:
+      case DEF:{
+        ;
+        break;
+        }
+      default:
+        jj_la1[10] = jj_gen;
+        break label_6;
+      }
+      switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
+      case LOOPFOR:
+      case LOOPDO:
+      case LOOPWHILE:{
+        Ciclos();
+        break;
+        }
+      case IFSTRUCT:{
+        Pregunta();
+        break;
+        }
+      case PRINTOUT:{
+        ImpCons();
+        break;
+        }
+      case DEF:{
+        declarVarLocal();
+        break;
+        }
+      case CONDITION:
+      case NUMBER:
+      case IDENTIFIER:
+      case STRING:{
+        OpAritmetica();
+        break;
+        }
+      default:
+        jj_la1[11] = jj_gen;
+        jj_consume_token(-1);
+        throw new ParseException();
+      }
+    }
+}
+
+  final public void ImpCons() throws ParseException {
+    jj_consume_token(PRINTOUT);
+    switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
+    case CONDITION:
+    case NUMBER:
+    case STRING:{
+      Valor();
+      break;
+      }
+    case IDENTIFIER:{
+      jj_consume_token(IDENTIFIER);
+      break;
+      }
+    default:
+      jj_la1[12] = jj_gen;
+      jj_consume_token(-1);
+      throw new ParseException();
+    }
+}
+
+  final public void Return() throws ParseException {
+    jj_consume_token(RETURN);
+    jj_consume_token(IDENTIFIER);
+}
+
+  final public void declarVarLocal() throws ParseException {
+    jj_consume_token(DEF);
+    DefinirVariables();
+    jj_consume_token(COLON);
+}
+
+  final public void Ciclos() throws ParseException {
+    switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
+    case LOOPFOR:{
+      CicloFor();
+      break;
+      }
+    case LOOPWHILE:{
+      CicloWhile();
+      break;
+      }
+    case LOOPDO:{
+      CicloDo();
+      break;
+      }
+    default:
+      jj_la1[13] = jj_gen;
+      jj_consume_token(-1);
+      throw new ParseException();
+    }
+}
+
+  final public void CicloFor() throws ParseException {
+    jj_consume_token(LOOPFOR);
+    EstructuraFor();
+    Bloque();
+}
+
+  final public void EstructuraFor() throws ParseException {
+    Condicion();
+    jj_consume_token(COMA);
+    jj_consume_token(IDENTIFIER);
+    jj_consume_token(ASIGN);
+    Valor();
+    jj_consume_token(COMA);
+    Incremento();
+}
+
+  final public void Incremento() throws ParseException {
+    jj_consume_token(IDENTIFIER);
+    jj_consume_token(ARITM);
+    Valor();
+}
+
+  final public void CicloWhile() throws ParseException {
+    jj_consume_token(LOOPWHILE);
+    Condicion();
+    Bloque();
+}
+
+  final public void CicloDo() throws ParseException {
+    jj_consume_token(LOOPDO);
+    Bloque();
+    jj_consume_token(LOOPWHILE);
+    Condicion();
+}
+
+  final public void Pregunta() throws ParseException {
+    jj_consume_token(IFSTRUCT);
+    Condicion();
+    jj_consume_token(THEN);
+    Bloque();
+    switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
+    case ALT:{
+      Sino();
+      break;
+      }
+    default:
+      jj_la1[14] = jj_gen;
+      ;
+    }
+}
+
+  final public void Sino() throws ParseException {
+    jj_consume_token(ALT);
+    Bloque();
+}
+
+  final public void Condicion() throws ParseException {
+    Oprelacional();
+    label_7:
+    while (true) {
+      switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
+      case LOGIC:{
+        ;
+        break;
+        }
+      default:
+        jj_la1[15] = jj_gen;
+        break label_7;
+      }
+      jj_consume_token(LOGIC);
+      Oprelacional();
+    }
+}
+
+  final public void OpAritmetica() throws ParseException {
+    switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
+    case IDENTIFIER:{
+      jj_consume_token(IDENTIFIER);
+      jj_consume_token(ASIGN);
+      break;
+      }
+    default:
+      jj_la1[16] = jj_gen;
+      ;
+    }
+    switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
+    case IDENTIFIER:{
+      jj_consume_token(IDENTIFIER);
+      break;
+      }
+    case CONDITION:
+    case NUMBER:
+    case STRING:{
+      Valor();
+      break;
+      }
+    default:
+      jj_la1[17] = jj_gen;
+      jj_consume_token(-1);
+      throw new ParseException();
+    }
+    label_8:
+    while (true) {
+      switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
+      case ARITM:{
+        ;
+        break;
+        }
+      default:
+        jj_la1[18] = jj_gen;
+        break label_8;
+      }
+      jj_consume_token(ARITM);
+      switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
+      case IDENTIFIER:{
+        jj_consume_token(IDENTIFIER);
+        break;
+        }
+      case CONDITION:
+      case NUMBER:
+      case STRING:{
+        Valor();
+        break;
+        }
+      default:
+        jj_la1[19] = jj_gen;
+        jj_consume_token(-1);
+        throw new ParseException();
+      }
+    }
+}
+
+  final public void Oprelacional() throws ParseException {
+    switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
+    case IDENTIFIER:{
+      jj_consume_token(IDENTIFIER);
+      break;
+      }
+    case CONDITION:
+    case NUMBER:
+    case STRING:{
+      OpAritmetica();
+      break;
+      }{
+      Valor();
+      break;
+      }
+    default:
+      jj_la1[20] = jj_gen;
+      jj_consume_token(-1);
+      throw new ParseException();
+    }
+    jj_consume_token(RELAT);
+    switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
+    case IDENTIFIER:{
+      jj_consume_token(IDENTIFIER);
+      break;
+      }
+    case CONDITION:
+    case NUMBER:
+    case STRING:{
+      OpAritmetica();
+      break;
+      }{
+      Valor();
+      break;
+      }
+    default:
+      jj_la1[21] = jj_gen;
+      jj_consume_token(-1);
+      throw new ParseException();
+    }
+}
+
+  final public void Valor() throws ParseException {
+    switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
+    case CONDITION:{
+      jj_consume_token(CONDITION);
+      break;
+      }
+    case NUMBER:{
+      jj_consume_token(NUMBER);
+      break;
+      }
+    case STRING:{
+      jj_consume_token(STRING);
+      break;
+      }
+    default:
+      jj_la1[22] = jj_gen;
+      jj_consume_token(-1);
+      throw new ParseException();
+    }
+}
+
+  final public void Enumerable() throws ParseException {
+    jj_consume_token(CONST);
+    jj_consume_token(ENUM);
+    BloqueEnum();
+    jj_consume_token(COLON);
+}
+
+  final public void BloqueEnum() throws ParseException {
+    label_9:
+    while (true) {
+      Valor();
+      switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
+      case CONDITION:
+      case NUMBER:
+      case STRING:{
+        ;
+        break;
+        }
+      default:
+        jj_la1[23] = jj_gen;
+        break label_9;
+      }
+    }
+}
+
+  final public void Estructura() throws ParseException {
+    switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
+    case STRING:{
+      jj_consume_token(STRING);
+      break;
+      }
+    case NUMBER:{
+      jj_consume_token(NUMBER);
+      break;
+      }
+    default:
+      jj_la1[24] = jj_gen;
+      jj_consume_token(-1);
+      throw new ParseException();
+    }
+    switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
+    case LIST:
+    case STACK:
+    case QUEUE:{
+      EstructuraDatos();
+      break;
+      }
+    case ARRAY:
+    case STRUCT:{
+      EstructuraEstatica();
+      break;
+      }
+    default:
+      jj_la1[25] = jj_gen;
+      jj_consume_token(-1);
+      throw new ParseException();
+    }
+    jj_consume_token(IDENTIFIER);
+}
+
+  final public void EstructuraDatos() throws ParseException {
+    switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
+    case LIST:{
+      jj_consume_token(LIST);
+      break;
+      }
+    case STACK:{
+      jj_consume_token(STACK);
+      break;
+      }
+    case QUEUE:{
+      jj_consume_token(QUEUE);
+      break;
+      }
+    default:
+      jj_la1[26] = jj_gen;
+      jj_consume_token(-1);
+      throw new ParseException();
+    }
+}
+
+  final public void EstructuraEstatica() throws ParseException {
+    switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
+    case ARRAY:{
+      jj_consume_token(ARRAY);
+      break;
+      }
+    case STRUCT:{
+      jj_consume_token(STRUCT);
+      break;
+      }
+    default:
+      jj_la1[27] = jj_gen;
+      jj_consume_token(-1);
+      throw new ParseException();
+    }
+}
+
   /** Generated Token Manager. */
   public adderTokenManager token_source;
   SimpleCharStream jj_input_stream;
@@ -201,7 +750,7 @@ System.out.println("Identificador: " + variable + " " + Lista.indexOf(variable) 
   public Token jj_nt;
   private int jj_ntk;
   private int jj_gen;
-  final private int[] jj_la1 = new int[2];
+  final private int[] jj_la1 = new int[28];
   static private int[] jj_la1_0;
   static private int[] jj_la1_1;
   static {
@@ -209,10 +758,10 @@ System.out.println("Identificador: " + variable + " " + Lista.indexOf(variable) 
 	   jj_la1_init_1();
 	}
 	private static void jj_la1_init_0() {
-	   jj_la1_0 = new int[] {0xffffffc0,0xffffffc0,};
+	   jj_la1_0 = new int[] {0xed07ffc0,0xed07ffc0,0x0,0x40000000,0x0,0x0,0x0,0x0,0x3e00,0x0,0x4e00000,0x4e00000,0x4000000,0xe00000,0x80000000,0x10000000,0x0,0x4000000,0x1000000,0x4000000,0x4000000,0x4000000,0x4000000,0x4000000,0x0,0x0,0x0,0x0,};
 	}
 	private static void jj_la1_init_1() {
-	   jj_la1_1 = new int[] {0x7,0x7,};
+	   jj_la1_1 = new int[] {0x18bf,0x18bf,0x2000,0x800,0x2000,0x800,0x30000,0x30000,0x0,0x800,0x11898,0x11898,0x1880,0x0,0x0,0x0,0x800,0x1880,0x0,0x1880,0x1880,0x1880,0x1080,0x1080,0x1080,0x1f00000,0x700000,0x1800000,};
 	}
 
   /** Constructor with InputStream. */
@@ -226,7 +775,7 @@ System.out.println("Identificador: " + variable + " " + Lista.indexOf(variable) 
 	 token = new Token();
 	 jj_ntk = -1;
 	 jj_gen = 0;
-	 for (int i = 0; i < 2; i++) jj_la1[i] = -1;
+	 for (int i = 0; i < 28; i++) jj_la1[i] = -1;
   }
 
   /** Reinitialise. */
@@ -240,7 +789,7 @@ System.out.println("Identificador: " + variable + " " + Lista.indexOf(variable) 
 	 token = new Token();
 	 jj_ntk = -1;
 	 jj_gen = 0;
-	 for (int i = 0; i < 2; i++) jj_la1[i] = -1;
+	 for (int i = 0; i < 28; i++) jj_la1[i] = -1;
   }
 
   /** Constructor. */
@@ -250,7 +799,7 @@ System.out.println("Identificador: " + variable + " " + Lista.indexOf(variable) 
 	 token = new Token();
 	 jj_ntk = -1;
 	 jj_gen = 0;
-	 for (int i = 0; i < 2; i++) jj_la1[i] = -1;
+	 for (int i = 0; i < 28; i++) jj_la1[i] = -1;
   }
 
   /** Reinitialise. */
@@ -268,7 +817,7 @@ System.out.println("Identificador: " + variable + " " + Lista.indexOf(variable) 
 	 token = new Token();
 	 jj_ntk = -1;
 	 jj_gen = 0;
-	 for (int i = 0; i < 2; i++) jj_la1[i] = -1;
+	 for (int i = 0; i < 28; i++) jj_la1[i] = -1;
   }
 
   /** Constructor with generated Token Manager. */
@@ -277,7 +826,7 @@ System.out.println("Identificador: " + variable + " " + Lista.indexOf(variable) 
 	 token = new Token();
 	 jj_ntk = -1;
 	 jj_gen = 0;
-	 for (int i = 0; i < 2; i++) jj_la1[i] = -1;
+	 for (int i = 0; i < 28; i++) jj_la1[i] = -1;
   }
 
   /** Reinitialise. */
@@ -286,7 +835,7 @@ System.out.println("Identificador: " + variable + " " + Lista.indexOf(variable) 
 	 token = new Token();
 	 jj_ntk = -1;
 	 jj_gen = 0;
-	 for (int i = 0; i < 2; i++) jj_la1[i] = -1;
+	 for (int i = 0; i < 28; i++) jj_la1[i] = -1;
   }
 
   private Token jj_consume_token(int kind) throws ParseException {
@@ -337,12 +886,12 @@ System.out.println("Identificador: " + variable + " " + Lista.indexOf(variable) 
   /** Generate ParseException. */
   public ParseException generateParseException() {
 	 jj_expentries.clear();
-	 boolean[] la1tokens = new boolean[35];
+	 boolean[] la1tokens = new boolean[57];
 	 if (jj_kind >= 0) {
 	   la1tokens[jj_kind] = true;
 	   jj_kind = -1;
 	 }
-	 for (int i = 0; i < 2; i++) {
+	 for (int i = 0; i < 28; i++) {
 	   if (jj_la1[i] == jj_gen) {
 		 for (int j = 0; j < 32; j++) {
 		   if ((jj_la1_0[i] & (1<<j)) != 0) {
@@ -354,7 +903,7 @@ System.out.println("Identificador: " + variable + " " + Lista.indexOf(variable) 
 		 }
 	   }
 	 }
-	 for (int i = 0; i < 35; i++) {
+	 for (int i = 0; i < 57; i++) {
 	   if (la1tokens[i]) {
 		 jj_expentry = new int[1];
 		 jj_expentry[0] = i;
