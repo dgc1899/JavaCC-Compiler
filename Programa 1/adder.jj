@@ -386,19 +386,25 @@ void Sino():
 void Condicion():
 {}
 {
-     Oprelacional() (<LOGIC> Oprelacional())*
+     /*Oprelacional()*/ Factor() (<LOGIC> /*Oprelacional()*/ Factor())*
+}
+
+void Factor():
+{}
+{
+	<IDENTIFIER> (Oprelacional() | OpAritmetica())
 }
 
 void Oprelacional():
 {}
 {
-    (OpAritmetica() | Valor()) <RELAT> (OpAritmetica() | Valor())
+    (/*<IDENTIFIER>*/ OpAritmetica() | Valor()) <RELAT> (<IDENTIFIER> | OpAritmetica() | Valor())
 }
 
 void OpAritmetica():
 {}
 {
-    <IDENTIFIER> <ASIGN> (<IDENTIFIER> | Valor()) (<ARITM> (<IDENTIFIER> | Valor()))*  
+    /*IDENTIFIER>*/ <ASIGN> (<IDENTIFIER> | Valor()) (<ARITM> (<IDENTIFIER> | Valor()))*  
 }
 
 void Valor():

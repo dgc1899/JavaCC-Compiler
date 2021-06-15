@@ -345,10 +345,10 @@ System.out.println("Identificador: " + variable + " " + Lista.indexOf(variable) 
       case LOOPFOR:
       case LOOPDO:
       case LOOPWHILE:
+      case ASIGN:
       case PRINTOUT:
       case IFSTRUCT:
-      case DEF:
-      case IDENTIFIER:{
+      case DEF:{
         ;
         break;
         }
@@ -375,7 +375,7 @@ System.out.println("Identificador: " + variable + " " + Lista.indexOf(variable) 
         declarVarLocal();
         break;
         }
-      case IDENTIFIER:{
+      case ASIGN:{
         OpAritmetica();
         break;
         }
@@ -496,7 +496,7 @@ System.out.println("Identificador: " + variable + " " + Lista.indexOf(variable) 
 }
 
   final public void Condicion() throws ParseException {
-    Oprelacional();
+    Factor();
     label_7:
     while (true) {
       switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
@@ -509,20 +509,21 @@ System.out.println("Identificador: " + variable + " " + Lista.indexOf(variable) 
         break label_7;
       }
       jj_consume_token(LOGIC);
-      Oprelacional();
+      Factor();
     }
 }
 
-  final public void Oprelacional() throws ParseException {
+  final public void Factor() throws ParseException {
+    jj_consume_token(IDENTIFIER);
     switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
-    case IDENTIFIER:{
-      OpAritmetica();
-      break;
-      }
+    case ASIGN:
     case CONDITION:
     case NUMBER:
     case STRING:{
-      Valor();
+      Oprelacional();
+      break;
+      }{
+      OpAritmetica();
       break;
       }
     default:
@@ -530,9 +531,11 @@ System.out.println("Identificador: " + variable + " " + Lista.indexOf(variable) 
       jj_consume_token(-1);
       throw new ParseException();
     }
-    jj_consume_token(RELAT);
+}
+
+  final public void Oprelacional() throws ParseException {
     switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
-    case IDENTIFIER:{
+    case ASIGN:{
       OpAritmetica();
       break;
       }
@@ -547,19 +550,31 @@ System.out.println("Identificador: " + variable + " " + Lista.indexOf(variable) 
       jj_consume_token(-1);
       throw new ParseException();
     }
-}
-
-  final public void OpAritmetica() throws ParseException {
-    jj_consume_token(IDENTIFIER);
+    jj_consume_token(RELAT);
     switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
+    case IDENTIFIER:{
+      jj_consume_token(IDENTIFIER);
+      break;
+      }
     case ASIGN:{
-      jj_consume_token(ASIGN);
+      OpAritmetica();
+      break;
+      }
+    case CONDITION:
+    case NUMBER:
+    case STRING:{
+      Valor();
       break;
       }
     default:
       jj_la1[18] = jj_gen;
-      ;
+      jj_consume_token(-1);
+      throw new ParseException();
     }
+}
+
+  final public void OpAritmetica() throws ParseException {
+    jj_consume_token(ASIGN);
     switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
     case IDENTIFIER:{
       jj_consume_token(IDENTIFIER);
@@ -743,10 +758,10 @@ System.out.println("Identificador: " + variable + " " + Lista.indexOf(variable) 
 	   jj_la1_init_1();
 	}
 	private static void jj_la1_init_0() {
-	   jj_la1_0 = new int[] {0xff683ffe,0xff683ffe,0x0,0x2000000,0x0,0x0,0x0,0x0,0x1f0,0x0,0xc0070000,0xc0070000,0x200000,0x70000,0x4000000,0x800000,0x200000,0x200000,0x100000,0x200000,0x80000,0x200000,0x200000,0x200000,0x0,0x0,0x0,0x0,};
+	   jj_la1_0 = new int[] {0xff683ffe,0xff683ffe,0x0,0x2000000,0x0,0x0,0x0,0x0,0x1f0,0x0,0xc0170000,0xc0170000,0x200000,0x70000,0x4000000,0x800000,0x300000,0x300000,0x300000,0x200000,0x80000,0x200000,0x200000,0x200000,0x0,0x0,0x0,0x0,};
 	}
 	private static void jj_la1_init_1() {
-	   jj_la1_1 = new int[] {0x8c001,0x8c001,0x4,0x4000,0x4,0x4000,0x60,0x60,0x0,0x4000,0x4020,0x4020,0x8c000,0x0,0x0,0x0,0x8c000,0x8c000,0x0,0x8c000,0x0,0x8c000,0x88000,0x88000,0x88000,0x3e00,0xe00,0x3000,};
+	   jj_la1_1 = new int[] {0x8c001,0x8c001,0x4,0x4000,0x4,0x4000,0x60,0x60,0x0,0x4000,0x20,0x20,0x8c000,0x0,0x0,0x0,0x88000,0x88000,0x8c000,0x8c000,0x0,0x8c000,0x88000,0x88000,0x88000,0x3e00,0xe00,0x3000,};
 	}
 
   /** Constructor with InputStream. */
