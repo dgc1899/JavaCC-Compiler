@@ -136,7 +136,7 @@ public interface adderConstants {
     "\"do \"",
     "\"while \"",
     "\"+| -| *| /\"",
-    "\"= \"",
+    "\"=\"",
     "\"true | false\"",
     "<RELAT>",
     "<LOGIC>",
