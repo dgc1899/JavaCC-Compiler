@@ -335,20 +335,19 @@ System.out.println("Identificador: " + variable + " " + Lista.indexOf(variable) 
 }
 
   final public void Bloque() throws ParseException {
-    Instrucciones();
-}
-
-  final public void Instrucciones() throws ParseException {
     label_6:
     while (true) {
       switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
       case LOOPFOR:
       case LOOPDO:
       case LOOPWHILE:
-      case ASIGN:
+      case CONDITION:
       case PRINTOUT:
       case IFSTRUCT:
-      case DEF:{
+      case DEF:
+      case IDENTIFIER:
+      case NUMBER:
+      case STRING:{
         ;
         break;
         }
@@ -375,7 +374,10 @@ System.out.println("Identificador: " + variable + " " + Lista.indexOf(variable) 
         declarVarLocal();
         break;
         }
-      case ASIGN:{
+      case CONDITION:
+      case IDENTIFIER:
+      case NUMBER:
+      case STRING:{
         OpAritmetica();
         break;
         }
@@ -387,7 +389,13 @@ System.out.println("Identificador: " + variable + " " + Lista.indexOf(variable) 
     }
 }
 
-  final public void ImpCons() throws ParseException {
+/*void Instrucciones():
+{}
+{
+
+}*/
+  final public 
+void ImpCons() throws ParseException {
     jj_consume_token(PRINTOUT);
     switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
     case CONDITION:
@@ -408,8 +416,16 @@ System.out.println("Identificador: " + variable + " " + Lista.indexOf(variable) 
 }
 
   final public void Return() throws ParseException {
-    jj_consume_token(RETURN);
-    jj_consume_token(IDENTIFIER);
+    switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
+    case RETURN:{
+      jj_consume_token(RETURN);
+      jj_consume_token(IDENTIFIER);
+      break;
+      }
+    default:
+      jj_la1[13] = jj_gen;
+      ;
+    }
 }
 
   final public void declarVarLocal() throws ParseException {
@@ -433,7 +449,7 @@ System.out.println("Identificador: " + variable + " " + Lista.indexOf(variable) 
       break;
       }
     default:
-      jj_la1[13] = jj_gen;
+      jj_la1[14] = jj_gen;
       jj_consume_token(-1);
       throw new ParseException();
     }
@@ -443,6 +459,7 @@ System.out.println("Identificador: " + variable + " " + Lista.indexOf(variable) 
     jj_consume_token(LOOPFOR);
     EstructuraFor();
     Bloque();
+    jj_consume_token(COLON);
 }
 
   final public void EstructuraFor() throws ParseException {
@@ -465,6 +482,7 @@ System.out.println("Identificador: " + variable + " " + Lista.indexOf(variable) 
     jj_consume_token(LOOPWHILE);
     Condicion();
     Bloque();
+    jj_consume_token(COLON);
 }
 
   final public void CicloDo() throws ParseException {
@@ -479,13 +497,14 @@ System.out.println("Identificador: " + variable + " " + Lista.indexOf(variable) 
     Condicion();
     jj_consume_token(THEN);
     Bloque();
+    jj_consume_token(COLON);
     switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
     case ALT:{
       Sino();
       break;
       }
     default:
-      jj_la1[14] = jj_gen;
+      jj_la1[15] = jj_gen;
       ;
     }
 }
@@ -493,10 +512,18 @@ System.out.println("Identificador: " + variable + " " + Lista.indexOf(variable) 
   final public void Sino() throws ParseException {
     jj_consume_token(ALT);
     Bloque();
+    jj_consume_token(COLON);
 }
 
-  final public void Condicion() throws ParseException {
-    Factor();
+/*void Asignar():
+{}
+{
+	<IDENTIFIER> <ASIGN> (<IDENTIFIER> | Valor() | OpAritmetica())
+}
+*/
+  final public 
+void Condicion() throws ParseException {
+    Oprelacional();
     label_7:
     while (true) {
       switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
@@ -505,38 +532,18 @@ System.out.println("Identificador: " + variable + " " + Lista.indexOf(variable) 
         break;
         }
       default:
-        jj_la1[15] = jj_gen;
+        jj_la1[16] = jj_gen;
         break label_7;
       }
       jj_consume_token(LOGIC);
-      Factor();
-    }
-}
-
-  final public void Factor() throws ParseException {
-    jj_consume_token(IDENTIFIER);
-    switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
-    case ASIGN:
-    case CONDITION:
-    case NUMBER:
-    case STRING:{
       Oprelacional();
-      break;
-      }{
-      OpAritmetica();
-      break;
-      }
-    default:
-      jj_la1[16] = jj_gen;
-      jj_consume_token(-1);
-      throw new ParseException();
     }
 }
 
   final public void Oprelacional() throws ParseException {
     switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
-    case ASIGN:{
-      OpAritmetica();
+    case IDENTIFIER:{
+      jj_consume_token(IDENTIFIER);
       break;
       }
     case CONDITION:
@@ -550,47 +557,6 @@ System.out.println("Identificador: " + variable + " " + Lista.indexOf(variable) 
       jj_consume_token(-1);
       throw new ParseException();
     }
-    jj_consume_token(RELAT);
-    switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
-    case IDENTIFIER:{
-      jj_consume_token(IDENTIFIER);
-      break;
-      }
-    case ASIGN:{
-      OpAritmetica();
-      break;
-      }
-    case CONDITION:
-    case NUMBER:
-    case STRING:{
-      Valor();
-      break;
-      }
-    default:
-      jj_la1[18] = jj_gen;
-      jj_consume_token(-1);
-      throw new ParseException();
-    }
-}
-
-  final public void OpAritmetica() throws ParseException {
-    jj_consume_token(ASIGN);
-    switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
-    case IDENTIFIER:{
-      jj_consume_token(IDENTIFIER);
-      break;
-      }
-    case CONDITION:
-    case NUMBER:
-    case STRING:{
-      Valor();
-      break;
-      }
-    default:
-      jj_la1[19] = jj_gen;
-      jj_consume_token(-1);
-      throw new ParseException();
-    }
     label_8:
     while (true) {
       switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
@@ -599,7 +565,7 @@ System.out.println("Identificador: " + variable + " " + Lista.indexOf(variable) 
         break;
         }
       default:
-        jj_la1[20] = jj_gen;
+        jj_la1[18] = jj_gen;
         break label_8;
       }
       jj_consume_token(ARITM);
@@ -615,7 +581,111 @@ System.out.println("Identificador: " + variable + " " + Lista.indexOf(variable) 
         break;
         }
       default:
+        jj_la1[19] = jj_gen;
+        jj_consume_token(-1);
+        throw new ParseException();
+      }
+    }
+    jj_consume_token(RELAT);
+    switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
+    case IDENTIFIER:{
+      jj_consume_token(IDENTIFIER);
+      break;
+      }
+    case CONDITION:
+    case NUMBER:
+    case STRING:{
+      Valor();
+      break;
+      }
+    default:
+      jj_la1[20] = jj_gen;
+      jj_consume_token(-1);
+      throw new ParseException();
+    }
+    label_9:
+    while (true) {
+      switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
+      case ARITM:{
+        ;
+        break;
+        }
+      default:
         jj_la1[21] = jj_gen;
+        break label_9;
+      }
+      jj_consume_token(ARITM);
+      switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
+      case IDENTIFIER:{
+        jj_consume_token(IDENTIFIER);
+        break;
+        }
+      case CONDITION:
+      case NUMBER:
+      case STRING:{
+        Valor();
+        break;
+        }
+      default:
+        jj_la1[22] = jj_gen;
+        jj_consume_token(-1);
+        throw new ParseException();
+      }
+    }
+}
+
+  final public void OpAritmetica() throws ParseException {
+    switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
+    case IDENTIFIER:{
+      jj_consume_token(IDENTIFIER);
+      jj_consume_token(ASIGN);
+      break;
+      }
+    default:
+      jj_la1[23] = jj_gen;
+      ;
+    }
+    switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
+    case IDENTIFIER:{
+      jj_consume_token(IDENTIFIER);
+      break;
+      }
+    case CONDITION:
+    case NUMBER:
+    case STRING:{
+      Valor();
+      break;
+      }
+    default:
+      jj_la1[24] = jj_gen;
+      jj_consume_token(-1);
+      throw new ParseException();
+    }
+    label_10:
+    while (true) {
+      switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
+      case ARITM:{
+        ;
+        break;
+        }
+      default:
+        jj_la1[25] = jj_gen;
+        break label_10;
+      }
+      jj_consume_token(ARITM);
+      switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
+      case IDENTIFIER:{
+        jj_consume_token(IDENTIFIER);
+        break;
+        }
+      case CONDITION:
+      case NUMBER:
+      case STRING:{
+        Valor();
+        break;
+        }
+      default:
+        jj_la1[26] = jj_gen;
         jj_consume_token(-1);
         throw new ParseException();
       }
@@ -637,7 +707,7 @@ System.out.println("Identificador: " + variable + " " + Lista.indexOf(variable) 
       break;
       }
     default:
-      jj_la1[22] = jj_gen;
+      jj_la1[27] = jj_gen;
       jj_consume_token(-1);
       throw new ParseException();
     }
@@ -651,7 +721,7 @@ System.out.println("Identificador: " + variable + " " + Lista.indexOf(variable) 
 }
 
   final public void BloqueEnum() throws ParseException {
-    label_9:
+    label_11:
     while (true) {
       Valor();
       switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
@@ -662,8 +732,8 @@ System.out.println("Identificador: " + variable + " " + Lista.indexOf(variable) 
         break;
         }
       default:
-        jj_la1[23] = jj_gen;
-        break label_9;
+        jj_la1[28] = jj_gen;
+        break label_11;
       }
     }
 }
@@ -679,7 +749,7 @@ System.out.println("Identificador: " + variable + " " + Lista.indexOf(variable) 
       break;
       }
     default:
-      jj_la1[24] = jj_gen;
+      jj_la1[29] = jj_gen;
       jj_consume_token(-1);
       throw new ParseException();
     }
@@ -690,13 +760,13 @@ System.out.println("Identificador: " + variable + " " + Lista.indexOf(variable) 
       EstructuraDatos();
       break;
       }
-    case ARRAY:
-    case STRUCT:{
+    case STRUCTTYPE:
+    case ARRAY:{
       EstructuraEstatica();
       break;
       }
     default:
-      jj_la1[25] = jj_gen;
+      jj_la1[30] = jj_gen;
       jj_consume_token(-1);
       throw new ParseException();
     }
@@ -718,7 +788,7 @@ System.out.println("Identificador: " + variable + " " + Lista.indexOf(variable) 
       break;
       }
     default:
-      jj_la1[26] = jj_gen;
+      jj_la1[31] = jj_gen;
       jj_consume_token(-1);
       throw new ParseException();
     }
@@ -730,12 +800,12 @@ System.out.println("Identificador: " + variable + " " + Lista.indexOf(variable) 
       jj_consume_token(ARRAY);
       break;
       }
-    case STRUCT:{
-      jj_consume_token(STRUCT);
+    case STRUCTTYPE:{
+      jj_consume_token(STRUCTTYPE);
       break;
       }
     default:
-      jj_la1[27] = jj_gen;
+      jj_la1[32] = jj_gen;
       jj_consume_token(-1);
       throw new ParseException();
     }
@@ -750,7 +820,7 @@ System.out.println("Identificador: " + variable + " " + Lista.indexOf(variable) 
   public Token jj_nt;
   private int jj_ntk;
   private int jj_gen;
-  final private int[] jj_la1 = new int[28];
+  final private int[] jj_la1 = new int[33];
   static private int[] jj_la1_0;
   static private int[] jj_la1_1;
   static {
@@ -758,10 +828,10 @@ System.out.println("Identificador: " + variable + " " + Lista.indexOf(variable) 
 	   jj_la1_init_1();
 	}
 	private static void jj_la1_init_0() {
-	   jj_la1_0 = new int[] {0xff683ffe,0xff683ffe,0x0,0x2000000,0x0,0x0,0x0,0x0,0x1f0,0x0,0xc0170000,0xc0170000,0x200000,0x70000,0x4000000,0x800000,0x300000,0x300000,0x300000,0x200000,0x80000,0x200000,0x200000,0x200000,0x0,0x0,0x0,0x0,};
+	   jj_la1_0 = new int[] {0xff683ffe,0xff683ffe,0x0,0x2000000,0x0,0x0,0x0,0x0,0x1f0,0x0,0xc0270000,0xc0270000,0x200000,0x0,0x70000,0x4000000,0x800000,0x200000,0x80000,0x200000,0x200000,0x80000,0x200000,0x0,0x200000,0x80000,0x200000,0x200000,0x200000,0x0,0x1000000,0x0,0x1000000,};
 	}
 	private static void jj_la1_init_1() {
-	   jj_la1_1 = new int[] {0x8c001,0x8c001,0x4,0x4000,0x4,0x4000,0x60,0x60,0x0,0x4000,0x20,0x20,0x8c000,0x0,0x0,0x0,0x88000,0x88000,0x8c000,0x8c000,0x0,0x8c000,0x88000,0x88000,0x88000,0x3e00,0xe00,0x3000,};
+	   jj_la1_1 = new int[] {0x46001,0x46001,0x4,0x2000,0x4,0x2000,0x60,0x60,0x0,0x2000,0x46020,0x46020,0x46000,0x80,0x0,0x0,0x0,0x46000,0x0,0x46000,0x46000,0x0,0x46000,0x2000,0x46000,0x0,0x46000,0x44000,0x44000,0x44000,0x1e00,0xe00,0x1000,};
 	}
 
   /** Constructor with InputStream. */
@@ -775,7 +845,7 @@ System.out.println("Identificador: " + variable + " " + Lista.indexOf(variable) 
 	 token = new Token();
 	 jj_ntk = -1;
 	 jj_gen = 0;
-	 for (int i = 0; i < 28; i++) jj_la1[i] = -1;
+	 for (int i = 0; i < 33; i++) jj_la1[i] = -1;
   }
 
   /** Reinitialise. */
@@ -789,7 +859,7 @@ System.out.println("Identificador: " + variable + " " + Lista.indexOf(variable) 
 	 token = new Token();
 	 jj_ntk = -1;
 	 jj_gen = 0;
-	 for (int i = 0; i < 28; i++) jj_la1[i] = -1;
+	 for (int i = 0; i < 33; i++) jj_la1[i] = -1;
   }
 
   /** Constructor. */
@@ -799,7 +869,7 @@ System.out.println("Identificador: " + variable + " " + Lista.indexOf(variable) 
 	 token = new Token();
 	 jj_ntk = -1;
 	 jj_gen = 0;
-	 for (int i = 0; i < 28; i++) jj_la1[i] = -1;
+	 for (int i = 0; i < 33; i++) jj_la1[i] = -1;
   }
 
   /** Reinitialise. */
@@ -817,7 +887,7 @@ System.out.println("Identificador: " + variable + " " + Lista.indexOf(variable) 
 	 token = new Token();
 	 jj_ntk = -1;
 	 jj_gen = 0;
-	 for (int i = 0; i < 28; i++) jj_la1[i] = -1;
+	 for (int i = 0; i < 33; i++) jj_la1[i] = -1;
   }
 
   /** Constructor with generated Token Manager. */
@@ -826,7 +896,7 @@ System.out.println("Identificador: " + variable + " " + Lista.indexOf(variable) 
 	 token = new Token();
 	 jj_ntk = -1;
 	 jj_gen = 0;
-	 for (int i = 0; i < 28; i++) jj_la1[i] = -1;
+	 for (int i = 0; i < 33; i++) jj_la1[i] = -1;
   }
 
   /** Reinitialise. */
@@ -835,7 +905,7 @@ System.out.println("Identificador: " + variable + " " + Lista.indexOf(variable) 
 	 token = new Token();
 	 jj_ntk = -1;
 	 jj_gen = 0;
-	 for (int i = 0; i < 28; i++) jj_la1[i] = -1;
+	 for (int i = 0; i < 33; i++) jj_la1[i] = -1;
   }
 
   private Token jj_consume_token(int kind) throws ParseException {
@@ -886,12 +956,12 @@ System.out.println("Identificador: " + variable + " " + Lista.indexOf(variable) 
   /** Generate ParseException. */
   public ParseException generateParseException() {
 	 jj_expentries.clear();
-	 boolean[] la1tokens = new boolean[57];
+	 boolean[] la1tokens = new boolean[56];
 	 if (jj_kind >= 0) {
 	   la1tokens[jj_kind] = true;
 	   jj_kind = -1;
 	 }
-	 for (int i = 0; i < 28; i++) {
+	 for (int i = 0; i < 33; i++) {
 	   if (jj_la1[i] == jj_gen) {
 		 for (int j = 0; j < 32; j++) {
 		   if ((jj_la1_0[i] & (1<<j)) != 0) {
@@ -903,7 +973,7 @@ System.out.println("Identificador: " + variable + " " + Lista.indexOf(variable) 
 		 }
 	   }
 	 }
-	 for (int i = 0; i < 57; i++) {
+	 for (int i = 0; i < 56; i++) {
 	   if (la1tokens[i]) {
 		 jj_expentry = new int[1];
 		 jj_expentry[0] = i;

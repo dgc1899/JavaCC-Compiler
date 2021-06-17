@@ -18,26 +18,28 @@ class Ejemplo
 		
 		if x>5 then
 			x = 1
+		:
 		else
 			x = 0
+		:
 		
-		
-		for y<5 , y=0 , y+1
+		for y<5, y=0, y+1
 			print y
 		
-		
+		:
 		while x<5 && y>5
 			x = x*2
-		
+		:
 		
 		do 
 			writeline cadena1
 		while x==3
-		
-	
-	return MetodoEj
+		:
+		return MetodoEj
 	:
 	
+:
+
 	
 	const enum 
 		a

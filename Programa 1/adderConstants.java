@@ -97,19 +97,17 @@ public interface adderConstants {
   /** RegularExpression Id. */
   int ARRAY = 44;
   /** RegularExpression Id. */
-  int STRUCT = 45;
+  int IDENTIFIER = 45;
   /** RegularExpression Id. */
-  int IDENTIFIER = 46;
+  int NUMBER = 46;
   /** RegularExpression Id. */
-  int NUMBER = 47;
+  int LETTER = 47;
   /** RegularExpression Id. */
-  int LETTER = 48;
+  int UNDERSC = 48;
   /** RegularExpression Id. */
-  int UNDERSC = 49;
+  int WORD = 49;
   /** RegularExpression Id. */
-  int WORD = 50;
-  /** RegularExpression Id. */
-  int STRING = 51;
+  int STRING = 50;
 
   /** Lexical state. */
   int DEFAULT = 0;
@@ -135,7 +133,7 @@ public interface adderConstants {
     "\"for \"",
     "\"do \"",
     "\"while \"",
-    "\"+| -| *| /\"",
+    "<ARITM>",
     "\"=\"",
     "\"true | false\"",
     "<RELAT>",
@@ -146,13 +144,13 @@ public interface adderConstants {
     "<FOREACH>",
     "<CATCH>",
     "\"try \"",
-    "\"print | println | writeline\"",
+    "<PRINTOUT>",
     "\"if \"",
-    "\"switch | stoom \"",
-    "\"then \"",
+    "<SWITCHSTRUCT>",
+    "\"then\"",
     "\"packexp \"",
     "\"import \"",
-    "\">> \"",
+    "\">>\"",
     "\"def\"",
     "\"const \"",
     "\"return \"",
@@ -161,7 +159,6 @@ public interface adderConstants {
     "\"stack \"",
     "\"queue \"",
     "\"array \"",
-    "\"struct \"",
     "<IDENTIFIER>",
     "<NUMBER>",
     "<LETTER>",
