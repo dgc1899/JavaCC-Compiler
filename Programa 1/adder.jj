@@ -146,7 +146,7 @@ TOKEN:{
 	
 //Token para heredar clases
 TOKEN:{
-	<HCLASS:">>"> {System.out.println("HCLASS-> "+"\r\n");}
+	<HCLASS:" >> "> {System.out.println("HCLASS-> "+"\r\n");}
 }
 
 //Token para palabra reservada def

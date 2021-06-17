@@ -3,7 +3,7 @@ Programa_1
 packexp libreria1
 
 
-class Ejemplo
+clasebase >> class Ejemplo
 
 	enum Enumerador1
 	'a'

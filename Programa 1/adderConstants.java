@@ -153,7 +153,7 @@ public interface adderConstants {
     "\"then\"",
     "\"packexp \"",
     "\"import \"",
-    "\">>\"",
+    "\" >> \"",
     "\"def\"",
     "\"const \"",
     "\"return \"",
