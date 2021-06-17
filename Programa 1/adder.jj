@@ -59,6 +59,7 @@ TOKEN:
 	| <SEMICOLON:"; ">{System.out.println("SEMICOL->"+"\r\n");}
 	| <COLON:":">{System.out.println("COL->"+"\r\n");}
 	| <COMA:", "> {System.out.println("COMA->"+"\r\n");}
+	| <DOUBLEC:"\""> {System.out.println("DOUBLEC->"+"\r\n");}
 }
 
 //Tokens para bloques repetitivos, control de flujo
@@ -190,7 +191,7 @@ TOKEN:{
 	|<UNDERSC:"_"> {System.out.print("UNDERSC-> "+image+"\r\n");}
 	|<WORD:(<LETTER>)+> {System.out.print("WORD-> "+image+"\r\n");}
 	//|<IDENTIFIER: <LETTER> (<WORD> <NUMBER> <UNDERSC>)*>{System.out.println("IDENTIFIER ->"+image+"\r\n");}
-	|<STRING : <LETTER> <NUMBER> (<WORD> <NUMBER>)*>{System.out.print("STRING -> "+image+"\r\n");}
+	|<STRING : "'" <LETTER> /*<NUMBER>*/ (<WORD> <NUMBER>)* "'" >{System.out.print("STRING -> "+image+"\r\n");}
 	//|<STRING : ["a"-"z","A"-"Z","0"-"9"](["a"-"z","A"-"Z","0"-"9"])*>{System.out.print("STRING -> "+image+"\r\n");}
 	}
 //Fin de estados léxicos
@@ -273,7 +274,7 @@ void Librerias():
 void Clase():
 {}
 {
-	(Heredar())? <CLASS> <IDENTIFIER> (DeclarVarGlob() | Metodo())* <COLON>
+	(Heredar())? <CLASS> <IDENTIFIER> (DeclarVarGlob() | Metodo() | Enumerable() | Estructura() )* <COLON>
 }
 
 
@@ -416,7 +417,7 @@ void Valor():
 void Enumerable():
 {}
 {
-     <CONST> <ENUM> BloqueEnum() <COLON>
+    <ENUM> <IDENTIFIER> BloqueEnum() <COLON>
 }
 
 void BloqueEnum():
@@ -429,7 +430,7 @@ void BloqueEnum():
 void Estructura():
 {}
 {
-    (<STRING>|<NUMBER>) (EstructuraDatos() | EstructuraEstatica()) <IDENTIFIER>
+    (<STRINGTYPE>|<NUMTYPES>) (EstructuraDatos() | EstructuraEstatica()) <IDENTIFIER>
 }
 
 void EstructuraDatos():

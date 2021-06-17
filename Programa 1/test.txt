@@ -5,6 +5,18 @@ packexp libreria1
 
 class Ejemplo
 
+	enum Enumerador1
+	'a'
+	'b'
+	'c'
+	'd'
+	:
+	
+	string list lista1
+	
+	int array arreglo1
+	
+	
 	def
 		numero1 = int
 		cadena1 = string
@@ -39,14 +51,4 @@ class Ejemplo
 :
 
 	
-	const enum 
-		a
-		b
-		c
-		d
-	:
-	
-	string list lista1
-	
-	int array arreglo1
 : 

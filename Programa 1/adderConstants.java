@@ -39,75 +39,77 @@ public interface adderConstants {
   /** RegularExpression Id. */
   int COMA = 15;
   /** RegularExpression Id. */
-  int LOOPFOR = 16;
+  int DOUBLEC = 16;
   /** RegularExpression Id. */
-  int LOOPDO = 17;
+  int LOOPFOR = 17;
   /** RegularExpression Id. */
-  int LOOPWHILE = 18;
+  int LOOPDO = 18;
   /** RegularExpression Id. */
-  int ARITM = 19;
+  int LOOPWHILE = 19;
   /** RegularExpression Id. */
-  int ASIGN = 20;
+  int ARITM = 20;
   /** RegularExpression Id. */
-  int CONDITION = 21;
+  int ASIGN = 21;
   /** RegularExpression Id. */
-  int RELAT = 22;
+  int CONDITION = 22;
   /** RegularExpression Id. */
-  int LOGIC = 23;
+  int RELAT = 23;
   /** RegularExpression Id. */
-  int STRUCTTYPE = 24;
+  int LOGIC = 24;
   /** RegularExpression Id. */
-  int CLASS = 25;
+  int STRUCTTYPE = 25;
   /** RegularExpression Id. */
-  int ALT = 26;
+  int CLASS = 26;
   /** RegularExpression Id. */
-  int FOREACH = 27;
+  int ALT = 27;
   /** RegularExpression Id. */
-  int CATCH = 28;
+  int FOREACH = 28;
   /** RegularExpression Id. */
-  int TRYBLOCK = 29;
+  int CATCH = 29;
   /** RegularExpression Id. */
-  int PRINTOUT = 30;
+  int TRYBLOCK = 30;
   /** RegularExpression Id. */
-  int IFSTRUCT = 31;
+  int PRINTOUT = 31;
   /** RegularExpression Id. */
-  int SWITCHSTRUCT = 32;
+  int IFSTRUCT = 32;
   /** RegularExpression Id. */
-  int THEN = 33;
+  int SWITCHSTRUCT = 33;
   /** RegularExpression Id. */
-  int PACKEXP = 34;
+  int THEN = 34;
   /** RegularExpression Id. */
-  int IMPORT = 35;
+  int PACKEXP = 35;
   /** RegularExpression Id. */
-  int HCLASS = 36;
+  int IMPORT = 36;
   /** RegularExpression Id. */
-  int DEF = 37;
+  int HCLASS = 37;
   /** RegularExpression Id. */
-  int CONST = 38;
+  int DEF = 38;
   /** RegularExpression Id. */
-  int RETURN = 39;
+  int CONST = 39;
   /** RegularExpression Id. */
-  int ENUM = 40;
+  int RETURN = 40;
   /** RegularExpression Id. */
-  int LIST = 41;
+  int ENUM = 41;
   /** RegularExpression Id. */
-  int STACK = 42;
+  int LIST = 42;
   /** RegularExpression Id. */
-  int QUEUE = 43;
+  int STACK = 43;
   /** RegularExpression Id. */
-  int ARRAY = 44;
+  int QUEUE = 44;
   /** RegularExpression Id. */
-  int IDENTIFIER = 45;
+  int ARRAY = 45;
   /** RegularExpression Id. */
-  int NUMBER = 46;
+  int IDENTIFIER = 46;
   /** RegularExpression Id. */
-  int LETTER = 47;
+  int NUMBER = 47;
   /** RegularExpression Id. */
-  int UNDERSC = 48;
+  int LETTER = 48;
   /** RegularExpression Id. */
-  int WORD = 49;
+  int UNDERSC = 49;
   /** RegularExpression Id. */
-  int STRING = 50;
+  int WORD = 50;
+  /** RegularExpression Id. */
+  int STRING = 51;
 
   /** Lexical state. */
   int DEFAULT = 0;
@@ -130,6 +132,7 @@ public interface adderConstants {
     "\"; \"",
     "\":\"",
     "\", \"",
+    "\"\\\"\"",
     "\"for \"",
     "\"do \"",
     "\"while \"",

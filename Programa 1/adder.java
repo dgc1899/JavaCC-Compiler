@@ -244,8 +244,11 @@ System.out.println("Identificador: " + variable + " " + Lista.indexOf(variable) 
     label_4:
     while (true) {
       switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
+      case NUMTYPES:
+      case STRINGTYPE:
       case DEF:
-      case CONST:{
+      case CONST:
+      case ENUM:{
         ;
         break;
         }
@@ -260,6 +263,15 @@ System.out.println("Identificador: " + variable + " " + Lista.indexOf(variable) 
         }
       case CONST:{
         Metodo();
+        break;
+        }
+      case ENUM:{
+        Enumerable();
+        break;
+        }
+      case NUMTYPES:
+      case STRINGTYPE:{
+        Estructura();
         break;
         }
       default:
@@ -700,8 +712,8 @@ void Condicion() throws ParseException {
 }
 
   final public void Enumerable() throws ParseException {
-    jj_consume_token(CONST);
     jj_consume_token(ENUM);
+    jj_consume_token(IDENTIFIER);
     BloqueEnum();
     jj_consume_token(COLON);
 }
@@ -726,12 +738,12 @@ void Condicion() throws ParseException {
 
   final public void Estructura() throws ParseException {
     switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
-    case STRING:{
-      jj_consume_token(STRING);
+    case STRINGTYPE:{
+      jj_consume_token(STRINGTYPE);
       break;
       }
-    case NUMBER:{
-      jj_consume_token(NUMBER);
+    case NUMTYPES:{
+      jj_consume_token(NUMTYPES);
       break;
       }
     default:
@@ -814,10 +826,10 @@ void Condicion() throws ParseException {
 	   jj_la1_init_1();
 	}
 	private static void jj_la1_init_0() {
-	   jj_la1_0 = new int[] {0xff683ffe,0xff683ffe,0x0,0x2000000,0x0,0x0,0x0,0x0,0x1f0,0x0,0xc0270000,0xc0270000,0x200000,0x70000,0x4000000,0x800000,0x200000,0x80000,0x200000,0x200000,0x80000,0x200000,0x0,0x200000,0x80000,0x200000,0x200000,0x200000,0x0,0x1000000,0x0,0x1000000,};
+	   jj_la1_0 = new int[] {0xfed03ffe,0xfed03ffe,0x0,0x4000000,0x0,0x0,0x50,0x50,0x1f0,0x0,0x804e0000,0x804e0000,0x400000,0xe0000,0x8000000,0x1000000,0x400000,0x100000,0x400000,0x400000,0x100000,0x400000,0x0,0x400000,0x100000,0x400000,0x400000,0x400000,0x50,0x2000000,0x0,0x2000000,};
 	}
 	private static void jj_la1_init_1() {
-	   jj_la1_1 = new int[] {0x46001,0x46001,0x4,0x2000,0x4,0x2000,0x60,0x60,0x0,0x2000,0x46020,0x46020,0x46000,0x0,0x0,0x0,0x46000,0x0,0x46000,0x46000,0x0,0x46000,0x2000,0x46000,0x0,0x46000,0x44000,0x44000,0x44000,0x1e00,0xe00,0x1000,};
+	   jj_la1_1 = new int[] {0x8c003,0x8c003,0x8,0x4000,0x8,0x4000,0x2c0,0x2c0,0x0,0x4000,0x8c041,0x8c041,0x8c000,0x0,0x0,0x0,0x8c000,0x0,0x8c000,0x8c000,0x0,0x8c000,0x4000,0x8c000,0x0,0x8c000,0x88000,0x88000,0x0,0x3c00,0x1c00,0x2000,};
 	}
 
   /** Constructor with InputStream. */
@@ -942,7 +954,7 @@ void Condicion() throws ParseException {
   /** Generate ParseException. */
   public ParseException generateParseException() {
 	 jj_expentries.clear();
-	 boolean[] la1tokens = new boolean[56];
+	 boolean[] la1tokens = new boolean[57];
 	 if (jj_kind >= 0) {
 	   la1tokens[jj_kind] = true;
 	   jj_kind = -1;
@@ -959,7 +971,7 @@ void Condicion() throws ParseException {
 		 }
 	   }
 	 }
-	 for (int i = 0; i < 56; i++) {
+	 for (int i = 0; i < 57; i++) {
 	   if (la1tokens[i]) {
 		 jj_expentry = new int[1];
 		 jj_expentry[0] = i;
