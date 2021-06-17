@@ -35,9 +35,7 @@ class Ejemplo
 			writeline cadena1
 		while x==3
 		:
-		return MetodoEj
-	:
-	
+	return MetodoEj
 :
 
 	

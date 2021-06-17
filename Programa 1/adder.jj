@@ -298,13 +298,13 @@ void DefinirVariables():
 void Metodo():
 {}
 {
-	<CONST><VOID><IDENTIFIER> Bloque() Return() <COLON>
+	<CONST><VOID><IDENTIFIER> Bloque() Return() <COLON> 
 }
 
 void Bloque():
 {}
 {
-	(Ciclos() | Pregunta() | ImpCons() | declarVarLocal()  | OpAritmetica())*
+	(Ciclos() | Pregunta() | ImpCons() | declarVarLocal()  | OpAritmetica())* 
 }
 
 
