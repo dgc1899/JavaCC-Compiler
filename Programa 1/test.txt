@@ -1,22 +1,18 @@
 Programa_1
 
-packexp libreria1
+class Ejemplo
 
-
-clasebase >> class Ejemplo
-
-	enum Enumerador1
-	'a'
-	'b'
-	'c'
-	'd'
+	enum hola
+		'a'
+		'b'
+		'c'
+		'd'
 	:
 	
 string list lista1
 	
 int array arreglo1
-	
-	
+
 	def
 		numero1 = int
 		cadena1 = string
@@ -30,24 +26,28 @@ int array arreglo1
 		
 		if x>5 then
 			x = 1
+		return MetodoEj
 		:
 		else
 			x = 0
+			return MetodoEj
 		:
 		
 		for y<5, y=0, y+1
 			print y
-		
+		return MetodoEj
 		:
 		while x<5 && y>5
 			x = x*2
+			return MetodoEj
 		:
 		
 		do 
 			writeline cadena1
 		while x==3
+		return MetodoEj
 		:
-		
 	return MetodoEj
-	:
-	
+ : 
+
+

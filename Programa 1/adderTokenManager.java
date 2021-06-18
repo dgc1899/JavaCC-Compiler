@@ -134,9 +134,9 @@ private final int jjStopStringLiteralDfa_0(int pos, long active0){
          }
          return -1;
       case 3:
-         if ((active0 & 0x400000180L) != 0L)
+         if ((active0 & 0x20400000180L) != 0L)
             return 181;
-         if ((active0 & 0x3f980448004cL) != 0L)
+         if ((active0 & 0x3d980448004cL) != 0L)
          {
             jjmatchedKind = 46;
             jjmatchedPos = 3;
@@ -899,7 +899,9 @@ private int jjMoveStringLiteralDfa3_0(long old0, long active0){
             return jjStartNfaWithStates_0(3, 8, 181);
          return jjMoveStringLiteralDfa4_0(active0, 0x80000L);
       case 109:
-         return jjMoveStringLiteralDfa4_0(active0, 0x20000000000L);
+         if ((active0 & 0x20000000000L) != 0L)
+            return jjStartNfaWithStates_0(3, 41, 181);
+         break;
       case 110:
          if ((active0 & 0x400000000L) != 0L)
             return jjStartNfaWithStates_0(3, 34, 181);
@@ -934,8 +936,6 @@ private int jjMoveStringLiteralDfa4_0(long old0, long active0){
       case 32:
          if ((active0 & 0x8L) != 0L)
             return jjStopAtPos(4, 3);
-         else if ((active0 & 0x20000000000L) != 0L)
-            return jjStopAtPos(4, 41);
          else if ((active0 & 0x40000000000L) != 0L)
             return jjStopAtPos(4, 42);
          return jjMoveStringLiteralDfa5_0(active0, 0x400000L);
@@ -2988,7 +2988,7 @@ public static final String[] jjstrLiteralImages = {
 "\143\154\141\163\163\40", null, null, null, "\164\162\171\40", null, "\151\146\40", null, 
 "\164\150\145\156", "\160\141\143\153\145\170\160\40", "\151\155\160\157\162\164\40", 
 "\40\76\76\40", "\144\145\146", "\143\157\156\163\164\40", "\162\145\164\165\162\156\40", 
-"\145\156\165\155\40", "\154\151\163\164\40", "\163\164\141\143\153\40", "\161\165\145\165\145\40", 
+"\145\156\165\155", "\154\151\163\164\40", "\163\164\141\143\153\40", "\161\165\145\165\145\40", 
 "\141\162\162\141\171\40", null, null, null, "\137", null, null, null, null, null, null, null, };
 protected Token jjFillToken()
 {
@@ -3307,7 +3307,7 @@ void TokenLexicalActions(Token matchedToken)
       case 41 :
         image.append(jjstrLiteralImages[41]);
         lengthOfMatch = jjstrLiteralImages[41].length();
-                        System.out.println("ENUM-> "+"\r\n");
+                       System.out.println("ENUM-> "+"\r\n");
          break;
       case 42 :
         image.append(jjstrLiteralImages[42]);

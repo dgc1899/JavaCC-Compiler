@@ -341,7 +341,6 @@ System.out.println("Identificador: " + variable + " " + Lista.indexOf(variable) 
     jj_consume_token(VOID);
     jj_consume_token(IDENTIFIER);
     Bloque();
-    Return();
     jj_consume_token(COLON);
 }
 
@@ -398,6 +397,7 @@ System.out.println("Identificador: " + variable + " " + Lista.indexOf(variable) 
         throw new ParseException();
       }
     }
+    Return();
 }
 
   final public void ImpCons() throws ParseException {

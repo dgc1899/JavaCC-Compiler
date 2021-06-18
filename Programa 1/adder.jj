@@ -166,7 +166,7 @@ TOKEN:{
 
 //Token para bloque enum
 TOKEN:{
-	<ENUM:"enum "> {System.out.println("ENUM-> "+"\r\n");}
+	<ENUM:"enum"> {System.out.println("ENUM-> "+"\r\n");}
 }
 
 //Token para estructuras de datos
@@ -299,13 +299,13 @@ void DefinirVariables():
 void Metodo():
 {}
 {
-	<CONST><VOID><IDENTIFIER> Bloque() Return() <COLON> 
+	<CONST><VOID><IDENTIFIER> Bloque()  <COLON> 
 }
 
 void Bloque():
 {}
 {
-	(Ciclos() | Pregunta() | ImpCons() | declarVarLocal()  | OpAritmetica())* 
+	(Ciclos() | Pregunta() | ImpCons() | declarVarLocal()  | OpAritmetica())* Return()
 }
 
 

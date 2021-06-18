@@ -157,7 +157,7 @@ public interface adderConstants {
     "\"def\"",
     "\"const \"",
     "\"return \"",
-    "\"enum \"",
+    "\"enum\"",
     "\"list \"",
     "\"stack \"",
     "\"queue \"",
