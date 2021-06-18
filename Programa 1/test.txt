@@ -85,6 +85,8 @@ int array arreglo1
 		
 		:
 		catch
+		
+		return MetodoEj
 		:
 		
 		switch Switchejemplo
@@ -97,9 +99,9 @@ int array arreglo1
 			return MetodoEj
 		:
 		
-		explicit decimal1 to float
+		explicit decimal1 to float 
 		
-		pass println 'abc'
+		pass println ' abc '
 		
 		
 		event on x<4

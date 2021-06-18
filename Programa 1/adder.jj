@@ -34,7 +34,7 @@ TOKEN:{
 //Tokens de tipos de numeros
 TOKEN:{
 		<NUMTYPES:("int "|"byte"|"short"|"long"|"sbyte"|"ushort"|"ulong")>{System.out.println("NUMTYPES-> "+image+"\r\n");}
-		|<FLOATTYPE:("float "|"double"|"decimal")>{System.out.println("FLOATTYPE-> "+image+"\r\n");}
+		|<FLOATTYPE:("float "|"double "|"decimal ")>{System.out.println("FLOATTYPE-> "+image+"\r\n");}
 	}
 
 //Tokens de tipo de datos alfanumericos
@@ -68,7 +68,7 @@ TOKEN:{
 }
 
 TOKEN:{
-	<LOOPDO:"do "> {System.out.println("LOOPDO-> "+"\r\n");}
+	<LOOPDO:"do"> {System.out.println("LOOPDO-> "+"\r\n");}
 }
 
 TOKEN:{
@@ -118,7 +118,7 @@ TOKEN:{
 }
 //tokens de clausula
 TOKEN:{
-    <CATCH:"catch "|"except ">{System.out.println("CATCH-> "+image +"\r\n");}
+    <CATCH:"catch"|"except ">{System.out.println("CATCH-> "+image +"\r\n");}
 }
 
 //tokens de sacar raise
@@ -129,7 +129,7 @@ TOKEN:{
 
 //Token de bloque try catch
 TOKEN:{
-	<TRYBLOCK:"try ">{System.out.println("TRYBLOCK->\r\n");}
+	<TRYBLOCK:"try">{System.out.println("TRYBLOCK->\r\n");}
 }
 
 //Token de imprimir a consola
@@ -204,7 +204,7 @@ TOKEN:{
 
 //Tokens para declarar conversion explicita
 TOKEN:{
-	<EXPLICIT:"explicit  "> {System.out.println("EXPLICIT-> "+"\r\n");}
+	<EXPLICIT:"explicit "> {System.out.println("EXPLICIT-> "+"\r\n");}
 	|<TO:"to "> {System.out.println("TO-> "+"\r\n");}
 }
 
@@ -343,7 +343,7 @@ void Metodo():
 void Bloque():
 {}
 {
-	(Ciclos() | Pregunta() | ImpCons() | declarVarLocal()  | OpAritmetica() | CicloForEach() | Goto() | Raise() )* Return()
+	(Ciclos() | Pregunta() | ImpCons() | declarVarLocal()  | OpAritmetica() | CicloForEach() | Goto() | Raise() | TryCatch() |Switch() | Conversion() |Ignorar() |  Evento())* Return()
 }
 
 
