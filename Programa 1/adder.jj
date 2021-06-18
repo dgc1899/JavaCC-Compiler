@@ -108,7 +108,8 @@ TOKEN:{
 }
 //tokens  de etiquetas 
 TOKEN:{
-	<ALT:"case "| "ing "|"else"|"finally " >{System.out.println("ALT-> "+image+"\r\n");}
+	<ALT:"ing "|"else"|"finally " >{System.out.println("ALT-> "+"\r\n");}
+	|<CASE:"case ">{System.out.println("CASE-> "+image+"\r\n");}
 
 }
 //tokens estructura repetitivas
@@ -117,7 +118,12 @@ TOKEN:{
 }
 //tokens de clausula
 TOKEN:{
-    <CATCH:"catch "|"except "|"raise " >{System.out.println("CATCH-> "+image +"\r\n");}
+    <CATCH:"catch "|"except ">{System.out.println("CATCH-> "+image +"\r\n");}
+}
+
+//tokens de sacar raise
+TOKEN:{
+    <RAISE:"raise">{System.out.println("RAISE-> "+image +"\r\n");}
 }
 
 
@@ -134,7 +140,7 @@ TOKEN:{
 //Token para delclaraciones de seleccion
 TOKEN:{
 	<IFSTRUCT: "if "> {System.out.println("IFSTRUCT-> "+"\r\n");}
-	|<SWITCHSTRUCT:"switch" | "stoom "> {System.out.println("SWITCHSTRUCT-> "+image+"\r\n");}
+	|<SWITCHSTRUCT:"switch " | "stoom "> {System.out.println("SWITCHSTRUCT-> "+image+"\r\n");}
 	|<THEN:"then"> {System.out.println("THEN-> "+"\r\n");}
 }
 	
@@ -179,6 +185,38 @@ TOKEN:{
 //Tokens para arreglos
 TOKEN:{
 	<ARRAY:"array "> {System.out.println("ARRAY-> "+"\r\n");}
+}
+
+//Tokens para comentarios
+TOKEN:{
+	<COMENT:"?"> {System.out.println("COMENT-> "+"\r\n");}
+}
+
+//Tokens para op. en estructuras
+TOKEN:{
+	<SIZEOF:"sizeof "> {System.out.println("SIZEOF-> "+"\r\n");}
+}
+
+//Tokens para op. en estructuras
+TOKEN:{
+	<GOTO:"goto "> {System.out.println("GOTO-> "+"\r\n");}
+}
+
+//Tokens para declarar conversion explicita
+TOKEN:{
+	<EXPLICIT:"explicit  "> {System.out.println("EXPLICIT-> "+"\r\n");}
+	|<TO:"to "> {System.out.println("TO-> "+"\r\n");}
+}
+
+//Tokens para ignorar instruccion
+TOKEN:{
+	<PASS:"pass "> {System.out.println("PASS-> "+"\r\n");}
+}
+
+//Tokens para declarar evento
+TOKEN:{
+	<EVENT:"event on "> {System.out.println("EVENT-> "+"\r\n");}
+
 }
 
 TOKEN:{
@@ -268,13 +306,13 @@ void Programa():
 void Librerias():
 {}
 {
-	(<PACKEXP> <IDENTIFIER>)+
+	( (<PACKEXP> | <IMPORT> ) <IDENTIFIER>)+
 }
 
 void Clase():
 {}
 {
-	(Heredar())? <CLASS> <IDENTIFIER> (DeclarVarGlob() | Metodo() | Enumerable() | Estructura() ) * 
+	(Heredar())? <CLASS> <IDENTIFIER> (DeclarVarGlob() | Metodo() | Enumerable() | Estructura() | Comentario() ) * 
 }
 
 
@@ -367,6 +405,12 @@ void CicloDo():
        <LOOPDO> Bloque() <LOOPWHILE> Condicion() <COLON>
 }
 
+void CicloForEach():
+{}
+{
+	<FOREACH> Condicion() Bloque() <COLON>
+}
+
 void Pregunta():
 {}
 {
@@ -380,12 +424,18 @@ void Sino():
      <ALT> Bloque() <COLON>
 }
 
-/*void Asignar():
+void TryCatch():
 {}
 {
-	<IDENTIFIER> <ASIGN> (<IDENTIFIER> | Valor() | OpAritmetica())
+	<TRYBLOCK> (Ciclos() | Pregunta() | ImpCons() | declarVarLocal()  | OpAritmetica())* <COLON> <CATCH> Bloque() <COLON>
 }
-*/
+
+void Switch():
+{}
+{
+	<SWITCHSTRUCT> <IDENTIFIER> (<CASE> Valor() Bloque())+ <COLON>
+}
+
 
 void Condicion():
 {}
@@ -430,17 +480,77 @@ void BloqueEnum():
 void Estructura():
 {}
 {
-    (<STRINGTYPE>|<NUMTYPES>) (EstructuraDatos() | EstructuraEstatica()) <IDENTIFIER>
+    (<STRINGTYPE>|<NUMTYPES>) EstructuraDatos() | (EstructuraEstatica() <IDENTIFIER>)
 }
 
 void EstructuraDatos():
 {}
 {
-    <LIST> | <STACK> | <QUEUE>
+    Lista() | Stack() | Queue()
+}
+
+void Lista():
+{}
+{
+	<LIST> <IDENTIFIER> (<NUMBER><COMA>Valor())+
+}
+
+void Stack():
+{}
+{
+	<STACK> <IDENTIFIER> (Valor())+
+}
+
+void Queue():
+{}
+{
+	<QUEUE> <IDENTIFIER> (Valor())+
 }
 
 void EstructuraEstatica():
 {}
 {
    <ARRAY> | <STRUCTTYPE>
+}
+
+void Comentario():
+{}
+{
+	<COMENT><STRING>
+}
+
+void Size():
+{}
+{
+	<SIZEOF> <IDENTIFIER>
+}
+
+void Goto():
+{}
+{
+	<GOTO> <NUMBER>
+}
+
+void Raise():
+{}
+{
+	<RAISE> Bloque() <COLON>
+}
+
+void Conversion():
+{}
+{
+	<EXPLICIT> <IDENTIFIER> <TO> (<NUMTYPES> | <STRINGTYPE>| <FLOATTYPE> | <CHARTYPE>)
+}
+
+void Ignorar():
+{}
+{
+	<PASS> (Ciclos() | Pregunta() | ImpCons() | declarVarLocal()  | OpAritmetica())
+}
+
+void Evento():
+{}
+{
+	<EVENT> Condicion() Bloque() <COLON>
 }

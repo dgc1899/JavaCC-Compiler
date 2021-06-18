@@ -63,53 +63,71 @@ public interface adderConstants {
   /** RegularExpression Id. */
   int ALT = 27;
   /** RegularExpression Id. */
-  int FOREACH = 28;
+  int CASE = 28;
   /** RegularExpression Id. */
-  int CATCH = 29;
+  int FOREACH = 29;
   /** RegularExpression Id. */
-  int TRYBLOCK = 30;
+  int CATCH = 30;
   /** RegularExpression Id. */
-  int PRINTOUT = 31;
+  int RAISE = 31;
   /** RegularExpression Id. */
-  int IFSTRUCT = 32;
+  int TRYBLOCK = 32;
   /** RegularExpression Id. */
-  int SWITCHSTRUCT = 33;
+  int PRINTOUT = 33;
   /** RegularExpression Id. */
-  int THEN = 34;
+  int IFSTRUCT = 34;
   /** RegularExpression Id. */
-  int PACKEXP = 35;
+  int SWITCHSTRUCT = 35;
   /** RegularExpression Id. */
-  int IMPORT = 36;
+  int THEN = 36;
   /** RegularExpression Id. */
-  int HCLASS = 37;
+  int PACKEXP = 37;
   /** RegularExpression Id. */
-  int DEF = 38;
+  int IMPORT = 38;
   /** RegularExpression Id. */
-  int CONST = 39;
+  int HCLASS = 39;
   /** RegularExpression Id. */
-  int RETURN = 40;
+  int DEF = 40;
   /** RegularExpression Id. */
-  int ENUM = 41;
+  int CONST = 41;
   /** RegularExpression Id. */
-  int LIST = 42;
+  int RETURN = 42;
   /** RegularExpression Id. */
-  int STACK = 43;
+  int ENUM = 43;
   /** RegularExpression Id. */
-  int QUEUE = 44;
+  int LIST = 44;
   /** RegularExpression Id. */
-  int ARRAY = 45;
+  int STACK = 45;
   /** RegularExpression Id. */
-  int IDENTIFIER = 46;
+  int QUEUE = 46;
   /** RegularExpression Id. */
-  int NUMBER = 47;
+  int ARRAY = 47;
   /** RegularExpression Id. */
-  int LETTER = 48;
+  int COMENT = 48;
   /** RegularExpression Id. */
-  int UNDERSC = 49;
+  int SIZEOF = 49;
   /** RegularExpression Id. */
-  int WORD = 50;
+  int GOTO = 50;
   /** RegularExpression Id. */
-  int STRING = 51;
+  int EXPLICIT = 51;
+  /** RegularExpression Id. */
+  int TO = 52;
+  /** RegularExpression Id. */
+  int PASS = 53;
+  /** RegularExpression Id. */
+  int EVENT = 54;
+  /** RegularExpression Id. */
+  int IDENTIFIER = 55;
+  /** RegularExpression Id. */
+  int NUMBER = 56;
+  /** RegularExpression Id. */
+  int LETTER = 57;
+  /** RegularExpression Id. */
+  int UNDERSC = 58;
+  /** RegularExpression Id. */
+  int WORD = 59;
+  /** RegularExpression Id. */
+  int STRING = 60;
 
   /** Lexical state. */
   int DEFAULT = 0;
@@ -144,8 +162,10 @@ public interface adderConstants {
     "<STRUCTTYPE>",
     "\"class \"",
     "<ALT>",
+    "\"case \"",
     "<FOREACH>",
     "<CATCH>",
+    "\"raise\"",
     "\"try \"",
     "<PRINTOUT>",
     "\"if \"",
@@ -162,6 +182,13 @@ public interface adderConstants {
     "\"stack \"",
     "\"queue \"",
     "\"array \"",
+    "\"?\"",
+    "\"sizeof \"",
+    "\"goto \"",
+    "\"explicit  \"",
+    "\"to \"",
+    "\"pass \"",
+    "\"event on \"",
     "<IDENTIFIER>",
     "<NUMBER>",
     "<LETTER>",

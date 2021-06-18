@@ -1,87 +1,111 @@
-Programa_1 (1)
+Programa_1
 
-import libreria1 (2)
+import libreria1
 
-packexp libreria1 (3)
+packexp libreria2
 
-class Ejemplo (4)
+class Ejemplo
 
-	enum hola (5)
+	enum hola
 		'a'
 		'b'
 		'c'
 		'd'
 	:
+
+?'comentario'
 	
-string list lista1 (6)
-
-struct queue queue4 (7)
-
-yool stack stack2 (8)
+string list lista1
+	1,'hola'
+	2,'abc'
+	:
 	
-int array arreglo1 (9)
+sizeof lista1
 
-event println H (10)
+int stack stack2
+	'hola'
+	'abc'
+	:
+	
+	
+struct estructura1
 
-Ejemplo class (11)
+int array arreglo1
 
-	def (12)
+
+	def
 		numero1 = int
 		cadena1 = string  
 	:
 	
-	const void MetodoEj (13)
+	const void MetodoEj
 		
 		def
 			x = int
 		:
 		
-		foreach i<10 (14)
-		     c = 1 + 2
-		return MetodoEj (15)
+		foreach i<10
+			c = 1 + 2
+		return MetodoEj
 		:
-		if x>5 then (16)
+		
+		if x>5 then
 			x = 1
 		return MetodoEj
 		:
 		else
 			x = 0
+			goto 81
 			return MetodoEj
 		:
-		ingfer p==0 (17)
-            f = 1
-            g = -1
-        :			
-		raise (18)
+		
+		raise
 		   if x>5 then 
 			x = 1
-        :		
-		for y<5, y=0, y+1 (19)
-			print y (20)
+			return MetodoEj
+        :
+		
+		for y<5, y=0, y+1
+			print y
 		return MetodoEj
 		:
-		while x<5 && y>5 (21)
+		
+		while x<5 && y>5
 			x = x*2
 			return MetodoEj
 		:
 		
-		do (22)
-			writeline cadena1 (23)
+		do
+			writeline cadena1
 		while x==3
 		return MetodoEj
 		:
-	return MetodoEj
-	
-	abstract void Sum1 (24)
-	
-	    def
-			y = byte
+		
+		try
+		
+		:
+		catch
+		:
+		
+		switch Switchejemplo
+
+		case 1
+		
+			return MetodoEj
+		case 2
+		
+			return MetodoEj
+		:
+		
+		explicit decimal1 to float
+		
+		pass println 'abc'
+		
+		
+		event on x<4
+			writeline cadena2
+			return MetodoEj
 		:
 	:
-		
-	long = z (25)
-	
-	byte = w (26)
-	
-	switch MetodoEj (27)
+	return MetodoEj	
  : 
