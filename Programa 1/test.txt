@@ -1,30 +1,46 @@
-Programa_1
+Programa_1 (1)
 
-class Ejemplo
+import libreria1 (2)
 
-	enum hola
+packexp libreria1 (3)
+
+class Ejemplo (4)
+
+	enum hola (5)
 		'a'
 		'b'
 		'c'
 		'd'
 	:
 	
-string list lista1
-	
-int array arreglo1
+string list lista1 (6)
 
-	def
+struct queue queue4 (7)
+
+yool stack stack2 (8)
+	
+int array arreglo1 (9)
+
+event println H (10)
+
+Ejemplo class (11)
+
+	def (12)
 		numero1 = int
-		cadena1 = string
+		cadena1 = string  
 	:
 	
-	const void MetodoEj
+	const void MetodoEj (13)
 		
 		def
 			x = int
 		:
 		
-		if x>5 then
+		foreach i<10 (14)
+		     c = 1 + 2
+		return MetodoEj (15)
+		:
+		if x>5 then (16)
 			x = 1
 		return MetodoEj
 		:
@@ -32,22 +48,40 @@ int array arreglo1
 			x = 0
 			return MetodoEj
 		:
-		
-		for y<5, y=0, y+1
-			print y
+		ingfer p==0 (17)
+            f = 1
+            g = -1
+        :			
+		raise (18)
+		   if x>5 then 
+			x = 1
+        :		
+		for y<5, y=0, y+1 (19)
+			print y (20)
 		return MetodoEj
 		:
-		while x<5 && y>5
+		while x<5 && y>5 (21)
 			x = x*2
 			return MetodoEj
 		:
 		
-		do 
-			writeline cadena1
+		do (22)
+			writeline cadena1 (23)
 		while x==3
 		return MetodoEj
 		:
 	return MetodoEj
+	
+	abstract void Sum1 (24)
+	
+	    def
+			y = byte
+		:
+	:
+		
+	long = z (25)
+	
+	byte = w (26)
+	
+	switch MetodoEj (27)
  : 
-
-
