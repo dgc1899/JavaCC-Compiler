@@ -12,8 +12,11 @@ class Ejemplo
 		' c '
 		' d '
 	:
+	
+	dropet enum
+	:
 
-// 56
+// comentario 56
 	
 int list lista1
 	1, 101
@@ -42,6 +45,19 @@ int array arreglo1
 		
 		def
 			x = int 
+		:
+		
+		cadnet string cadenahola
+		  println cadenahola  
+		:
+		
+		headk cadenahola
+		:
+		
+		tailk cadenahola
+		:
+		
+		giw cadenahola
 		:
 		
 		foreach i<10
@@ -107,6 +123,9 @@ int array arreglo1
 		event on x<4
 			writeline cadena2
 			return MetodoEj
+		:
+		
+		fixed X
 		:
 		return MetodoEj
 	:
