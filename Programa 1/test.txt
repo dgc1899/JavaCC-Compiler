@@ -12,9 +12,9 @@ clasebase >> class Ejemplo
 	'd'
 	:
 	
-	string list lista1
+string list lista1
 	
-	int array arreglo1
+int array arreglo1
 	
 	
 	def
@@ -47,8 +47,7 @@ clasebase >> class Ejemplo
 			writeline cadena1
 		while x==3
 		:
+		
 	return MetodoEj
-:
-
+	:
 	
-: 

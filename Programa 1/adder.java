@@ -209,7 +209,7 @@ System.out.println("Identificador: " + variable + " " + Lista.indexOf(variable) 
       }
       Clase();
     }
-    jj_consume_token(COLON);
+    jj_consume_token(0);
 }
 
   final public void Librerias() throws ParseException {
@@ -280,7 +280,6 @@ System.out.println("Identificador: " + variable + " " + Lista.indexOf(variable) 
         throw new ParseException();
       }
     }
-    jj_consume_token(COLON);
 }
 
   final public void Heredar() throws ParseException {
@@ -488,6 +487,7 @@ System.out.println("Identificador: " + variable + " " + Lista.indexOf(variable) 
     Bloque();
     jj_consume_token(LOOPWHILE);
     Condicion();
+    jj_consume_token(COLON);
 }
 
   final public void Pregunta() throws ParseException {

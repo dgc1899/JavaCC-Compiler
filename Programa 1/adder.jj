@@ -262,7 +262,7 @@ void Start():
 void Programa():
 {}
 {
-	<IDENTIFIER> (Librerias())? (Clase())* <COLON>
+	<IDENTIFIER> (Librerias())? (Clase())* <EOF>
 }
 
 void Librerias():
@@ -274,7 +274,7 @@ void Librerias():
 void Clase():
 {}
 {
-	(Heredar())? <CLASS> <IDENTIFIER> (DeclarVarGlob() | Metodo() | Enumerable() | Estructura() )* <COLON>
+	(Heredar())? <CLASS> <IDENTIFIER> (DeclarVarGlob() | Metodo() | Enumerable() | Estructura() ) * 
 }
 
 
@@ -364,7 +364,7 @@ void CicloWhile():
 void CicloDo():
 {}
 {
-       <LOOPDO> Bloque() <LOOPWHILE> Condicion()
+       <LOOPDO> Bloque() <LOOPWHILE> Condicion() <COLON>
 }
 
 void Pregunta():
