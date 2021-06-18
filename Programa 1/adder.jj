@@ -202,6 +202,11 @@ TOKEN:{
 	<GOTO:"goto "> {System.out.println("GOTO-> "+"\r\n");}
 }
 
+//Tokens para declaracion de garantia 
+TOKEN:{
+	<FIXED:"fixed  "> {System.out.println("FIXED-> "+"\r\n");}
+}
+
 //Tokens para declarar conversion explicita
 TOKEN:{
 	<EXPLICIT:"explicit "> {System.out.println("EXPLICIT-> "+"\r\n");}
@@ -216,6 +221,36 @@ TOKEN:{
 //Tokens para declarar evento
 TOKEN:{
 	<EVENT:"event on "> {System.out.println("EVENT-> "+"\r\n");}
+
+}
+
+//Tokens para eliminadores
+TOKEN:{
+	<DROPET:"dropet "> {System.out.println("DROPET-> "+"\r\n");}
+
+}
+
+//Tokens para crear cadenas
+TOKEN:{
+	<CADNET:"cadnet "> {System.out.println("CADNET-> "+"\r\n");}
+
+}
+
+//Tokens para eliminar cadenas
+TOKEN:{
+	<GIW:"giw "> {System.out.println("GIW-> "+"\r\n");}
+
+}
+
+//Tokens para ver la cabeza de la cadena
+TOKEN:{
+	<HEADK:"headk "> {System.out.println("HEADK-> "+"\r\n");}
+
+}
+
+//Tokens para ver el final de la cadena
+TOKEN:{
+	<TAILK:"tailk "> {System.out.println("TAILK-> "+"\r\n");}
 
 }
 
@@ -312,7 +347,7 @@ void Librerias():
 void Clase():
 {}
 {
-	(Heredar())? <CLASS> <IDENTIFIER> (DeclarVarGlob() | Metodo() | Enumerable() | Estructura() | Comentario() | Size() ) * 
+	(Heredar())? <CLASS> <IDENTIFIER> (DeclarVarGlob() | Metodo() | Enumerable() | Estructura() | Comentario() | Size() ) * | dropet()
 }
 
 
@@ -343,7 +378,7 @@ void Metodo():
 void Bloque():
 {}
 {
-	(Ciclos() | Pregunta() | ImpCons() | declarVarLocal()  | OpAritmetica() | CicloForEach() | Goto() | Raise() | TryCatch() |Switch() | Conversion() |Ignorar() |  Evento())* Return()
+	(Ciclos() | Pregunta() | ImpCons() | declarVarLocal()  | OpAritmetica() | CicloForEach() | Goto() | Raise() | TryCatch() |Switch() | Conversion() |Ignorar() |  Evento())* | fixed() | cadnet() | giw() | headk() | tailk() | Return()
 }
 
 
@@ -553,4 +588,40 @@ void Evento():
 {}
 {
 	<EVENT> Condicion() Bloque() <COLON>
+}
+
+void fixed():
+{}
+{
+   <FIXED> <IDENTIFIER> <COLON>
+}
+
+void dropet():
+{}
+{
+  <DROPET> <IDENTIFIER> <COLON>
+}
+
+void cadnet():
+{}
+{
+  <CADNET> <STRINGTYPE> <IDENTIFIER> Bloque() <COLON>
+}
+
+void giw():
+{}
+{
+  <GIW> <IDENTIFIER> <COLON>
+}
+
+void headk():
+{}
+{
+  <HEADK> <IDENTIFIER> <COLON>
+}
+
+void tailk():
+{}
+{
+  <TAILK> <IDENTIFIER> <COLON>
 }
