@@ -59,6 +59,7 @@ TOKEN:
 	| <SEMICOLON:"; ">{System.out.println("SEMICOL->"+"\r\n");}
 	| <COLON:":">{System.out.println("COL->"+"\r\n");}
 	| <COMA:", "> {System.out.println("COMA->"+"\r\n");}
+	| <DOUBLEC:"\""> {System.out.println("DOUBLEC->"+"\r\n");}
 }
 
 //Tokens para bloques repetitivos, control de flujo
@@ -76,7 +77,7 @@ TOKEN:{
 
 //Tokens para operadores aritmeticos
 TOKEN:{
-	<ARITM:"+| -| *| /">{System.out.println("ARITM-> "+image+"\r\n");}
+	<ARITM:"+"|"-"|"*"|"/">{System.out.println("ARITM-> "+image+"\r\n");}
 }
 
 //Token para asignar
@@ -107,7 +108,7 @@ TOKEN:{
 }
 //tokens  de etiquetas 
 TOKEN:{
-	<ALT:"case "| "ing "|"else "|"finally " >{System.out.println("ALT-> "+image+"\r\n");}
+	<ALT:"case "| "ing "|"else"|"finally " >{System.out.println("ALT-> "+image+"\r\n");}
 
 }
 //tokens estructura repetitivas
@@ -127,14 +128,14 @@ TOKEN:{
 
 //Token de imprimir a consola
 TOKEN:{
-	<PRINTOUT:"print | println | writeline"> {System.out.println("PRINTOUT-> "+image+"\r\n");}
+	<PRINTOUT:"print" | "println" | "writeline "> {System.out.println("PRINTOUT-> "+image+"\r\n");}
 }
 
 //Token para delclaraciones de seleccion
 TOKEN:{
 	<IFSTRUCT: "if "> {System.out.println("IFSTRUCT-> "+"\r\n");}
-	|<SWITCHSTRUCT:"switch | stoom "> {System.out.println("SWITCHSTRUCT-> "+image+"\r\n");}
-	|<THEN:"then "> {System.out.println("THEN-> "+"\r\n");}
+	|<SWITCHSTRUCT:"switch" | "stoom "> {System.out.println("SWITCHSTRUCT-> "+image+"\r\n");}
+	|<THEN:"then"> {System.out.println("THEN-> "+"\r\n");}
 }
 	
 //Token para importar paquetes
@@ -145,7 +146,7 @@ TOKEN:{
 	
 //Token para heredar clases
 TOKEN:{
-	<HCLASS:">> "> {System.out.println("HCLASS-> "+"\r\n");}
+	<HCLASS:">>"> {System.out.println("HCLASS-> "+"\r\n");}
 }
 
 //Token para palabra reservada def
@@ -178,7 +179,6 @@ TOKEN:{
 //Tokens para arreglos
 TOKEN:{
 	<ARRAY:"array "> {System.out.println("ARRAY-> "+"\r\n");}
-	|<STRUCT:"struct "> {System.out.println("STRUCT-> "+"\r\n");}
 }
 
 TOKEN:{
@@ -186,12 +186,12 @@ TOKEN:{
 }
 //Token para identificadores de usuario
 TOKEN:{
-	 <NUMBER : (["0"-"9"])+ > {System.out.print("NUM-> "+image+"\r\n");}
+	 <NUMBER:(["0"-"9"])+ > {System.out.print("NUM-> "+image+"\r\n");}
 	|<LETTER:["A"-"Z","a"-"z"]> {System.out.print("LETTER-> "+image+"\r\n");}
 	|<UNDERSC:"_"> {System.out.print("UNDERSC-> "+image+"\r\n");}
 	|<WORD:(<LETTER>)+> {System.out.print("WORD-> "+image+"\r\n");}
 	//|<IDENTIFIER: <LETTER> (<WORD> <NUMBER> <UNDERSC>)*>{System.out.println("IDENTIFIER ->"+image+"\r\n");}
-	|<STRING : <LETTER> <NUMBER> (<WORD> <NUMBER>)*>{System.out.print("STRING -> "+image+"\r\n");}
+	|<STRING : "'" <LETTER> /*<NUMBER>*/ (<WORD> <NUMBER>)* "'" >{System.out.print("STRING -> "+image+"\r\n");}
 	//|<STRING : ["a"-"z","A"-"Z","0"-"9"](["a"-"z","A"-"Z","0"-"9"])*>{System.out.print("STRING -> "+image+"\r\n");}
 	}
 //Fin de estados léxicos
@@ -274,7 +274,7 @@ void Librerias():
 void Clase():
 {}
 {
-	(Heredar())? <CLASS> <IDENTIFIER> (DeclarVarGlob() | Metodo())* <COLON>
+	(Heredar())? <CLASS> <IDENTIFIER> (DeclarVarGlob() | Metodo() | Enumerable() | Estructura() )* <COLON>
 }
 
 
@@ -299,20 +299,16 @@ void DefinirVariables():
 void Metodo():
 {}
 {
-	<CONST><VOID><IDENTIFIER> Bloque() Return() <COLON>
+	<CONST> <VOID> <IDENTIFIER> Bloque() <COLON> 
 }
 
 void Bloque():
 {}
 {
-	Instrucciones()
+	(Ciclos() | Pregunta() | ImpCons() | declarVarLocal()  | OpAritmetica())* Return() 
 }
 
-void Instrucciones():
-{}
-{
-	(Ciclos() | Pregunta() | ImpCons() | declarVarLocal() | OpAritmetica())*
-}
+
 
 void ImpCons():
 {}
@@ -334,6 +330,7 @@ void declarVarLocal():
 	<DEF> DefinirVariables() <COLON>
 }
 
+
 void Ciclos():
 {}
 {
@@ -343,13 +340,13 @@ void Ciclos():
 void CicloFor():
 {}
 {
-	<LOOPFOR> EstructuraFor() Bloque()
+	<LOOPFOR> EstructuraFor() Bloque() <COLON>
 }
 
 void EstructuraFor():
 {}
 {
-	Condicion() <COMA> <IDENTIFIER> <ASIGN> Valor() <COMA> Incremento()
+	Condicion() <COMA> <IDENTIFIER> <ASIGN> Valor() <COMA> Incremento() 
 }
 
 void Incremento():
@@ -361,7 +358,7 @@ void Incremento():
 void CicloWhile():
 {}
 {
-	<LOOPWHILE> Condicion() Bloque()
+	<LOOPWHILE> Condicion() Bloque() <COLON>
 }
 
 void CicloDo():
@@ -373,38 +370,42 @@ void CicloDo():
 void Pregunta():
 {}
 {
-      <IFSTRUCT> Condicion() <THEN> Bloque() (Sino())?
+      <IFSTRUCT> Condicion() <THEN> Bloque() <COLON> (Sino())?
 }
 
 
 void Sino():
 {}
 {
-     <ALT> Bloque()
+     <ALT> Bloque() <COLON>
 }
+
+/*void Asignar():
+{}
+{
+	<IDENTIFIER> <ASIGN> (<IDENTIFIER> | Valor() | OpAritmetica())
+}
+*/
 
 void Condicion():
 {}
 {
-     Oprelacional() (<LOGIC> Oprelacional())*
+    Oprelacional() (<LOGIC> Oprelacional() )*
 }
+
 
 void Oprelacional():
 {}
 {
-    (OpAritmetica() | Valor()) A'()
-}
-
-void A'():
-{}
-{
-   <RELAT> | ϵ
+    (<IDENTIFIER> | Valor()) (<ARITM>(<IDENTIFIER>|Valor() ) )* <RELAT> (<IDENTIFIER> | Valor()) (<ARITM>(<IDENTIFIER>|Valor() ) )*
 }
 
 void OpAritmetica():
 {}
 {
-    <IDENTIFIER> <ASIGN> (<IDENTIFIER> | Valor()) (<ARITM> (<IDENTIFIER> | Valor()))*  
+    //IDENTIFIER> <ASIGN> (<IDENTIFIER> | Valor()) (<ARITM> (<IDENTIFIER> | Valor()))*  
+	(<IDENTIFIER> <ASIGN>)? (<IDENTIFIER> | Valor() ) (<ARITM> (<IDENTIFIER> | Valor() ))*
+	//(Factor() |Valor()) (<ARITM> (<IDENTIFIER> | Valor() ))+
 }
 
 void Valor():
@@ -416,7 +417,7 @@ void Valor():
 void Enumerable():
 {}
 {
-     <CONST> <ENUM> BloqueEnum() <COLON>
+    <ENUM> <IDENTIFIER> BloqueEnum() <COLON>
 }
 
 void BloqueEnum():
@@ -429,7 +430,7 @@ void BloqueEnum():
 void Estructura():
 {}
 {
-    (<STRING>|<NUMBER>) (EstructuraDatos() | EstructuraEstatica()) <IDENTIFIER>
+    (<STRINGTYPE>|<NUMTYPES>) (EstructuraDatos() | EstructuraEstatica()) <IDENTIFIER>
 }
 
 void EstructuraDatos():
@@ -441,5 +442,5 @@ void EstructuraDatos():
 void EstructuraEstatica():
 {}
 {
-   <ARRAY> | <STRUCT>
+   <ARRAY> | <STRUCTTYPE>
 }
