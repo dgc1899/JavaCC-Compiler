@@ -33,14 +33,14 @@ TOKEN:{
 
 //Tokens de tipos de numeros
 TOKEN:{
-		<NUMTYPES:("int"|"byte"|"short"|"long"|"sbyte"|"ushort"|"ulong")>{System.out.println("NUMTYPES-> "+image+"\r\n");}
-		|<FLOATTYPE:("float"|"double"|"decimal")>{System.out.println("FLOATTYPE-> "+image+"\r\n");}
+		<NUMTYPES:("int "|"byte"|"short"|"long"|"sbyte"|"ushort"|"ulong")>{System.out.println("NUMTYPES-> "+image+"\r\n");}
+		|<FLOATTYPE:("float "|"double"|"decimal")>{System.out.println("FLOATTYPE-> "+image+"\r\n");}
 	}
 
 //Tokens de tipo de datos alfanumericos
 TOKEN:{
-	<STRINGTYPE:("string")>{System.out.println("STRINGTYPE-> "+"\r\n");}
-	|<CHARTYPE:("char")>{System.out.println("CHARTYPE-> "+"\r\n");}
+	<STRINGTYPE:("string ")>{System.out.println("STRINGTYPE-> "+"\r\n");}
+	|<CHARTYPE:("char ")>{System.out.println("CHARTYPE-> "+"\r\n");}
 }
 	
 //Token para tipo de dato booleano
@@ -189,7 +189,7 @@ TOKEN:{
 
 //Tokens para comentarios
 TOKEN:{
-	<COMENT:"?"> {System.out.println("COMENT-> "+"\r\n");}
+	<COMENT:"// "> {System.out.println("COMENT-> "+"\r\n");}
 }
 
 //Tokens para op. en estructuras
@@ -229,7 +229,7 @@ TOKEN:{
 	|<UNDERSC:"_"> {System.out.print("UNDERSC-> "+image+"\r\n");}
 	|<WORD:(<LETTER>)+> {System.out.print("WORD-> "+image+"\r\n");}
 	//|<IDENTIFIER: <LETTER> (<WORD> <NUMBER> <UNDERSC>)*>{System.out.println("IDENTIFIER ->"+image+"\r\n");}
-	|<STRING : "'" <LETTER> /*<NUMBER>*/ (<WORD> <NUMBER>)* "'" >{System.out.print("STRING -> "+image+"\r\n");}
+	|<STRING : "' " (<LETTER>|<WORD>) (<WORD> <NUMBER>)* " '" >{System.out.print("STRING -> "+image+"\r\n");}
 	//|<STRING : ["a"-"z","A"-"Z","0"-"9"](["a"-"z","A"-"Z","0"-"9"])*>{System.out.print("STRING -> "+image+"\r\n");}
 	}
 //Fin de estados léxicos
@@ -312,7 +312,7 @@ void Librerias():
 void Clase():
 {}
 {
-	(Heredar())? <CLASS> <IDENTIFIER> (DeclarVarGlob() | Metodo() | Enumerable() | Estructura() | Comentario() ) * 
+	(Heredar())? <CLASS> <IDENTIFIER> (DeclarVarGlob() | Metodo() | Enumerable() | Estructura() | Comentario() | Size() ) * 
 }
 
 
@@ -343,7 +343,7 @@ void Metodo():
 void Bloque():
 {}
 {
-	(Ciclos() | Pregunta() | ImpCons() | declarVarLocal()  | OpAritmetica())* Return()
+	(Ciclos() | Pregunta() | ImpCons() | declarVarLocal()  | OpAritmetica() | CicloForEach() | Goto() | Raise() )* Return()
 }
 
 
@@ -480,7 +480,7 @@ void BloqueEnum():
 void Estructura():
 {}
 {
-    (<STRINGTYPE>|<NUMTYPES>) EstructuraDatos() | (EstructuraEstatica() <IDENTIFIER>)
+    (<STRINGTYPE>|<NUMTYPES>) (EstructuraDatos() | (EstructuraEstatica() <IDENTIFIER>) )
 }
 
 void EstructuraDatos():
@@ -492,19 +492,19 @@ void EstructuraDatos():
 void Lista():
 {}
 {
-	<LIST> <IDENTIFIER> (<NUMBER><COMA>Valor())+
+	<LIST> <IDENTIFIER> (<NUMBER><COMA>Valor())+ <COLON>
 }
 
 void Stack():
 {}
 {
-	<STACK> <IDENTIFIER> (Valor())+
+	<STACK> <IDENTIFIER> (Valor())+ <COLON>
 }
 
 void Queue():
 {}
 {
-	<QUEUE> <IDENTIFIER> (Valor())+
+	<QUEUE> <IDENTIFIER> (Valor())+ <COLON>
 }
 
 void EstructuraEstatica():
@@ -516,7 +516,7 @@ void EstructuraEstatica():
 void Comentario():
 {}
 {
-	<COMENT><STRING>
+	<COMENT> Valor()
 }
 
 void Size():

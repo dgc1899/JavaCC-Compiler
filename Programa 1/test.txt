@@ -7,41 +7,41 @@ packexp libreria2
 class Ejemplo
 
 	enum hola
-		'a'
-		'b'
-		'c'
-		'd'
+		' a '
+		' b '
+		' c '
+		' d '
 	:
 
-?'comentario'
+// 56
 	
-string list lista1
-	1,'hola'
-	2,'abc'
+int list lista1
+	1, 101
+	2, 201
 	:
 	
 sizeof lista1
 
 int stack stack2
-	'hola'
-	'abc'
+	' hola '
+	' abc '
 	:
 	
 	
-struct estructura1
+string struct estructura1
 
 int array arreglo1
 
 
 	def
-		numero1 = int
-		cadena1 = string  
+		numero1 = int 
+		cadena1 = string 
 	:
 	
 	const void MetodoEj
 		
 		def
-			x = int
+			x = int 
 		:
 		
 		foreach i<10

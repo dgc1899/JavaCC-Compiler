@@ -261,12 +261,11 @@ System.out.println("Identificador: " + variable + " " + Lista.indexOf(variable) 
       switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
       case NUMTYPES:
       case STRINGTYPE:
-      case STRUCTTYPE:
       case DEF:
       case CONST:
       case ENUM:
-      case ARRAY:
-      case COMENT:{
+      case COMENT:
+      case SIZEOF:{
         ;
         break;
         }
@@ -288,14 +287,16 @@ System.out.println("Identificador: " + variable + " " + Lista.indexOf(variable) 
         break;
         }
       case NUMTYPES:
-      case STRINGTYPE:
-      case STRUCTTYPE:
-      case ARRAY:{
+      case STRINGTYPE:{
         Estructura();
         break;
         }
       case COMENT:{
         Comentario();
+        break;
+        }
+      case SIZEOF:{
+        Size();
         break;
         }
       default:
@@ -376,9 +377,12 @@ System.out.println("Identificador: " + variable + " " + Lista.indexOf(variable) 
       case LOOPDO:
       case LOOPWHILE:
       case CONDITION:
+      case FOREACH:
+      case RAISE:
       case PRINTOUT:
       case IFSTRUCT:
       case DEF:
+      case GOTO:
       case IDENTIFIER:
       case NUMBER:
       case STRING:{
@@ -413,6 +417,18 @@ System.out.println("Identificador: " + variable + " " + Lista.indexOf(variable) 
       case NUMBER:
       case STRING:{
         OpAritmetica();
+        break;
+        }
+      case FOREACH:{
+        CicloForEach();
+        break;
+        }
+      case GOTO:{
+        Goto();
+        break;
+        }
+      case RAISE:{
+        Raise();
         break;
         }
       default:
@@ -843,22 +859,23 @@ System.out.println("Identificador: " + variable + " " + Lista.indexOf(variable) 
 
   final public void Estructura() throws ParseException {
     switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
-    case NUMTYPES:
     case STRINGTYPE:{
-      switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
-      case STRINGTYPE:{
-        jj_consume_token(STRINGTYPE);
-        break;
-        }
-      case NUMTYPES:{
-        jj_consume_token(NUMTYPES);
-        break;
-        }
-      default:
-        jj_la1[32] = jj_gen;
-        jj_consume_token(-1);
-        throw new ParseException();
+      jj_consume_token(STRINGTYPE);
+      break;
       }
+    case NUMTYPES:{
+      jj_consume_token(NUMTYPES);
+      break;
+      }
+    default:
+      jj_la1[32] = jj_gen;
+      jj_consume_token(-1);
+      throw new ParseException();
+    }
+    switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
+    case LIST:
+    case STACK:
+    case QUEUE:{
       EstructuraDatos();
       break;
       }
@@ -914,6 +931,7 @@ System.out.println("Identificador: " + variable + " " + Lista.indexOf(variable) 
         break label_14;
       }
     }
+    jj_consume_token(COLON);
 }
 
   final public void Stack() throws ParseException {
@@ -934,6 +952,7 @@ System.out.println("Identificador: " + variable + " " + Lista.indexOf(variable) 
         break label_15;
       }
     }
+    jj_consume_token(COLON);
 }
 
   final public void Queue() throws ParseException {
@@ -954,6 +973,7 @@ System.out.println("Identificador: " + variable + " " + Lista.indexOf(variable) 
         break label_16;
       }
     }
+    jj_consume_token(COLON);
 }
 
   final public void EstructuraEstatica() throws ParseException {
@@ -975,8 +995,7 @@ System.out.println("Identificador: " + variable + " " + Lista.indexOf(variable) 
 
   final public void Comentario() throws ParseException {
     jj_consume_token(COMENT);
-    jj_consume_token(STRING);
-    jj_consume_token(COMENT);
+    Valor();
 }
 
   final public void Size() throws ParseException {
@@ -1084,10 +1103,10 @@ System.out.println("Identificador: " + variable + " " + Lista.indexOf(variable) 
 	   jj_la1_init_2();
 	}
 	private static void jj_la1_init_0() {
-	   jj_la1_0 = new int[] {0x6ed03ffe,0x6ed03ffe,0x0,0x4000000,0x0,0x0,0x0,0x2000050,0x2000050,0x1f0,0x0,0x4e0000,0x4e0000,0x400000,0xe0000,0x8000000,0x4e0000,0x4e0000,0x10000000,0x1000000,0x400000,0x100000,0x400000,0x400000,0x100000,0x400000,0x0,0x400000,0x100000,0x400000,0x400000,0x400000,0x50,0x2000050,0x0,0x0,0x400000,0x400000,0x2000000,0xf0,0x4e0000,};
+	   jj_la1_0 = new int[] {0x6ed03ffe,0x6ed03ffe,0x0,0x4000000,0x0,0x0,0x0,0x50,0x50,0x1f0,0x0,0xa04e0000,0xa04e0000,0x400000,0xe0000,0x8000000,0x4e0000,0x4e0000,0x10000000,0x1000000,0x400000,0x100000,0x400000,0x400000,0x100000,0x400000,0x0,0x400000,0x100000,0x400000,0x400000,0x400000,0x50,0x2000000,0x0,0x0,0x400000,0x400000,0x2000000,0xf0,0x4e0000,};
 	}
 	private static void jj_la1_init_1() {
-	   jj_la1_1 = new int[] {0x1180000f,0x1180000f,0x60,0x800000,0x60,0x60,0x800000,0x18b00,0x18b00,0x0,0x800000,0x11800106,0x11800106,0x11800000,0x0,0x0,0x11800106,0x11800106,0x0,0x0,0x11800000,0x0,0x11800000,0x11800000,0x0,0x11800000,0x800000,0x11800000,0x0,0x11800000,0x11000000,0x11000000,0x0,0x8000,0x7000,0x1000000,0x11000000,0x11000000,0x8000,0x0,0x11800106,};
+	   jj_la1_1 = new int[] {0x1180000f,0x1180000f,0x60,0x800000,0x60,0x60,0x800000,0x30b00,0x30b00,0x0,0x800000,0x11840106,0x11840106,0x11800000,0x0,0x0,0x11800106,0x11800106,0x0,0x0,0x11800000,0x0,0x11800000,0x11800000,0x0,0x11800000,0x800000,0x11800000,0x0,0x11800000,0x11000000,0x11000000,0x0,0xf000,0x7000,0x1000000,0x11000000,0x11000000,0x8000,0x0,0x11800106,};
 	}
 	private static void jj_la1_init_2() {
 	   jj_la1_2 = new int[] {0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,};
