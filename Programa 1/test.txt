@@ -12,11 +12,8 @@ class Ejemplo
 		' c '
 		' d '
 	:
-	
-	dropet enum
-	:
 
-// comentario 56
+// 56
 	
 int list lista1
 	1, 101
@@ -47,8 +44,7 @@ int array arreglo1
 			x = int 
 		:
 		
-		cadnet string cadenahola
-		  println cadenahola  
+		cadnet cadena3
 		:
 		
 		headk cadenahola
@@ -127,6 +123,8 @@ int array arreglo1
 		
 		fixed X
 		:
+		dropet x
+	    :
 		return MetodoEj
 	:
 
