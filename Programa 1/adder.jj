@@ -605,7 +605,7 @@ void dropet():
 void cadnet():
 {}
 {
-  <CADNET> <STRINGTYPE> <IDENTIFIER> Bloque() <COLON>
+  <CADNET> <IDENTIFIER> <COLON>
 }
 
 void giw():
