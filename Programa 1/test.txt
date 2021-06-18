@@ -108,6 +108,7 @@ int array arreglo1
 			writeline cadena2
 			return MetodoEj
 		:
+		return MetodoEj
 	:
-	return MetodoEj	
- : 
+
+ :
