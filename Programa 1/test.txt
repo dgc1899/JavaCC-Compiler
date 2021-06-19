@@ -138,4 +138,3 @@ int array arreglo1
 		
 	return MetodoEj
 	:
- :
