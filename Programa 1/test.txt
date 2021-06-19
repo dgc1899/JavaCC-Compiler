@@ -45,15 +45,23 @@ int array arreglo1
 		:
 		
 		cadnet cadena3
+		
+		return MetodoEj
 		:
 		
 		headk cadenahola
+		
+		return MetodoEj
 		:
 		
 		tailk cadenahola
+		
+		return MetodoEj
 		:
 		
 		giw cadenahola
+		
+		return MetodoEj
 		:
 		
 		foreach i<10
@@ -89,8 +97,8 @@ int array arreglo1
 		
 		do
 			writeline cadena1
+			return MetodoEj
 		while x==3
-		return MetodoEj
 		:
 		
 		try
@@ -124,8 +132,10 @@ int array arreglo1
 		fixed X
 		:
 		dropet x
-	    :
+		
 		return MetodoEj
+	    :
+		
+	return MetodoEj
 	:
-
  :

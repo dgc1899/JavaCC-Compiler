@@ -109,25 +109,37 @@ public interface adderConstants {
   /** RegularExpression Id. */
   int GOTO = 50;
   /** RegularExpression Id. */
-  int EXPLICIT = 51;
+  int FIXED = 51;
   /** RegularExpression Id. */
-  int TO = 52;
+  int EXPLICIT = 52;
   /** RegularExpression Id. */
-  int PASS = 53;
+  int TO = 53;
   /** RegularExpression Id. */
-  int EVENT = 54;
+  int PASS = 54;
   /** RegularExpression Id. */
-  int IDENTIFIER = 55;
+  int EVENT = 55;
   /** RegularExpression Id. */
-  int NUMBER = 56;
+  int DROPET = 56;
   /** RegularExpression Id. */
-  int LETTER = 57;
+  int CADNET = 57;
   /** RegularExpression Id. */
-  int UNDERSC = 58;
+  int GIW = 58;
   /** RegularExpression Id. */
-  int WORD = 59;
+  int HEADK = 59;
   /** RegularExpression Id. */
-  int STRING = 60;
+  int TAILK = 60;
+  /** RegularExpression Id. */
+  int IDENTIFIER = 61;
+  /** RegularExpression Id. */
+  int NUMBER = 62;
+  /** RegularExpression Id. */
+  int LETTER = 63;
+  /** RegularExpression Id. */
+  int UNDERSC = 64;
+  /** RegularExpression Id. */
+  int WORD = 65;
+  /** RegularExpression Id. */
+  int STRING = 66;
 
   /** Lexical state. */
   int DEFAULT = 0;
@@ -185,10 +197,16 @@ public interface adderConstants {
     "\"// \"",
     "\"sizeof \"",
     "\"goto \"",
+    "\"fixed \"",
     "\"explicit \"",
     "\"to \"",
     "\"pass \"",
     "\"event on \"",
+    "\"dropet \"",
+    "\"cadnet \"",
+    "\"giw \"",
+    "\"headk \"",
+    "\"tailk \"",
     "<IDENTIFIER>",
     "<NUMBER>",
     "<LETTER>",

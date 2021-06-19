@@ -366,7 +366,6 @@ System.out.println("Identificador: " + variable + " " + Lista.indexOf(variable) 
     jj_consume_token(VOID);
     jj_consume_token(IDENTIFIER);
     Bloque();
-    jj_consume_token(COLON);
 }
 
   final public void Bloque() throws ParseException {
@@ -385,9 +384,15 @@ System.out.println("Identificador: " + variable + " " + Lista.indexOf(variable) 
       case SWITCHSTRUCT:
       case DEF:
       case GOTO:
+      case FIXED:
       case EXPLICIT:
       case PASS:
       case EVENT:
+      case DROPET:
+      case CADNET:
+      case GIW:
+      case HEADK:
+      case TAILK:
       case IDENTIFIER:
       case NUMBER:
       case STRING:{
@@ -454,6 +459,30 @@ System.out.println("Identificador: " + variable + " " + Lista.indexOf(variable) 
         }
       case EVENT:{
         Evento();
+        break;
+        }
+      case FIXED:{
+        fixed();
+        break;
+        }
+      case CADNET:{
+        cadnet();
+        break;
+        }
+      case GIW:{
+        giw();
+        break;
+        }
+      case HEADK:{
+        headk();
+        break;
+        }
+      case TAILK:{
+        tailk();
+        break;
+        }
+      case DROPET:{
+        dropet();
         break;
         }
       default:
@@ -1109,6 +1138,47 @@ System.out.println("Identificador: " + variable + " " + Lista.indexOf(variable) 
     jj_consume_token(COLON);
 }
 
+  final public void fixed() throws ParseException {
+    jj_consume_token(FIXED);
+    jj_consume_token(IDENTIFIER);
+    jj_consume_token(COLON);
+}
+
+  final public void dropet() throws ParseException {
+    jj_consume_token(DROPET);
+    jj_consume_token(IDENTIFIER);
+    Bloque();
+    jj_consume_token(COLON);
+}
+
+  final public void cadnet() throws ParseException {
+    jj_consume_token(CADNET);
+    jj_consume_token(IDENTIFIER);
+    Bloque();
+    jj_consume_token(COLON);
+}
+
+  final public void giw() throws ParseException {
+    jj_consume_token(GIW);
+    jj_consume_token(IDENTIFIER);
+    Bloque();
+    jj_consume_token(COLON);
+}
+
+  final public void headk() throws ParseException {
+    jj_consume_token(HEADK);
+    jj_consume_token(IDENTIFIER);
+    Bloque();
+    jj_consume_token(COLON);
+}
+
+  final public void tailk() throws ParseException {
+    jj_consume_token(TAILK);
+    jj_consume_token(IDENTIFIER);
+    Bloque();
+    jj_consume_token(COLON);
+}
+
   /** Generated Token Manager. */
   public adderTokenManager token_source;
   SimpleCharStream jj_input_stream;
@@ -1131,10 +1201,10 @@ System.out.println("Identificador: " + variable + " " + Lista.indexOf(variable) 
 	   jj_la1_0 = new int[] {0x6ed03ffe,0x6ed03ffe,0x0,0x4000000,0x0,0x0,0x0,0x50,0x50,0x1f0,0x0,0xa04e0000,0xa04e0000,0x400000,0xe0000,0x8000000,0x4e0000,0x4e0000,0x10000000,0x1000000,0x400000,0x100000,0x400000,0x400000,0x100000,0x400000,0x0,0x400000,0x100000,0x400000,0x400000,0x400000,0x50,0x2000000,0x0,0x0,0x400000,0x400000,0x2000000,0xf0,0x4e0000,};
 	}
 	private static void jj_la1_init_1() {
-	   jj_la1_1 = new int[] {0x1180000f,0x1180000f,0x60,0x800000,0x60,0x60,0x800000,0x30b00,0x30b00,0x0,0x800000,0x11ec010f,0x11ec010f,0x11800000,0x0,0x0,0x11800106,0x11800106,0x0,0x0,0x11800000,0x0,0x11800000,0x11800000,0x0,0x11800000,0x800000,0x11800000,0x0,0x11800000,0x11000000,0x11000000,0x0,0xf000,0x7000,0x1000000,0x11000000,0x11000000,0x8000,0x0,0x11800106,};
+	   jj_la1_1 = new int[] {0x6000000f,0x6000000f,0x60,0x20000000,0x60,0x60,0x20000000,0x30b00,0x30b00,0x0,0x20000000,0x7fdc010f,0x7fdc010f,0x60000000,0x0,0x0,0x60000106,0x60000106,0x0,0x0,0x60000000,0x0,0x60000000,0x60000000,0x0,0x60000000,0x20000000,0x60000000,0x0,0x60000000,0x40000000,0x40000000,0x0,0xf000,0x7000,0x40000000,0x40000000,0x40000000,0x8000,0x0,0x60000106,};
 	}
 	private static void jj_la1_init_2() {
-	   jj_la1_2 = new int[] {0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,};
+	   jj_la1_2 = new int[] {0x4,0x4,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x4,0x4,0x4,0x0,0x0,0x4,0x4,0x0,0x0,0x4,0x0,0x4,0x4,0x0,0x4,0x0,0x4,0x0,0x4,0x4,0x4,0x0,0x0,0x0,0x0,0x4,0x4,0x0,0x0,0x4,};
 	}
 
   /** Constructor with InputStream. */
@@ -1259,7 +1329,7 @@ System.out.println("Identificador: " + variable + " " + Lista.indexOf(variable) 
   /** Generate ParseException. */
   public ParseException generateParseException() {
 	 jj_expentries.clear();
-	 boolean[] la1tokens = new boolean[66];
+	 boolean[] la1tokens = new boolean[72];
 	 if (jj_kind >= 0) {
 	   la1tokens[jj_kind] = true;
 	   jj_kind = -1;
@@ -1279,7 +1349,7 @@ System.out.println("Identificador: " + variable + " " + Lista.indexOf(variable) 
 		 }
 	   }
 	 }
-	 for (int i = 0; i < 66; i++) {
+	 for (int i = 0; i < 72; i++) {
 	   if (la1tokens[i]) {
 		 jj_expentry = new int[1];
 		 jj_expentry[0] = i;

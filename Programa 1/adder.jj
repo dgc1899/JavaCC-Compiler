@@ -204,7 +204,7 @@ TOKEN:{
 
 //Tokens para declaracion de garantia 
 TOKEN:{
-	<FIXED:"fixed  "> {System.out.println("FIXED-> "+"\r\n");}
+	<FIXED:"fixed "> {System.out.println("FIXED-> "+"\r\n");}
 }
 
 //Tokens para declarar conversion explicita
@@ -347,7 +347,7 @@ void Librerias():
 void Clase():
 {}
 {
-	(Heredar())? <CLASS> <IDENTIFIER> (DeclarVarGlob() | Metodo() | Enumerable() | Estructura() | Comentario() | Size() ) * | dropet()
+	(Heredar())? <CLASS> <IDENTIFIER> (DeclarVarGlob() | Metodo() | Enumerable() | Estructura() | Comentario() | Size() ) * 
 }
 
 
@@ -372,13 +372,14 @@ void DefinirVariables():
 void Metodo():
 {}
 {
-	<CONST><VOID><IDENTIFIER> Bloque()  <COLON> 
+	<CONST><VOID><IDENTIFIER> Bloque()  
 }
 
 void Bloque():
 {}
 {
-	(Ciclos() | Pregunta() | ImpCons() | declarVarLocal()  | OpAritmetica() | CicloForEach() | Goto() | Raise() | TryCatch() |Switch() | Conversion() |Ignorar() |  Evento())* | fixed() | cadnet() | giw() | headk() | tailk() | Return()
+	(Ciclos() | Pregunta() | ImpCons() | declarVarLocal()  | OpAritmetica() | CicloForEach() 
+	| Goto() | Raise() | TryCatch() |Switch() | Conversion() |Ignorar() |  Evento() | fixed() | cadnet() | giw() | headk() | tailk() | dropet())*  Return()
 }
 
 
@@ -599,29 +600,29 @@ void fixed():
 void dropet():
 {}
 {
-  <DROPET> <IDENTIFIER> <COLON>
+  <DROPET> <IDENTIFIER> Bloque() <COLON>
 }
 
 void cadnet():
 {}
 {
-  <CADNET> <IDENTIFIER> <COLON>
+  <CADNET> <IDENTIFIER> Bloque() <COLON>
 }
 
 void giw():
 {}
 {
-  <GIW> <IDENTIFIER> <COLON>
+  <GIW> <IDENTIFIER> Bloque() <COLON>
 }
 
 void headk():
 {}
 {
-  <HEADK> <IDENTIFIER> <COLON>
+  <HEADK> <IDENTIFIER> Bloque() <COLON>
 }
 
 void tailk():
 {}
 {
-  <TAILK> <IDENTIFIER> <COLON>
+  <TAILK> <IDENTIFIER> Bloque() <COLON>
 }
